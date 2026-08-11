@@ -25,12 +25,13 @@ it. **The quoted text is the locator. The line number is a convenience.**
 
 ## States
 
-| state                         | meaning                                                                                                                                    |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| **reported**                  | Written down with its evidence. Nobody has ruled on it yet.                                                                                |
-| **verified**                  | The owner has read the evidence and agrees the standard is wrong. What to do about it is not yet decided.                                  |
-| **rejected**                  | The owner has ruled that the standard stands — the source is wrong, not authoritative enough, or read wrong. Reasoning stays in the entry. |
-| **held for the next version** | Verified, correction decided, waiting on a release. Until that release the published text still says the wrong thing.                      |
+| state                         | meaning                                                                                                                                                                                           |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **reported**                  | Written down with its evidence. Nobody has ruled on it yet.                                                                                                                                       |
+| **verified**                  | The owner has read the evidence and agrees the standard is wrong. What to do about it is not yet decided.                                                                                         |
+| **rejected**                  | The owner has ruled that the standard stands — the source is wrong, not authoritative enough, or read wrong. Reasoning stays in the entry.                                                        |
+| **corrected in `X.Y.Z`**      | The correction has shipped in that version. The entry stays here forever: the published text of every earlier version still says the wrong thing, and a reader holding one needs to find out why. |
+| **held for the next version** | Verified, correction decided, waiting on a release. Until that release the published text still says the wrong thing.                                                                             |
 
 ---
 
@@ -49,7 +50,7 @@ it. **The quoted text is the locator. The line number is a convenience.**
 
 | field        | value                                                                                                           |
 | ------------ | --------------------------------------------------------------------------------------------------------------- |
-| **state**    | reported                                                                                                        |
+| **state**    | **corrected in 1.1.0** — verified against the primary source, then fixed                                        |
 | **reported** | 2026-08-11, by the datum-caretaker, against primary sources                                                     |
 | **found in** | 1.0.0                                                                                                           |
 | **location** | `SPRITE-DESIGN-DATUM.md:625` — the tolerance register, under _Hard — a gatekeeper or an API rejects violations_ |
@@ -110,7 +111,7 @@ reconciling Epic's mip arithmetic with itself is not this register's job.
 
 | field        | value                                                                                             |
 | ------------ | ------------------------------------------------------------------------------------------------- |
-| **state**    | reported                                                                                          |
+| **state**    | **corrected in 1.1.0** — verified against the primary source, then fixed                          |
 | **reported** | 2026-08-11, by the datum-caretaker, against primary sources                                       |
 | **found in** | 1.0.0                                                                                             |
 | **location** | `SPRITE-DESIGN-DATUM.md:668` — the tolerance register, under _Derived arithmetic_                 |

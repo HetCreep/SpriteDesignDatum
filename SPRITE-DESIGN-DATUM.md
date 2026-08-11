@@ -43,7 +43,7 @@
 
 # SPRITE DESIGN DATUM
 
-> **Version 1.0.0** · first published 2026-08-11 · © 2026 HetCreep Released under
+> **Version 1.1.0** · first published 2026-08-11 · © 2026 HetCreep Released under
 > [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/). Free to read, cite, and
 > conform to. Commercial use or adaptation of the document requires a separate written licence. See
 > `LICENSE`, and the comment above for what a lawyer still has to settle.
@@ -617,19 +617,24 @@ deliberately.
 
 <a id="hard-a-gatekeeper-or-an-api-rejects-violations"></a>
 
-## Hard — a gatekeeper or an API rejects violations
+## Hard — the violating result cannot exist
 
-| quantity                           | value                                                              | source                                               |
-| ---------------------------------- | ------------------------------------------------------------------ | ---------------------------------------------------- |
-| Store listing screenshot, per side | **320 – 3840 px inclusive**                                        | Google Play Console Help, _Add preview assets_       |
-| Store listing screenshot, aspect   | **max dimension ≤ 2 × min dimension** — any aspect from 1:2 to 2:1 | Google Play Console Help                             |
-| Store listing icon                 | **exactly 512 × 512 px**, 32-bit PNG with alpha, **≤ 1024 KB**     | Google Play Console Help                             |
-| Store feature graphic              | **exactly 1024 × 500 px**, JPEG or 24-bit PNG, no alpha            | Google Play Console Help                             |
-| Apple screenshot sizes             | a **set** of accepted sizes per display class, not one fixed size  | Apple, App Store Connect Help                        |
-| Texture dimension ceiling          | **16384 × 16384 px** — importer will not accept larger             | Unity Manual, _Import a texture_                     |
-| Texture dimension ceiling          | **8192 × 8192 px** without an engine configuration change          | Unreal Engine, _Texture Format Support and Settings_ |
-| Minimum size for tight sprite mesh | **32 × 32 px** — below this the engine silently forces Full Rect   | Unity Manual, _Sprite texture type reference_        |
-| Pixel-exact rendering              | **one identical Pixels Per Unit across every sprite in a scene**   | Unity 2D Pixel Perfect 5.0                           |
+| quantity                           | value                                                                                                                                                                | source                                                            |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| Store listing screenshot, per side | **320 – 3840 px inclusive**                                                                                                                                          | Google Play Console Help, _Add preview assets_                    |
+| Store listing screenshot, aspect   | **max dimension ≤ 2 × min dimension** — any aspect from 1:2 to 2:1                                                                                                   | Google Play Console Help                                          |
+| Store listing icon                 | **exactly 512 × 512 px**, 32-bit PNG with alpha, **≤ 1024 KB**                                                                                                       | Google Play Console Help                                          |
+| Store feature graphic              | **exactly 1024 × 500 px**, JPEG or 24-bit PNG, no alpha                                                                                                              | Google Play Console Help                                          |
+| Apple screenshot sizes             | a **set** of accepted sizes per display class, not one fixed size                                                                                                    | Apple, App Store Connect Help                                     |
+| Texture dimension ceiling          | **16384 × 16384 px** — importer will not accept larger                                                                                                               | Unity Manual, _Import a texture_                                  |
+| Texture dimension ceiling          | **8192 × 8192 px**, and only **with** an `.INI` change — set `MaxLODSize` in `BaseDeviceProfiles.ini`. Without it an imported 8192 texture renders at 4096, silently | Unreal Engine, _Texture Format Support and Settings_ (VENDOR_DOC) |
+| Minimum size for tight sprite mesh | **32 × 32 px** — below this the engine silently forces Full Rect                                                                                                     | Unity Manual, _Sprite texture type reference_                     |
+
+A row belongs here when the violating output **cannot be produced**, by either of two mechanisms: a
+gatekeeper refuses the upload, or the engine silently overrides you. The second is the more
+dangerous of the two and is why the test is inviolability rather than rejection — an override leaves
+you with a result you did not ask for and no error to tell you so. Each row below says which
+mechanism applies.
 
 **The 2:1 ratio rule is the strongest evidence this register contains** — it is a published
 tolerance expressed as a range rather than a point, by a gatekeeper that enforces it.
@@ -638,11 +643,11 @@ tolerance expressed as a range rather than a point, by a gatekeeper that enforce
 
 ## Recommendation — documented cost, no rejection
 
-| quantity                     | guidance                                                                                            | source                                  |
-| ---------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------- |
-| Power-of-two dimensions      | preferred; NPOT costs memory and sample speed                                                       | Unity, corroborated by Godot and Unreal |
-| Integer upscale factors      | fractional scaling distorts pixel-exact art; engines ship a floor() to avoid it                     | Godot 4, _Multiple resolutions_         |
-| Store listing aspect targets | 16:9 / 9:16 and similar are **highly recommended** for listing eligibility — **not** an upload gate | Google Play Console Help                |
+| quantity                | guidance                                                                                                                                  | source                                  |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| Power-of-two dimensions | preferred; NPOT costs memory and sample speed                                                                                             | Unity, corroborated by Godot and Unreal |
+| Integer upscale factors | fractional scaling distorts pixel-exact art; engines ship a floor() to avoid it                                                           | Godot 4, _Multiple resolutions_         |
+| Pixel-exact rendering   | one identical Pixels Per Unit across every sprite in a scene — nothing rejects, clamps, or detects a mismatch; it renders and looks wrong | Google Play Console Help                |
 
 <a id="tool-default-one-vendor-s-considered-choice-cited-as-such"></a>
 
@@ -665,12 +670,12 @@ tolerance expressed as a range rather than a point, by a gatekeeper that enforce
 
 ## Derived arithmetic — a consequence of a real specification
 
-| quantity              | derivation                                                                                                                                                                                                 |
-| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Decode footprint      | `frames × w × h × 4` bytes at RGBA8                                                                                                                                                                        |
-| Block-compressed size | `ceil(w / bw) × ceil(h / bh) × 16` bytes — any `w`, `h`                                                                                                                                                    |
-| Contain-fit scale     | `min(boxW / srcW, boxH / srcH)`; the fitted axis determines the on-screen size                                                                                                                             |
-| Half-texel offset     | index-space `n − 0.5` and continuous texel-space `n` are the same point; a 0.5 gap between the two conventions is the half-texel offset, not a discrepancy (Microsoft Learn, _Bilinear Texture Filtering_) |
+| quantity              | derivation                                                                                                                                                                                                                                                                                                                                      |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Decode footprint      | `frames × w × h × 4` bytes at RGBA8                                                                                                                                                                                                                                                                                                             |
+| Block-compressed size | `ceil(w / bw) × ceil(h / bh) × 16` bytes — any `w`, `h`                                                                                                                                                                                                                                                                                         |
+| Contain-fit scale     | `min(boxW / srcW, boxH / srcH)`; the fitted axis determines the on-screen size                                                                                                                                                                                                                                                                  |
+| Half-texel offset     | a texel’s centre sits half a texel from the integer grid line, so the two conventions differ by exactly 0.5 and that gap is the offset, not a discrepancy (Microsoft Learn, _Coordinate Systems_ (Direct3D 10): “Linear sampling: Left Texel # = floor(U − 0.5)” · Vulkan specification, texel coordinate systems) (SPECIFICATION + VENDOR_DOC) |
 
 ---
 

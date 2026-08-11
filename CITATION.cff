@@ -41,7 +41,7 @@ authors:
   # question as one a lawyer has to settle — so the entity form is used here rather than inventing a
   # split of a handle into a first and last name.
   - name: HetCreep
-version: 1.0.0
+version: 1.1.0
 date-released: '2026-08-11'
 license: CC-BY-NC-ND-4.0
 abstract: >-

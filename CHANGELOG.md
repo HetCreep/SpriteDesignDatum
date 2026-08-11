@@ -7,6 +7,44 @@ Versions follow [Semantic Versioning](https://semver.org/) applied to a standard
 - **MINOR** — a rule or register entry is added; existing conforming work still conforms.
 - **PATCH** — wording, citations, corrections that do not move a value.
 
+## 1.1.0 — 2026-08-11
+
+Two errata verified against their primary sources and corrected, plus the taxonomy defect that let
+one of them hide. `ERRATA.md` keeps both entries permanently — 1.0.0's text still says the wrong
+thing, and anyone holding that version needs to be able to find out why.
+
+**Corrected**
+
+- **E-001** — the Unreal texture-ceiling row said 8192 was available "without an engine
+  configuration change". Epic's own documentation says the opposite: it needs `MaxLODSize` set in
+  `BaseDeviceProfiles.ini`, and without that an imported 8192 texture renders at 4096 **silently**.
+  The row now states the condition and names the silence.
+- **E-002** — the half-texel row attributed its explanation to Microsoft Learn's _Bilinear Texture
+  Filtering_, a Direct3D 9 conceptual page that does not contain it. The statement was correct; the
+  citation was not. Now sourced to _Coordinate Systems_ (Direct3D 10), which states
+  `Left Texel # = floor(U − 0.5)` verbatim, and to the Vulkan specification. This was the second
+  occurrence of a failure this document already records committing once, which is why both rows now
+  carry their citation class.
+
+**Changed — the taxonomy that let E-001 hide**
+
+- The register section headed _"Hard — a gatekeeper or an API rejects violations"_ is now _"Hard —
+  the violating result cannot exist"_, and states which of two mechanisms each row relies on: a
+  gatekeeper refusing the upload, or the engine silently overriding you. The old wording tested for
+  **rejection**, so a row whose engine quietly clamps you to half the size read as correctly filed.
+  It was not, and that wording is what let it sit there unnoticed.
+- The pixel-exact rendering row moved from _Hard_ to _Recommendation_. Nothing rejects, clamps, or
+  detects a mismatched Pixels Per Unit — it renders, and it looks wrong. That is the Recommendation
+  tier's definition, not Hard's.
+
+**Why MINOR and not MAJOR**
+
+The stated test for MAJOR is that a published tolerance moves and conforming work may stop
+conforming. Neither happened. 8192 is still 8192; what changed is the condition attached to it and
+the honesty of its strength class. Moving a row out of _Hard_ makes it **less** binding, so a
+project that met the stricter reading still conforms. A correction that only loosens, or that adds
+information about a third party's behaviour, does not break anyone downstream.
+
 ## 1.0.0 — 2026-08-11
 
 First standalone publication. The document existed before this as an internal design lock inside one
