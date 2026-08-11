@@ -101,6 +101,29 @@ function parseRows(src) {
 // A cell may hold a bare URL, a markdown link, an autolink, or backticks.
 const urlOf = (cell) => (/(https?:\/\/[^\s)\]>`]+)/.exec(cell || '') || [])[1] || ''
 
+// Is the redirect target the same document, or a different one?
+//
+// The first sweep reported two "moved" rows and only one of them had moved. Apple really did
+// reorganise a page; Google Play bounced to the same page with `?hl=he` attached, chosen from
+// the caller's IP. Both are redirects and `res.redirected` cannot tell them apart, so a raw
+// comparison files a locale bounce as a finding — every month, forever, on rows nothing is wrong
+// with. That is how a report teaches people to stop reading it.
+//
+// Same origin and same path, differing only in query or fragment, is the same document. A changed
+// path is a real move and still reports. Deliberately narrow: it does not try to strip locale
+// SEGMENTS (`/en-us/`), because a path is where a real move shows up and guessing which segments
+// are decorative would start hiding the thing this exists to catch.
+function sameDocument(from, to) {
+  try {
+    const a = new URL(from)
+    const b = new URL(to)
+    const strip = (p) => p.replace(/\/+$/, '')
+    return a.host === b.host && strip(a.pathname) === strip(b.pathname)
+  } catch {
+    return false
+  }
+}
+
 // accessed + revalidate, or null when either is unparseable.
 function dueDate(accessed, revalidate) {
   const m = /^(\d+)\s*([dwmy])$/i.exec((revalidate || '').trim())
@@ -217,9 +240,18 @@ for (const row of rows) {
       note: res.statusText || '',
     })
     process.stderr.write(`dead (${res.status})\n`)
-  } else if (res.redirected && res.url !== url) {
+  } else if (res.redirected && res.url !== url && !sameDocument(url, res.url)) {
     verdicts.push({ id: row.id, url, http: res.status, verdict: 'moved', note: `now ${res.url}` })
     process.stderr.write(`moved -> ${res.url}\n`)
+  } else if (res.redirected && res.url !== url) {
+    verdicts.push({
+      id: row.id,
+      url,
+      http: res.status,
+      verdict: 'reachable',
+      note: `redirected within the same document (${new URL(res.url).search || 'trailing slash'})`,
+    })
+    process.stderr.write(`reachable (same doc, redirected)\n`)
   } else {
     verdicts.push({ id: row.id, url, http: res.status, verdict: 'reachable', note: '' })
     process.stderr.write(`reachable\n`)
@@ -280,11 +312,17 @@ const prior = existsSync(REGISTER) ? readFileSync(REGISTER, 'utf8') : '# Revalid
 writeFileSync(REGISTER, prior.replace(/\s*$/, '\n') + out, 'utf8')
 
 // Best effort: keep the register formatted so tools/check.mjs stays green after a sweep.
-spawnSync('npx', ['--yes', 'prettier', '--write', 'REVALIDATION.md'], {
-  cwd: ROOT,
-  shell: true,
-  stdio: 'ignore',
-  timeout: 120000,
-})
+// `shell: true` here raised DEP0190 on every run — Node warns that arguments are concatenated
+// rather than escaped. Nothing here is attacker-controlled, but a deprecation warning printed on
+// every sweep is noise in a report whose whole value is that its output gets read.
+spawnSync(
+  process.platform === 'win32' ? 'npx.cmd' : 'npx',
+  ['--yes', 'prettier', '--write', 'REVALIDATION.md'],
+  {
+    cwd: ROOT,
+    stdio: 'ignore',
+    timeout: 120000,
+  },
+)
 
 console.log(`Appended sweep ${TODAY} to REVALIDATION.md.`)

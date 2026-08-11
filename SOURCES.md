@@ -138,15 +138,15 @@ Unreal page; only the Unity locator can be supplied without guessing.
 
 ## Store and platform policy
 
-| id    | cited as                                                              | line | class          | url                                                                                     | version     | accessed   | revalidate |
-| ----- | --------------------------------------------------------------------- | ---- | -------------- | --------------------------------------------------------------------------------------- | ----------- | ---------- | ---------- |
-| S-017 | "An Android App Bundle that targets texture compression formats…"     | 353  | VENDOR_DOC     | https://developer.android.com/guide/playcore/asset-delivery/texture-compression         | unversioned | 2026-08-11 | 90d        |
-| S-026 | Google Play Console Help, _Add preview assets_ (screenshot, per side) | 619  | VENDOR_DOC     | https://support.google.com/googleplay/android-developer/answer/9866151                  | unversioned | 2026-08-11 | 90d        |
-| S-027 | Google Play Console Help (screenshot, aspect)                         | 620  | VENDOR_DOC     | https://support.google.com/googleplay/android-developer/answer/9866151                  | unversioned | 2026-08-11 | 90d        |
-| S-028 | Google Play Console Help (listing icon)                               | 621  | VENDOR_DOC     | https://support.google.com/googleplay/android-developer/answer/9866151                  | unversioned | 2026-08-11 | 90d        |
-| S-029 | Google Play Console Help (feature graphic)                            | 622  | VENDOR_DOC     | https://support.google.com/googleplay/android-developer/answer/9866151                  | unversioned | 2026-08-11 | 90d        |
-| S-030 | Apple, App Store Connect Help (screenshot sizes)                      | 623  | VENDOR_DOC     | https://developer.apple.com/help/app-store-connect/reference/screenshot-specifications/ | unversioned | 2026-08-11 | 90d        |
-| S-037 | Google Play Console Help (listing aspect targets)                     | 640  | RECOMMENDATION | https://support.google.com/googleplay/android-developer/answer/9866151                  | unversioned | 2026-08-11 | 90d        |
+| id    | cited as                                                              | line | class          | url                                                                                                    | version     | accessed   | revalidate |
+| ----- | --------------------------------------------------------------------- | ---- | -------------- | ------------------------------------------------------------------------------------------------------ | ----------- | ---------- | ---------- |
+| S-017 | "An Android App Bundle that targets texture compression formats…"     | 353  | VENDOR_DOC     | https://developer.android.com/guide/playcore/asset-delivery/texture-compression                        | unversioned | 2026-08-11 | 90d        |
+| S-026 | Google Play Console Help, _Add preview assets_ (screenshot, per side) | 619  | VENDOR_DOC     | https://support.google.com/googleplay/android-developer/answer/9866151                                 | unversioned | 2026-08-11 | 90d        |
+| S-027 | Google Play Console Help (screenshot, aspect)                         | 620  | VENDOR_DOC     | https://support.google.com/googleplay/android-developer/answer/9866151                                 | unversioned | 2026-08-11 | 90d        |
+| S-028 | Google Play Console Help (listing icon)                               | 621  | VENDOR_DOC     | https://support.google.com/googleplay/android-developer/answer/9866151                                 | unversioned | 2026-08-11 | 90d        |
+| S-029 | Google Play Console Help (feature graphic)                            | 622  | VENDOR_DOC     | https://support.google.com/googleplay/android-developer/answer/9866151                                 | unversioned | 2026-08-11 | 90d        |
+| S-030 | Apple, App Store Connect Help (screenshot sizes)                      | 623  | VENDOR_DOC     | https://developer.apple.com/help/app-store-connect/reference/app-information/screenshot-specifications | unversioned | 2026-08-11 | 90d        |
+| S-037 | Google Play Console Help (listing aspect targets)                     | 640  | RECOMMENDATION | https://support.google.com/googleplay/android-developer/answer/9866151                                 | unversioned | 2026-08-11 | 90d        |
 
 All four Google Play rows resolve to one page. Neither store versions or dates its help pages, so
 `accessed` is the only handle a reader has on when the policy was read — which is why this class
