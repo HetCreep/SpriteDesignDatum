@@ -85,17 +85,19 @@ interesting outcome of the two.
 
 ## Where a report goes
 
-**Today: there is no issue tracker.** This repository has no public remote yet — so `LICENSE`'s
-instruction to "open an issue on this repository", as its licence-request section is written today,
-points at something that does not exist. Saying so here is cheaper than letting a reader find out.
+**Open an issue.** https://github.com/HetCreep/SpriteDesignDatum/issues
 
-Until it does exist, use the other route `LICENSE` already names: the copyright holder, through
-**github.com/HetCreep**.
+That is the route to use for a correction, a counter-exemplar, or a re-measurement. It is public, it
+is harder to lose than a message, and a report anyone can read is a report anyone can check.
 
-**After publication: open an issue.** That is the better route — it is public, it is harder to lose
-than a message, and a report anyone can read is a report anyone can check. This section gets updated
-in the same commit that adds the remote, and that instruction in `LICENSE` becomes true at that
-moment rather than before it.
+For a **licence request** — commercial use, adaptation, redistribution of the document — either an
+issue or a direct approach through **github.com/HetCreep** works. `LICENSE` names both.
+
+> An earlier revision of this section said there was no issue tracker, because there was no public
+> remote, and instructed that it "gets updated in the same commit that adds the remote". The remote
+> was added and this section was not updated in that commit. It is recorded rather than quietly
+> replaced, because a file that predicts its own staleness and goes stale anyway is a better
+> argument for checking than any rule about it.
 
 ## What happens to it
 

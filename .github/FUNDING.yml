@@ -1,9 +1,11 @@
 # The sponsor button GitHub renders on a repository page.
 #
-# Note where this does and does not reach. This repository is PRIVATE, so nobody outside
-# sees a repository page at all, and the readers this standard is written for arrive at
-# the published documentation site instead. The link that actually reaches them lives in
-# README.md, not here. This file is correct and nearly inert; it starts working the day
-# the repository becomes visible, and costs nothing until then.
+# The repository is public, so this button is rendered and reaches anyone who lands on
+# the repository page. Most readers of the standard will not: they arrive at the
+# documentation site, which does not read this file. The link that reaches them is the
+# one in README.md, which the site publishes. Both are wanted; neither replaces the other.
+#
+# An earlier revision of this comment said the repository was private and the file was
+# nearly inert. True when written, false the moment it was published.
 
 github: HetCreep
