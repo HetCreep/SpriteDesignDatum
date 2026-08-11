@@ -7,6 +7,65 @@ Versions follow [Semantic Versioning](https://semver.org/) applied to a standard
 - **MINOR** — a rule or register entry is added; existing conforming work still conforms.
 - **PATCH** — wording, citations, corrections that do not move a value.
 
+## 2.0.0 — 2026-08-11
+
+**`E-003`.** Layer B and the unbounded register were sorted on two different axes and the document
+never said so, which made three quantities appear in both lists and read as a contradiction. For two
+of them it was not one.
+
+An opinion board of four independent seats — one deliberately blind to the framing, the options, and
+the proposal on the table — was asked where the three belonged. All four rejected the question. The
+discriminator in use, _did you measure it_, is not what separates these cases.
+
+**Changed — the Layer B entry condition**
+
+Was: a value enters Layer B only with a corpus measurement behind it. Now: a value enters Layer B
+only if a **wrong** value would be a demonstrable error against something that exists independently
+of the declaration.
+
+A canvas declared at 63 px when the file ships 64 px is wrong, and anyone can open the file and show
+it. Eight frames rather than twelve is not a wrong count — it is a different animation. The old test
+admitted the second, because you can always count files; the new one does not, because counting them
+proves nothing about which count was right.
+
+The document also now states the axis outright: **Layer B asks whether the adopting project can
+measure a value; the unbounded register asks whether anyone outside bounds it. A value may sit on
+both**, and a frame count does.
+
+**Changed — the slot list**
+
+The direction-to-index mapping is no longer a Layer B slot. Nothing in the art can be measured to
+produce "0 means south"; it is a label. It carries a warning the board surfaced that nobody had
+raised: it is **free of external constraint and not free of cost**, because every filename already
+delivered encodes it. Changing it is a breaking migration.
+
+Each remaining slot now states its answer on both axes instead of sitting in a bare list.
+
+**Changed — the promotion clause**
+
+Promotion out of Layer C now takes the same evidence the entry condition asks for, so the two cannot
+drift apart. And it says plainly that **promotion is not exclusion** — a value that earns Layer B
+still belongs in the unbounded register if nobody outside bounds it. Without that sentence, the old
+wording quietly recreated the same mis-sorting from the other direction.
+
+**Added**
+
+- A register row for the **number of directions in a set**. It had appeared exactly once in the
+  whole document, in the slot list, and any repair that only moved slots would have lost it
+  entirely.
+
+**Why MAJOR**
+
+The stated test is that a locked rule changes meaning **or** a published tolerance moves. The first
+clause fires: the Layer B entry condition admits and excludes different values than it did. The
+second fires too — a project that filed the direction-to-index mapping at Layer B, which the slot
+list told it to do, stops conforming.
+
+An earlier draft of this entry called it MINOR by arguing only the second clause and skipping the
+first. The rule uses _or_, not _and_. Calling it MINOR because the document is one day old and
+nobody outside has adopted it yet would have been choosing the number by convenience rather than by
+the test — which is the habit this document exists to make harder.
+
 ## 1.1.0 — 2026-08-11
 
 Two errata verified against their primary sources and corrected, plus the taxonomy defect that let

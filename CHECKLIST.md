@@ -49,7 +49,9 @@ That is the entire reason a checklist exists for something a compiler could othe
 
 [ ] Directional sets are ordered by the agreed convention, and you have checked it rather
     than assumed it. Getting this wrong produces NO error — the character simply faces
-    the wrong way, forever.                                                                -> Layer C
+    the wrong way, forever. Layer C is where this belongs and the standard says so: no
+    measurement of the art can tell you which number means "south". Agree it in writing,
+    then treat changing it as a rename of every file you have already sent.               -> Layer C
 
 [ ] Nothing was re-cropped or re-canvased to make one consumer look right. If a consumer
     needs a different framing, that is a conversation, not a silent edit — re-cropping for

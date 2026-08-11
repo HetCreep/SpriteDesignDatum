@@ -43,7 +43,7 @@
 
 # SPRITE DESIGN DATUM
 
-> **Version 1.1.0** · first published 2026-08-11 · © 2026 HetCreep Released under
+> **Version 2.0.0** · first published 2026-08-11 · © 2026 HetCreep Released under
 > [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/). Free to read, cite, and
 > conform to. Commercial use or adaptation of the document requires a separate written licence. See
 > `LICENSE`, and the comment above for what a lawyer still has to settle.
@@ -461,13 +461,40 @@ recommendation. Everything between those ceilings is a project decision.
 
 A project fills these slots in its conformance document, each with its provenance:
 
-- canvas dimensions, per animation set
-- frame count per direction, and direction count
-- direction-to-index mapping for any set addressed by number
-- animation-set lengths and playback cadence
-- the anchor's position inside the canvas
+- the anchor's position inside the canvas — **measurable; bounded by nobody**
+- canvas dimensions, per animation set — **measurable; bounded above only** (the register's texture
+  ceilings)
+- frame count per direction, and the number of directions — **measurable; bounded by nobody**
+- animation-set lengths and playback cadence — **measurable; bounded by nobody**
 
-**A value enters Layer B only with a corpus measurement behind it, not a rationale.**
+**Not a Layer B slot:** the mapping from a direction to an index — which number in a filename means
+_facing south_. No instrument can produce that from the art; it is a label, and it is filed in the
+unbounded register. It is nonetheless **mandatory to fix and expensive to change**: shipped
+filenames already encode it, so "bounded by nobody" describes the absence of external constraint,
+not the absence of cost. Treat a change as a breaking migration of every file already delivered.
+
+**Layer B and the unbounded register sort on different axes, and a value may sit on both.**
+
+Layer B asks: _can the adopting project measure this against its own material?_ The unbounded
+register asks: _does any external body bound this?_
+
+Those are independent. A value can be measurable by the project and unbounded by everyone else at
+the same time — a frame count is exactly that: you can count the delivered files, and no vendor
+publishes a number you should have counted against. Such a value belongs in **both** lists, and its
+conformance row says so: measured by us, bounded by nobody.
+
+**A value enters Layer B only if a wrong value would be a demonstrable error against something that
+exists independently of the declaration.** A canvas declared at 63 px when the file ships 64 px is
+wrong, and anyone can open the file and show it. Feet declared on row 10 that render on row 40 are
+wrong, and the instrument finds the gap. But eight frames rather than twelve is not a wrong count —
+it is a different animation. Where every candidate value is an equally legitimate design, no
+measurement can settle it, and the value does not enter Layer B however unavoidable it is to pick
+one.
+
+A measurement taken **after** a decision is not the same as a decision **derived from** a
+measurement. Reading a canvas size back out of a file you authored confirms what you typed; it does
+not discover anything. That is why the test above is about demonstrable error rather than about
+whether a number can be read back.
 
 ---
 
@@ -479,8 +506,14 @@ Values in this layer are legitimate, are chosen by the project, and **must never
 specification**. A project's conformance document lists its own; the classes that always land here
 are enumerated in the unbounded register below.
 
-**Promoting a value from C to B requires a corpus measurement. Promoting it to B-ext requires a
-named external exemplar. Neither can be done with an argument alone.**
+**A value is promoted out of Layer C by evidence, never by argument.** To Layer B: a demonstration
+that a wrong value would be a verifiable error against the project's own material — a measurement
+alone is not enough, since anything written down can be read back. To Layer B-ext: a named external
+exemplar. To Layer A or a store requirement: the specification or the gatekeeper itself.
+
+**Promotion is not exclusion.** A value that leaves Layer C because the project can now demonstrate
+error against it still belongs in the unbounded register if no external body bounds it. These
+registers are not a hierarchy — they answer different questions.
 
 ---
 
@@ -701,6 +734,7 @@ found nothing — and in most cases can say why nothing exists.
 | Image format choice among universally-supported options                                                     | Standards publish what a decoder must **accept**, never which accepted format a producer should **emit**.                                                                                                                                                                                                                                                                                                                                                                                                        |
 | Acceptability of a RAM ceiling                                                                              | The number derives cleanly; its acceptability does not. No vendor publishes a per-app texture-RAM budget for a browser tab.                                                                                                                                                                                                                                                                                                                                                                                      |
 | Requiring every frame of one set to share a canvas                                                          | **No format requires this, and the industry answer is the opposite**: carry the untrimmed frame of reference in per-frame metadata and let frames differ. A project may still adopt the stricter rule — but as its own Layer B choice, not as a standard.                                                                                                                                                                                                                                                        |
+| Number of directions in a set                                                                               | A coverage choice traded against art budget — four directions, eight, or a mirrored set. Nothing outside the project bounds it: no tool publishes a direction count, and no consumer of the files can tell you what yours should be. Countable off the delivery once it exists; not derivable before it does.                                                                                                                                                                                                    |
 | Device-fleet format support percentages                                                                     | Telemetry that moves month to month as the installed base turns over. Re-check at port-decision time; never carry the number forward.                                                                                                                                                                                                                                                                                                                                                                            |
 
 <a id="known-coverage-gap-in-this-register"></a>

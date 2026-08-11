@@ -710,32 +710,35 @@ what it is not    a standard. If someone reads this record and adopts a shared c
 
 ## [The Layer B slots](SPRITE-DESIGN-DATUM.md#layer-b-locked-by-the-adopting-project-s-own-measurement)
 
-The standard names five slots a project fills at Layer B. We fill them, and we could not file three
-of them where we were told to.
+The standard names four slots a project fills at Layer B, and one thing that looks like a slot and
+is not. We answer all five, and two of them are answered in two places on purpose.
 
-| slot                                       | our answer                                  | filed at                      |
-| ------------------------------------------ | ------------------------------------------- | ----------------------------- |
-| canvas dimensions, per animation set       | the six canvases in the project table       | **C**, see the note           |
-| frame count per direction, direction count | the frame table, four directions everywhere | **C**, Layer C register above |
-| direction-to-index mapping                 | `0=S · 1=W · 2=N · 3=E`                     | **C**, Layer C register above |
-| animation-set lengths, playback cadence    | the cadence row                             | **C**, Layer C register above |
-| the anchor's position inside the canvas    | the per-family table under `E1`             | **B**, `MEASURED-LIVE`        |
+| slot                                       | our answer                                  | filed at               |
+| ------------------------------------------ | ------------------------------------------- | ---------------------- |
+| the anchor's position inside the canvas    | the per-family table under `E1`             | **B**, `MEASURED-LIVE` |
+| canvas dimensions, per animation set       | the six canvases in the project table       | **B**                  |
+| frame count per direction, direction count | the frame table, four directions everywhere | **B and C**            |
+| animation-set lengths, playback cadence    | the cadence row                             | **B and C**            |
+| direction-to-index mapping                 | `0=S · 1=W · 2=N · 3=E`                     | **C only**             |
 
-> **Three of these five are also enumerated in the standard's register of quantities nobody locks,
-> and the two registers file them differently.** Layer B admits a value only with a corpus
-> measurement behind it; a direction-to-index mapping cannot be measured, because it is a convention
-> with no measurable referent. `CHECKLIST.md` agrees with the Layer C reading and points directional
-> ordering at Layer C explicitly.
+> **Two rows are filed in both registers, and that is the correct answer, not a hedge.** The
+> standard sorts Layer B and the unbounded register on different axes: Layer B asks whether we can
+> measure a value against our own material, the register asks whether anyone outside bounds it. Our
+> frame count answers yes to the first and no to the second, so it belongs in both, and this record
+> says so rather than picking one and hoping.
 >
-> We filed them under C, because a value that cannot be measured cannot meet Layer B's own entry
-> condition, and because the checklist and the unbounded register outnumber the slot list two to
-> one. **We did not decide the question — we recorded which way we went and why, and reported it
-> upstream.** A project that quietly filed them under B would be claiming a measurement it does not
-> have.
+> **Canvas dimensions sit at B under the entry test as written.** An earlier revision of this record
+> filed them at C, reasoning that a canvas is agreed before any frame exists so there is nothing to
+> measure at the moment of the decision. That reasoning was answering the old entry condition, which
+> asked whether a measurement stood behind the value. The test asks something else now: whether a
+> **wrong** value would be a demonstrable error. Ours would be — declare 47 px, ship 48 px, and
+> anyone can open the file and show it. So they are Layer B, and the earlier hedge is recorded here
+> rather than deleted, because the reasoning was sound against the rule it was written for.
 >
-> Canvas dimensions are a milder case of the same thing: a canvas is agreed before the first frame
-> exists, so there is no corpus to measure at the moment the decision is made. Ours are measurable
-> now, after the fact, and that is not the same as having been derived from a measurement.
+> **The direction-to-index mapping is not a Layer B slot at all**, and the standard now says so
+> outright. Nothing in the art can be measured to produce "0 means south" — it is a label. We note
+> what the standard notes: changing it is free of external constraint and **not** free of cost,
+> since every filename we have already delivered encodes it.
 
 ---
 

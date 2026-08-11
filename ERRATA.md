@@ -183,7 +183,7 @@ verbatim. The Vulkan half is recorded as unverified rather than assumed.
 
 | field        | value                                                                                            |
 | ------------ | ------------------------------------------------------------------------------------------------ |
-| **state**    | reported                                                                                         |
+| **state**    | **corrected in 2.0.0** — the board reported it, the owner ruled, the standard changed            |
 | **reported** | 2026-08-11, by an opinion board of four independent seats, one of them blind to the framing      |
 | **found in** | 1.0.0, 1.1.0                                                                                     |
 | **location** | `SPRITE-DESIGN-DATUM.md:464-470` (the Layer B slot list) and `:687-694` (the unbounded register) |

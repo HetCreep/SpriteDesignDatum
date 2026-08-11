@@ -300,6 +300,12 @@ check('version-string coupling', (fail, note) => {
 //
 // Other projects' conformance records are meant to cite these ids, so a reference
 // to a rule no heading defines is a broken contract, not a typo.
+//
+// The id pattern is [APLE] followed by a digit, so LAYER ids — B, B-ext, C — cannot match
+// and never have. That is deliberate: they are layer names, not rule ids, nothing cites them
+// by number, and there is no heading-per-layer contract to break. Nothing here inspects Layer
+// B or Layer C content and nothing is meant to. Whether a value is filed in the right layer is
+// a judgement about the value, which no regex reaches.
 // ---------------------------------------------------------------------------
 
 check('rule-id resolution', (fail, note) => {
