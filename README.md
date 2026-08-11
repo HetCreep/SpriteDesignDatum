@@ -5,6 +5,11 @@ geometry have a real external standard and which parts nobody has ever published
 
 📄 **The standard itself: [`SPRITE-DESIGN-DATUM.md`](SPRITE-DESIGN-DATUM.md)**
 
+🔗 **Published at
+[https://hetcreep.gitbook.io/hetcreep-docs](https://hetcreep.gitbook.io/hetcreep-docs)** — that is
+the address to link and to cite. Rule ids are stable anchors (`#L1`, `#E3`), so a conformance record
+in another project can point at a single rule and keep working when a heading is reworded.
+
 ---
 
 ## Why this exists
@@ -106,6 +111,17 @@ commercially or otherwise. The restriction is on redistributing or adapting **th
 
 Commercial use, adaptation, or redistribution of the document as part of a paid product or service
 requires a separate written licence. See [`LICENSE`](LICENSE).
+
+## Supporting this
+
+Measuring two public corpora, checking every claim against its source, and writing down the
+quantities that have **no** source took considerably longer than writing the rules would have. If
+the standard saved you that work, [GitHub Sponsors](https://github.com/sponsors/HetCreep) is where
+to say so.
+
+Nothing here is behind it. The document is free to read, cite, and conform to, sponsored or not, and
+it always will be — the paid thing is a licence to redistribute or adapt the document itself, which
+is a different transaction and is described in [`LICENSE`](LICENSE).
 
 > ⚠️ The licence text is a **draft**, written by an AI assistant at the owner's direction and not
 > reviewed by a lawyer. `LICENSE` states plainly what a lawyer still has to settle before it is

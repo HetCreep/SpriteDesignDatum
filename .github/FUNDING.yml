@@ -1,0 +1,9 @@
+# The sponsor button GitHub renders on a repository page.
+#
+# Note where this does and does not reach. This repository is PRIVATE, so nobody outside
+# sees a repository page at all, and the readers this standard is written for arrive at
+# the published documentation site instead. The link that actually reaches them lives in
+# README.md, not here. This file is correct and nearly inert; it starts working the day
+# the repository becomes visible, and costs nothing until then.
+
+github: HetCreep

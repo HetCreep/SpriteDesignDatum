@@ -17,17 +17,20 @@
 #   and a register of quantities that have no published source at all. Filed as `dataset` for that
 #   reason. It is not a data file, and this comment exists so nobody reads the field as saying it is.
 #
-# WHY THERE IS NO `url` OR `repository-code`
+# WHY `url` IS THE DOCUMENTATION SITE AND THERE IS NO `repository-code`
 #
-#   This repository has no public remote yet. A citation pointing at a URL that does not resolve is
-#   worse than one carrying no URL, because the reader cannot tell a dead link from a wrong one. Add
-#   both in the same commit that publishes the remote.
+#   The repository is private. `repository-code` pointing at it would resolve to a 404 for every
+#   reader who is not the owner, which is worse than no field: a reader cannot tell a dead link from
+#   a wrong one. The documentation site is where the standard is actually readable, so that is what
+#   a citation should carry. Add `repository-code` in the same commit that makes the repository
+#   public, if that ever happens.
 #
 # NOTE FOR WHOEVER MAINTAINS THIS
 #
 #   `version` below is a THIRD copy of the version string. The other two are the front matter of
 #   SPRITE-DESIGN-DATUM.md and the top heading of CHANGELOG.md. All three must move together, and
-#   nothing currently enforces that.
+#   `tools/check.mjs` check 4 enforces exactly that — it reads all three and fails on a mismatch,
+#   and takes the tag being cut as an optional fourth. Do not add a fourth copy without telling it.
 
 cff-version: 1.2.0
 message: >-
@@ -41,7 +44,8 @@ authors:
   # question as one a lawyer has to settle — so the entity form is used here rather than inventing a
   # split of a handle into a first and last name.
   - name: HetCreep
-version: 2.0.0
+url: 'https://hetcreep.gitbook.io/hetcreep-docs'
+version: 2.0.1
 date-released: '2026-08-11'
 license: CC-BY-NC-ND-4.0
 abstract: >-

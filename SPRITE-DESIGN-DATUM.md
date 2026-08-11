@@ -43,10 +43,14 @@
 
 # SPRITE DESIGN DATUM
 
-> **Version 2.0.0** · first published 2026-08-11 · © 2026 HetCreep Released under
-> [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/). Free to read, cite, and
-> conform to. Commercial use or adaptation of the document requires a separate written licence. See
-> `LICENSE`, and the comment above for what a lawyer still has to settle.
+> **Version 2.0.1** · first published 2026-08-11 · © 2026 HetCreep
+>
+> Published at **https://hetcreep.gitbook.io/hetcreep-docs** — cite that, and cite the version. Rule
+> ids are stable anchors: `#L1`, `#E3`, `#A2`. Cite the id, never the heading text.
+>
+> Released under [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/). Free to
+> read, cite, and conform to. Commercial use or adaptation of the document requires a separate
+> written licence. See `LICENSE`, and the comment above for what a lawyer still has to settle.
 
 **Binding on both sides of a project that adopts it: the code that renders sprites, and the people
 who draw them.**

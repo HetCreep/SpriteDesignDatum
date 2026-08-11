@@ -37,11 +37,11 @@ it. **The quoted text is the locator. The line number is a convenience.**
 
 ## Register
 
-| id              | location in `1.0.0`                          | what it is                                                                                                                                                                                                      | state    |
-| --------------- | -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| [E-001](#e-001) | `SPRITE-DESIGN-DATUM.md:625`                 | Unreal's 8192 ceiling **requires** a `BaseDeviceProfiles.ini` change, and an oversized import is silently clamped rather than rejected                                                                          | reported |
-| [E-002](#e-002) | `SPRITE-DESIGN-DATUM.md:668`                 | The half-texel explanation is attributed to a page that does not contain it. The statement itself is correct                                                                                                    | reported |
-| [E-003](#e-003) | `SPRITE-DESIGN-DATUM.md:464-470`, `:687-694` | Layer B and the unbounded register are sorted on **two different axes**, printed as though they were one. Three quantities appear in both lists, and for two of them that is correct rather than contradictory. |
+| id              | location in `1.0.0`                          | what it is                                                                                                                                                                                                      | state                  |
+| --------------- | -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
+| [E-001](#e-001) | `SPRITE-DESIGN-DATUM.md:625`                 | Unreal's 8192 ceiling **requires** a `BaseDeviceProfiles.ini` change, and an oversized import is silently clamped rather than rejected                                                                          | **corrected in 1.1.0** |
+| [E-002](#e-002) | `SPRITE-DESIGN-DATUM.md:668`                 | The half-texel explanation is attributed to a page that does not contain it. The statement itself is correct                                                                                                    | **corrected in 1.1.0** |
+| [E-003](#e-003) | `SPRITE-DESIGN-DATUM.md:464-470`, `:687-694` | Layer B and the unbounded register are sorted on **two different axes**, printed as though they were one. Three quantities appear in both lists, and for two of them that is correct rather than contradictory. | **corrected in 2.0.0** |
 
 ---
 

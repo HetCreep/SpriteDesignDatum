@@ -7,7 +7,35 @@ Versions follow [Semantic Versioning](https://semver.org/) applied to a standard
 - **MINOR** — a rule or register entry is added; existing conforming work still conforms.
 - **PATCH** — wording, citations, corrections that do not move a value.
 
-## 2.0.0 — 2026-08-11
+## 2.0.1 — 2026-08-11
+
+The standard is now published at **https://hetcreep.gitbook.io/hetcreep-docs**, which is the first
+time the instruction it has carried since 1.0.0 — _"LINK to it and cite it"_ — has had anything to
+point at. The front matter and `CITATION.cff` now carry that address, and the front matter states
+what a citation should look like: the id, the version, never the heading text.
+
+PATCH, and the version moves at all only because `GOVERNANCE.md` says a released version is
+immutable. 2.0.0 was tagged and pushed before these edits; changing its text and leaving the number
+alone would have made the tag and the document disagree, which is precisely the failure the
+immutability rule exists to prevent.
+
+**Corrected — four places where a document described a world that had changed**
+
+- `ERRATA.md`'s summary table still marked `E-001` and `E-002` as **reported** while their own
+  entries said **corrected in 1.1.0**, and `E-003`'s state cell was empty. The table is what a
+  reader scans first, so it was the copy most worth keeping right and the one that drifted.
+- `.github/workflows/check.yml` opened by declaring the repository had no remote and the workflow
+  had never run. Both stopped being true the moment it was pushed.
+- `CITATION.cff` warned that nothing enforced the three copies of the version string. `check.mjs`
+  check 4 has enforced it since the day it was written.
+- `REVALIDATION.md` had an empty Sweeps section and said nothing about being empty. It now says so
+  outright: no claim has been re-checked since publication, and an empty register states that better
+  than a green tick would.
+
+All four were found by the caretaker running offline, and all four are the same species — a sentence
+that was true when written and quietly stopped being true. That is the thing this repository exists
+to catch, so finding four of them inside its own files on day one is the expected number, not an
+embarrassing one.
 
 **`E-003`.** Layer B and the unbounded register were sorted on two different axes and the document
 never said so, which made three quantities appear in both lists and read as a contradiction. For two

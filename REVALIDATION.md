@@ -44,5 +44,11 @@ the afternoon.
 Machine sweeps are appended below by `tools/watch-sources.mjs`. Human verdicts are written by hand
 in the same append-only way, in a section headed with the date and the caretaker who ran it.
 
+**Nothing has been swept yet — this section is empty and that is the honest state.** The locators in
+`SOURCES.md` were checked once, on the day they were written, by the pass that wrote them; that is
+recorded there as each row's `accessed` date and is not a sweep. Until a dated section appears
+below, no claim in the standard has been re-checked against its source since publication, and an
+empty register says that far better than a green tick would.
+
 _No sweep has been recorded yet. `SOURCES.md` is being built by another lane; the first machine
 sweep runs once it exists._

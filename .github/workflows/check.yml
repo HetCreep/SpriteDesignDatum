@@ -1,8 +1,10 @@
 # ---------------------------------------------------------------------------
-# INERT AS OF 2026-08-11.
+# LIVE AS OF 2026-08-11, on a PRIVATE repository.
 #
-# This repository has no remote, and the owner has not decided whether it will be
-# published. Until someone pushes it to GitHub, this file runs nowhere, has never run,
+# The repository is now at github.com/HetCreep/SpriteDesignDatum and this workflow does
+# run. It is private, so nobody outside sees the result; treat a green tick here as a
+# note to the owner, not as a public signal. An earlier revision of this header said the
+# repository had no remote and this file
 # and proves nothing. It is here so that the day it is pushed the checks are already
 # wired, not because anything is watching today.
 #
