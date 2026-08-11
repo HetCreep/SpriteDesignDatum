@@ -45,13 +45,19 @@ Both ran on 2026-08-11. The first reported **2 moved**, the second **0**, and no
 sources changed in between — the difference is one real correction and one fixed defect, and the
 register keeps both runs because deleting the wrong one is how a register stops being evidence.
 
-- (Apple screenshot specifications) **had genuinely moved**. The locator in was updated to the new
-  path, so the second sweep found it where it now lives.
-- (Play texture compression) **had not moved at all**. Google bounced it to the same page with
-  appended, chosen from the caller's address. cannot tell that from a real move, so the watch filed
-  a finding against a row nothing was wrong with. Left unfixed it would have reported the same
-  non-event every month, which is how a report teaches its readers to stop opening it. The watch now
-  compares host and path and treats a query-only redirect as the same document.
+- `S-030` (Apple screenshot specifications) **had genuinely moved**. The locator in `SOURCES.md` was
+  updated to the new path, so the second sweep found it where it now lives.
+- `S-017` (Play texture compression) **had not moved at all**. Google bounced it to the same page
+  with `?hl=he` appended, chosen from the caller's address. `res.redirected` cannot tell that from a
+  real move, so the watch filed a finding against a row nothing was wrong with. Left unfixed it
+  would have reported the same non-event every month, which is how a report teaches its readers to
+  stop opening it. The watch now compares host and path and treats a query-only redirect as the same
+  document.
+
+An earlier revision of this section shipped with every one of those identifiers missing — `S-030`,
+`S-017`, the filename, the query string — because the shell ate the backticks on the way in. It read
+as "the locator in was updated". Recorded here rather than silently overwritten, since a register
+that quietly repairs itself is the thing this file exists not to be.
 
 ## Sweeps
 
