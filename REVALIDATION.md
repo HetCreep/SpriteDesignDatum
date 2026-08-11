@@ -50,5 +50,6 @@ recorded there as each row's `accessed` date and is not a sweep. Until a dated s
 below, no claim in the standard has been re-checked against its source since publication, and an
 empty register says that far better than a green tick would.
 
-_No sweep has been recorded yet. `SOURCES.md` is being built by another lane; the first machine
-sweep runs once it exists._
+_No sweep has been recorded yet. `SOURCES.md` exists and holds the locators; nothing has re-checked
+them since the day they were written. (An earlier revision of this line said `SOURCES.md` was still
+being built — stale since the day it was written, caught 2026-08-11.)_

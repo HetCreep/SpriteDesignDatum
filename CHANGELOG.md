@@ -7,7 +7,39 @@ Versions follow [Semantic Versioning](https://semver.org/) applied to a standard
 - **MINOR** — a rule or register entry is added; existing conforming work still conforms.
 - **PATCH** — wording, citations, corrections that do not move a value.
 
-## 2.0.1 — 2026-08-11
+## 2.0.2 — 2026-08-11
+
+**The address this document told everyone to cite could not resolve a single rule.** 2.0.1 published
+at a documentation site and said "rule ids are stable anchors: `#L1`, `#E3`, `#A2`". They are not,
+there. That renderer strips explicit anchors and generates its own slugs, so every `#L1` in a
+citation landed at the top of the page — silently, which is the worst way for a link to fail.
+
+Measured on the served HTML of both surfaces, not inferred:
+
+```
+documentation site, rendered      0 of 13 rule anchors present
+the file at a signed tag         13 of 13 present
+```
+
+An earlier check appeared to show the anchors surviving. It was wrong, because the tool used
+converts a page to markdown before anyone looks at it — so it was reading the source both times
+rather than the render. That is recorded because the mistake is the instructive part: a measurement
+is only as good as the thing it actually touched.
+
+**Changed**
+
+- Citations now point at `SPRITE-DESIGN-DATUM.md` **at a signed tag**, which is where the anchors
+  resolve. `CITATION.cff`, the front matter and `README.md` all say the same thing.
+- The documentation site is described as what it is: a reading copy, convenient and **not** citable.
+  Not hidden, not apologised for — a reader is told which surface answers which need.
+- The repository is **public**. That is what makes a tagged file a citable address at all, and it
+  closes the oldest gap here: a document that has instructed readers to "LINK to it and cite it"
+  since 1.0.0 finally has somewhere to point that works.
+- `.gitbook.yaml` and `SUMMARY.md` bound what the site publishes. It had been publishing every
+  tracked file — including the caretaker's own seat definition and an internal audit report — as
+  public pages nobody wrote for readers.
+- The `check.yml` header is repaired. It had been wrong twice in opposite directions, first claiming
+  no remote existed and then left half-written during that repair, and now records both.
 
 The standard is now published at **https://hetcreep.gitbook.io/hetcreep-docs**, which is the first
 time the instruction it has carried since 1.0.0 — _"LINK to it and cite it"_ — has had anything to

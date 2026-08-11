@@ -17,13 +17,13 @@
 #   and a register of quantities that have no published source at all. Filed as `dataset` for that
 #   reason. It is not a data file, and this comment exists so nobody reads the field as saying it is.
 #
-# WHY `url` IS THE DOCUMENTATION SITE AND THERE IS NO `repository-code`
+# WHY `url` IS A TAGGED FILE AND NOT THE DOCUMENTATION SITE
 #
-#   The repository is private. `repository-code` pointing at it would resolve to a 404 for every
-#   reader who is not the owner, which is worse than no field: a reader cannot tell a dead link from
-#   a wrong one. The documentation site is where the standard is actually readable, so that is what
-#   a citation should carry. Add `repository-code` in the same commit that makes the repository
-#   public, if that ever happens.
+#   A citation has to resolve to the exact bytes it cites, and to the RULE inside them. The
+#   documentation site fails the second half: its renderer strips the explicit anchors, so a
+#   citation ending `#L1` lands at the top of the page instead of at L1. Measured on the served
+#   HTML — 0 of 13 rule anchors present. The file at a signed tag keeps all 13, so that is what a
+#   citation carries. The site is a reading copy and is not cited.
 #
 # NOTE FOR WHOEVER MAINTAINS THIS
 #
@@ -44,8 +44,9 @@ authors:
   # question as one a lawyer has to settle — so the entity form is used here rather than inventing a
   # split of a handle into a first and last name.
   - name: HetCreep
-url: 'https://hetcreep.gitbook.io/hetcreep-docs'
-version: 2.0.1
+url: 'https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.2/SPRITE-DESIGN-DATUM.md'
+repository-code: 'https://github.com/HetCreep/SpriteDesignDatum'
+version: 2.0.2
 date-released: '2026-08-11'
 license: CC-BY-NC-ND-4.0
 abstract: >-

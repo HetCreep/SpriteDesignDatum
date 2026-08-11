@@ -5,10 +5,16 @@ geometry have a real external standard and which parts nobody has ever published
 
 📄 **The standard itself: [`SPRITE-DESIGN-DATUM.md`](SPRITE-DESIGN-DATUM.md)**
 
-🔗 **Published at
-[https://hetcreep.gitbook.io/hetcreep-docs](https://hetcreep.gitbook.io/hetcreep-docs)** — that is
-the address to link and to cite. Rule ids are stable anchors (`#L1`, `#E3`), so a conformance record
-in another project can point at a single rule and keep working when a heading is reworded.
+🔗 **Cite
+[`SPRITE-DESIGN-DATUM.md` at a signed tag](https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.2/SPRITE-DESIGN-DATUM.md)**
+— rule ids resolve as anchors there, so a conformance record in another project can point at `#L1`
+and keep working when a heading is reworded.
+
+📖 **Read it at
+[https://hetcreep.gitbook.io/hetcreep-docs](https://hetcreep.gitbook.io/hetcreep-docs)** if you
+prefer a site. That copy is not citable: the renderer strips the anchors, so `#L1` lands at the top
+of the page. Measured — 0 of 13 rule anchors survive the render, 13 of 13 survive on the tagged
+file.
 
 ---
 

@@ -43,10 +43,17 @@
 
 # SPRITE DESIGN DATUM
 
-> **Version 2.0.1** · first published 2026-08-11 · © 2026 HetCreep
+> **Version 2.0.2** · first published 2026-08-11 · © 2026 HetCreep
 >
-> Published at **https://hetcreep.gitbook.io/hetcreep-docs** — cite that, and cite the version. Rule
-> ids are stable anchors: `#L1`, `#E3`, `#A2`. Cite the id, never the heading text.
+> **Cite this at**
+> `https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.2/SPRITE-DESIGN-DATUM.md` — the file at a
+> signed tag. Rule ids resolve as anchors there: append `#L1`, `#E3`, `#A2`. Cite the id, never the
+> heading text, and always name the version.
+>
+> There is also a reading copy at https://hetcreep.gitbook.io/hetcreep-docs. It is convenient and it
+> is **not** citable: its renderer strips the explicit anchors, so every `#L1` lands at the top of
+> the page. Measured rather than assumed — 0 of 13 rule anchors survive there, 13 of 13 survive on
+> the tagged file.
 >
 > Released under [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/). Free to
 > read, cite, and conform to. Commercial use or adaptation of the document requires a separate
