@@ -15,7 +15,19 @@
 #
 #     node tools/check.mjs
 #
-# If this repository is ever published, pin the two actions below to commit SHAs rather
+# The actions below are pinned to commit SHAs, not to a moving tag. A tag can be
+# repointed by whoever owns the action; a SHA cannot, so what runs here is what was
+# reviewed here. The trailing comment names the version each SHA was v4 at, for anyone
+# reading it later.
+#
+# This was written as an instruction — "if this repository is ever published, pin the
+# actions" — and then sat unexecuted through publication and three audit passes before
+# anybody did it. Recorded because that is the third instruction in this repository to
+# fire and go unread, and the pattern is worth more than the pin.
+#
+# Pinning is not upgrading: these are the SHAs the v4 tags point at, deliberately, so
+# that this change did nothing but freeze what was already running. Moving to a newer
+# major is a separate decision with its own reasons.
 # than tags. A tag is mutable and this workflow has repository read access.
 # ---------------------------------------------------------------------------
 
@@ -33,9 +45,9 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22
 

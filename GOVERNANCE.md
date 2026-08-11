@@ -77,6 +77,35 @@ who has already claimed conformance:
   as in the standard's text. If E-00n touches a rule your record marks met, your record is met
   against a sentence that is under dispute, and the honest record says so.
 
+## Two published surfaces, one normative
+
+The standard is readable in two places, and they do not have equal standing.
+
+**The repository is normative.** The text of a released version is `SPRITE-DESIGN-DATUM.md` at its
+signed tag — `github.com/HetCreep/SpriteDesignDatum/blob/<tag>/SPRITE-DESIGN-DATUM.md` — and that
+address is what a citation or a conformance record names. Rule ids resolve as anchors there; the tag
+fixes the bytes.
+
+**The documentation site (`hetcreep.gitbook.io/hetcreep-docs`) is a reading copy.** It is a
+rendering of whatever the repository currently holds, republished on the hosting platform's own
+schedule. It is not a second edition and it is not citable: its renderer strips the rule-id anchors,
+so a citation ending `#L1` lands at the top of the page — measured, 0 of 13 rule anchors survive
+there against 13 of 13 on the tagged file. The evidence and the decision behind this arrangement are
+recorded in [`docs/gitbook-assessment.md`](docs/gitbook-assessment.md).
+
+**If the two disagree, the repository is right.** A disagreement is a rendering defect, not an
+ambiguity about what the standard says — report it like any other defect. And since the site tracks
+the current state of the repository while a released version is fixed by its tag, the site saying
+something a tagged version does not is not necessarily a defect at all; the tag is the record.
+
+**The site is not a write surface.** No change to this standard is made through the site's editor.
+The platform's sync is technically capable of carrying an edit back into the repository, and no
+setting turns that off — so it is turned off by rule instead: every change enters through the
+repository's own process, where the mechanical checks run, the reasoning lands in the commit
+history, and a correction to released text goes through `ERRATA.md` rather than around it. A commit
+on the synced branch bearing the platform's own prefix (`GITBOOK-…`) would mean this rule failed,
+and is treated as a defect to be reported and rolled back, not as an edit to be merged.
+
 ## Single-maintainer risk, and the bind under it
 
 One person maintains this. If they stop — and people stop for ordinary reasons — the document does

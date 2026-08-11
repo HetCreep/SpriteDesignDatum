@@ -64,15 +64,16 @@ that quietly repairs itself is the thing this file exists not to be.
 Machine sweeps are appended below by `tools/watch-sources.mjs`. Human verdicts are written by hand
 in the same append-only way, in a section headed with the date and the caretaker who ran it.
 
-**Nothing has been swept yet — this section is empty and that is the honest state.** The locators in
-`SOURCES.md` were checked once, on the day they were written, by the pass that wrote them; that is
-recorded there as each row's `accessed` date and is not a sweep. Until a dated section appears
-below, no claim in the standard has been re-checked against its source since publication, and an
-empty register says that far better than a green tick would.
+**Two machine sweeps are recorded below; no human verdict exists yet.** The locators' reachability
+has been checked by `tools/watch-sources.mjs`; whether any page still says what the standard says it
+says has not — no row anywhere in this register carries **held**. The locators are alive, and the
+claims behind them are unread since the day they were written.
 
-_No sweep has been recorded yet. `SOURCES.md` exists and holds the locators; nothing has re-checked
-them since the day they were written. (An earlier revision of this line said `SOURCES.md` was still
-being built — stale since the day it was written, caught 2026-08-11.)_
+_(An earlier revision of this paragraph said nothing had been swept and the section was empty — true
+when written, false the moment the first sweep was appended below it, caught 2026-08-11 by the third
+caretaker pass. The revision before that said `SOURCES.md` was still being built — stale since the
+day it was written, caught the same day. Both kept: a register that quietly repairs its own prose is
+the thing this file exists not to be.)_
 
 ## Sweep 2026-08-11
 
