@@ -20,7 +20,7 @@ it.
 | ---------- | --------------------------------------- | ----------------------------------------------------- |
 | **A**      | the graphics API / hardware             | **no** — violating it breaks at the API level         |
 | **A-port** | the target device (RAM, DPR, renderer)  | **no** — re-measure per target, never carry forward   |
-| **L1–L4**  | the project owner                       | **no** — owner ruling required, escalate and stop     |
+| **L1–L4**  | the adopting project's owner            | **no** — owner ruling required, escalate and stop     |
 | **B-ext**  | external convention with real precedent | only by producing a **named counter-exemplar**        |
 | **B**      | the adopting project's own measurement  | only by **re-measuring the corpus** and showing how   |
 | **C**      | nobody                                  | free — but say it is free, and never quote it as spec |
@@ -35,10 +35,12 @@ worse than producing none, because a plausible number gets adopted.
    to, it is Layer C — write it as unlocked. Do not promote it to spec to make a table look
    complete.
 
-2. **A number measured live and a number computed carry different labels, always.** `MEASURED-LIVE`
-   means an instrument was run against the real thing. `COMPUTED` means arithmetic over other
-   numbers. They are not interchangeable, and blurring them has already produced a wrong document
-   once.
+2. **A number measured live and a number computed are never presented as the same kind of thing.**
+   One means an instrument was run against the real artifact; the other means arithmetic over other
+   numbers. Say which, in whatever words the surrounding text uses — the standard does this in prose
+   ("state it as a theoretical ceiling, never as measured usage") rather than with a fixed token,
+   and either is fine as long as a reader can tell them apart. Blurring them has already produced a
+   wrong document once.
 
 3. **Every citation states its class** — specification · vendor documentation · tool default ·
    recommendation. They do not weigh the same. A tutorial sentence is not a spec, and this document
@@ -72,7 +74,9 @@ Rules for writing one:
   consumer still violates it is worse than no record, because the next reader stops looking. This
   has happened in the field: a record declared aspect-ownership closed while a live consumer four
   lines above it in the same table still pinned a ratio and was fed art that did not match, and a
-  character shrank 31.9% mid-animation as a result.
+  character visibly changed size mid-animation as a result. (A field report from the project this
+  standard came out of. The figure lives in that project's conformance record and cannot be
+  re-derived from anything here, so it is not quoted as one.)
 - **Publish the cost, not only the win.** A change that improves one number and worsens another gets
   both in the table. A fix that lists only what improved cannot be audited.
 - **Every number must reconstruct.** If a reader cannot re-derive a count or a percentage from
@@ -90,8 +94,7 @@ always.
 
 ## Licence — what you may do with this document
 
-© 2026 HetCreep / Katomnoi Studio,
-[CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/).
+© 2026 HetCreep, [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/).
 
 - **You may** read it, cite it, quote it with attribution, and conform any project to it.
 - **You may** ship what you build from it, freely and commercially. Conforming does not make your

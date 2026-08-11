@@ -1,14 +1,37 @@
-Copyright (c) 2026 HetCreep / Katomnoi Studio. All rights reserved.
+Copyright (c) 2026 HetCreep.
+
+Some rights are granted below. Katomnoi Studio holds a licence to this
+document, stated in STANDING GRANT; it is not a co-owner of the copyright.
 
 ================================================================================
 LICENCE — Creative Commons Attribution-NonCommercial-NoDerivatives 4.0
 ================================================================================
 
-Everything in this repository — SPRITE-DESIGN-DATUM.md, README.md, AGENTS.md,
-CHECKLIST.md, and CHANGELOG.md — is licensed under Creative Commons
-Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0).
+This repository holds two different kinds of thing and they carry two
+different licences.
+
+  THE DOCUMENTS — CC BY-NC-ND 4.0.
+  Every markdown file, this LICENSE, CITATION.cff, and any prose added
+  later. The standard and everything written around it.
+
+  THE TOOLING — MIT (see tools/LICENSE).
+  tools/ and .github/workflows/. The checker, the source watch, and the
+  workflows that run them.
+
+  The split is deliberate. Restricting the DOCUMENT is the point of this
+  repository: it is the thing that took the work and it is the thing worth
+  licensing. Restricting the SCRIPTS would achieve nothing anyone wants — a
+  checker nobody may adapt is a checker nobody can use on their own project,
+  and helping other people hold themselves to this standard is the reason it
+  was published. The tooling carries no value that needs defending; the
+  document does.
 
     https://creativecommons.org/licenses/by-nc-nd/4.0/
+
+  An earlier revision named five files explicitly. That was a closed list in a
+  repository that already tracked more than five, which left the remainder
+  outside the grant by a narrow reading. Naming no files is both shorter and
+  correct as the repository grows.
 
 WHAT YOU MAY DO, AT NO COST
 
@@ -34,8 +57,9 @@ WHAT YOU MAY NOT DO WITHOUT A SEPARATE WRITTEN LICENCE
 
 TO REQUEST A COMMERCIAL OR ADAPTATION LICENCE
 
-  Open an issue on this repository, or contact the copyright holder through
-  github.com/HetCreep.
+  Contact the copyright holder through github.com/HetCreep. If this repository
+  is published with an issue tracker, an issue is also fine — see CONTRIBUTING.md
+  for the current route, which is kept true as that changes.
 
 ================================================================================
 STANDING GRANT — Katomnoi Studio (github.com/KatomnoiStudio)

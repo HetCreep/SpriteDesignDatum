@@ -1,0 +1,64 @@
+# Citation metadata for Sprite Design Datum, in Citation File Format 1.2.0.
+# https://citation-file-format.github.io/
+#
+# WHY `type: dataset`
+#
+#   CFF 1.2.0 permits exactly two values for `type`: `software` and `dataset`. Neither describes a
+#   standards document and there is no third option to reach for, so this is the closer of two
+#   imperfect fits rather than a claim.
+#
+#   `software` is the wrong one. This repository deliberately ships no code, no linter, and no
+#   schema — see README, "What it deliberately does not do" — because a machine-readable copy of the
+#   values would be a second source of truth for them.
+#
+#   `dataset` is the conventional CFF filing for a non-software research output, and the
+#   load-bearing half of this document is measurement: tolerances recovered from named public sprite
+#   corpora with a stated, re-runnable instrument, alongside a register of published external values
+#   and a register of quantities that have no published source at all. Filed as `dataset` for that
+#   reason. It is not a data file, and this comment exists so nobody reads the field as saying it is.
+#
+# WHY THERE IS NO `url` OR `repository-code`
+#
+#   This repository has no public remote yet. A citation pointing at a URL that does not resolve is
+#   worse than one carrying no URL, because the reader cannot tell a dead link from a wrong one. Add
+#   both in the same commit that publishes the remote.
+#
+# NOTE FOR WHOEVER MAINTAINS THIS
+#
+#   `version` below is a THIRD copy of the version string. The other two are the front matter of
+#   SPRITE-DESIGN-DATUM.md and the top heading of CHANGELOG.md. All three must move together, and
+#   nothing currently enforces that.
+
+cff-version: 1.2.0
+message: >-
+  If you cite this standard, or conform a project to it, please cite it as below. Citing it and
+  linking to it is the intended use and needs no permission.
+title: Sprite Design Datum
+type: dataset
+authors:
+  # CFF splits authors into persons (given-names / family-names) and entities (a single `name`). The
+  # author publishes under a handle, and LICENSE's scope section already flags the named-holder
+  # question as one a lawyer has to settle — so the entity form is used here rather than inventing a
+  # split of a handle into a first and last name.
+  - name: HetCreep
+version: 1.0.0
+date-released: '2026-08-11'
+license: CC-BY-NC-ND-4.0
+abstract: >-
+  A geometry standard for 2D sprite art, and a map of which parts of that geometry have a published
+  external source and which parts have none. Every value is filed under who locks it — a graphics
+  API, a device target, the adopting project's owner, an external convention with real precedent,
+  the adopting project's own measurement, or nobody — and a value nobody locks is written as
+  unlocked rather than promoted to specification to make a table look complete. Where no authority
+  exists, tolerances were recovered by measuring public sprite corpora with a stated, re-runnable
+  instrument, and the method is published alongside the result so the numbers can be re-derived
+  rather than trusted. The document names its own coverage gaps, including the absence of any
+  web-platform source in its register of published values.
+keywords:
+  - sprite
+  - 2D art
+  - pixel art
+  - texture
+  - anchor tolerance
+  - game development
+  - standard

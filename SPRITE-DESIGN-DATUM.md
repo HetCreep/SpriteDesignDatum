@@ -1,7 +1,8 @@
 <!--
   LICENCE NOTICE
 
-  Copyright (c) 2026 HetCreep / Katomnoi Studio. All rights reserved.
+  Copyright (c) 2026 HetCreep. Katomnoi Studio holds a licence to this document,
+  stated in LICENSE under STANDING GRANT; it is not a co-owner of the copyright.
 
   This document is licensed under Creative Commons Attribution-NonCommercial-NoDerivatives 4.0
   International (CC BY-NC-ND 4.0): https://creativecommons.org/licenses/by-nc-nd/4.0/
@@ -24,7 +25,8 @@
   stays the copyright holder's to license.
 
   ⚠️ DRAFT — NOT LEGAL ADVICE. Written by an AI assistant at the owner's direction and NOT reviewed
-  by a lawyer. Two things a lawyer must settle before this is relied on:
+  by a lawyer. Four things a lawyer must settle before this is relied on — the same four
+  LICENSE states in full, condensed here so the notice survives detachment from the repository:
     1. Earlier revisions of this file were published in a public MIT-licensed repository. An MIT
        grant already made cannot be withdrawn for copies already distributed. This notice binds
        future revisions; it does not reach back.
@@ -34,17 +36,22 @@
        protects here is the EXPRESSION — the prose, the structure, the layer framework, the way the
        argument is built. Anyone may independently re-measure the same corpora and publish their own
        numbers. That is expected, and it is how a standard earns trust.
+    4. Short passages quoted here from vendor documentation and specifications remain the property
+       of their respective owners, used under fair dealing / fair use for citation and commentary.
+       Each is attributed at its point of use.
 -->
 
 # SPRITE DESIGN DATUM
 
-> **Version 1.0.0** · first published 2026-08-11 · © 2026 HetCreep / Katomnoi Studio Released under
+> **Version 1.0.0** · first published 2026-08-11 · © 2026 HetCreep Released under
 > [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/). Free to read, cite, and
 > conform to. Commercial use or adaptation of the document requires a separate written licence. See
 > `LICENSE`, and the comment above for what a lawyer still has to settle.
 
 **Binding on both sides of a project that adopts it: the code that renders sprites, and the people
 who draw them.**
+
+<a id="what-a-datum-is-and-why-the-word-is-exact"></a>
 
 ## What a "datum" is, and why the word is exact
 
@@ -70,6 +77,53 @@ description of whatever happened to be built.
 translation would create two vocabularies for one contract.
 
 ---
+
+<a id="contents"></a>
+
+## Contents
+
+Rules are addressed by id — `L1`, `E3`, `A2` — and each carries an explicit anchor, so a link from
+another project’s conformance record keeps working even if a heading is later reworded. Cite the id,
+not the heading text.
+
+- [What a "datum" is, and why the word is exact](#what-a-datum-is-and-why-the-word-is-exact)
+- [How to read this](#how-to-read-this)
+- [Layer A — locked by specification, not by us](#layer-a-locked-by-specification-not-by-us)
+  - [A1 · Aspect ratio belongs to geometry, not to the file](#A1)
+  - [A2 · Power-of-two and NPOT — a recommendation, not a requirement](#A2)
+  - [A3 · Block compression — no divisibility requirement](#A3)
+- [Layer A-port — variables that appear when a device target is chosen](#layer-a-port-variables-that-appear-when-a-device-target-is-chosen)
+  - [P1 · RAM ceiling](#P1)
+  - [P2 · Resolution floor](#P2)
+  - [P3 · Render target](#P3)
+- [The locked rules — L1 to L4](#the-locked-rules-l1-to-l4)
+  - [L1 · Aspect ownership](#L1)
+  - [L2 · Crop for one consumer, record it, and walk every other consumer](#L2)
+  - [L3 · The contract carries across platforms unchanged](#L3)
+  - [L4 · Stores govern texture FORMAT and non-texture asset GEOMETRY](#L4)
+- [Layer B-ext — external conventions, adoptable with citation](#layer-b-ext-external-conventions-adoptable-with-citation)
+  - [E1 · Bottom-centre anchor, on the feet](#E1)
+  - [E2 · The anchor must survive trimming](#E2)
+  - [E3 · World size is DERIVED from texture pixels, never hand-authored](#E3)
+- [Layer B — locked by the adopting project's own measurement](#layer-b-locked-by-the-adopting-project-s-own-measurement)
+- [Layer C — locked by nobody](#layer-c-locked-by-nobody)
+- [The anchor tolerance register — measured from external corpora](#the-anchor-tolerance-register-measured-from-external-corpora)
+  - [Method — stated so the numbers can be checked, not trusted](#method-stated-so-the-numbers-can-be-checked-not-trusted)
+  - [Does the tolerance scale with character size? — measured, and no](#does-the-tolerance-scale-with-character-size-measured-and-no)
+  - [The base](#the-base)
+  - [Provenance and limits of these numbers](#provenance-and-limits-of-these-numbers)
+- [The tolerance register — published external values](#the-tolerance-register-published-external-values)
+  - [Hard — a gatekeeper or an API rejects violations](#hard-a-gatekeeper-or-an-api-rejects-violations)
+  - [Recommendation — documented cost, no rejection](#recommendation-documented-cost-no-rejection)
+  - [Tool default — one vendor's considered choice, cited as such](#tool-default-one-vendor-s-considered-choice-cited-as-such)
+  - [Derived arithmetic — a consequence of a real specification](#derived-arithmetic-a-consequence-of-a-real-specification)
+- [The unbounded register — quantities with no published external value](#the-unbounded-register-quantities-with-no-published-external-value)
+  - [Known coverage gap in this register](#known-coverage-gap-in-this-register)
+- [Conformance](#conformance)
+
+---
+
+<a id="how-to-read-this"></a>
 
 ## How to read this
 
@@ -105,7 +159,11 @@ Every value is filed under **who locks it**, and that is the whole point.
 
 ---
 
+<a id="layer-a-locked-by-specification-not-by-us"></a>
+
 # Layer A — locked by specification, not by us
+
+<a id="A1"></a>
 
 ## A1 · Aspect ratio belongs to geometry, not to the file
 
@@ -136,6 +194,8 @@ pipeline:
 A single px→world scale shared by every sprite in a scene is the same invariant this rule states,
 from the other direction.
 
+<a id="A2"></a>
+
 ## A2 · Power-of-two and NPOT — a recommendation, not a requirement
 
 Power-of-two dimensions are recommended by every engine and required by none on a modern target.
@@ -164,6 +224,8 @@ not transparent black.
 **A2 is a conditional external owner of canvas size.** It binds nothing on a WebGL2/WebGPU target.
 It returns in full the day a render target regresses to WebGL1.
 
+<a id="A3"></a>
+
 ## A3 · Block compression — no divisibility requirement
 
 > **This is where an earlier edition was most seriously wrong.** It asserted that ASTC requires the
@@ -190,7 +252,11 @@ rather than trusted from this page.**
 
 ---
 
+<a id="layer-a-port-variables-that-appear-when-a-device-target-is-chosen"></a>
+
 # Layer A-port — variables that appear when a device target is chosen
+
+<a id="P1"></a>
 
 ## P1 · RAM ceiling
 
@@ -201,6 +267,8 @@ the page can observe the eviction policy.
 **No external source bounds the acceptability of that ceiling.** No vendor publishes a
 per-application texture-RAM budget for a browser tab; the real limit is set by the device, the tab
 count, and an eviction policy the page cannot see.
+
+<a id="P2"></a>
 
 ## P2 · Resolution floor
 
@@ -218,6 +286,8 @@ for this class of art, and at least one engine ships a floor() to prevent them.
 > Godot 4 documentation, _Multiple resolutions_ (RECOMMENDATION) — integer scaling is offered
 > precisely because fractional scaling distorts pixel-exact art.
 
+<a id="P3"></a>
+
 ## P3 · Render target
 
 A WebView port keeps the same renderer and the same contract. A native-engine port changes the whole
@@ -226,9 +296,13 @@ expects a pivot/offset per sprite.
 
 ---
 
+<a id="the-locked-rules-l1-to-l4"></a>
+
 # The locked rules — L1 to L4
 
 > **What is locked is the mechanism, never a project's numbers.**
+
+<a id="L1"></a>
 
 ## L1 · Aspect ownership
 
@@ -237,6 +311,8 @@ with a comment naming the source canvas. **Every pinned aspect number must state
 
 Both halves are binding. An implementation that satisfies (a) or (b) but leaves the number
 unexplained has met half of L1.
+
+<a id="L2"></a>
 
 ## L2 · Crop for one consumer, record it, and walk every other consumer
 
@@ -260,6 +336,8 @@ preserves the anchor across frames; a trim that discards it desynchronises every
 trimmed amount. That is the difference between a uniform crop and a per-frame tight crop, and it is
 invisible until the animation plays.
 
+<a id="L3"></a>
+
 ## L3 · The contract carries across platforms unchanged
 
 | target                         | L1                    | L2                                           |
@@ -270,6 +348,8 @@ invisible until the animation plays.
 
 It carries because **UV coordinates carry no aspect information on any API** — not because "UV is
 always 0–1" (see A1).
+
+<a id="L4"></a>
 
 ## L4 · Stores govern texture FORMAT and non-texture asset GEOMETRY
 
@@ -291,7 +371,11 @@ See the tolerance register below for the published numbers.
 
 ---
 
+<a id="layer-b-ext-external-conventions-adoptable-with-citation"></a>
+
 # Layer B-ext — external conventions, adoptable with citation
+
+<a id="E1"></a>
 
 ## E1 · Bottom-centre anchor, on the feet
 
@@ -317,6 +401,8 @@ position is already relying on this convention whether or not it wrote it down.
 > tile objects to bottom-_left_ in every orientation except isometric. It may only be cited by a
 > project that explicitly treats its own view as isometric for this purpose.
 
+<a id="E2"></a>
+
 ## E2 · The anchor must survive trimming
 
 Whatever anchor a project adopts, it must be expressed in a frame of reference that trimming cannot
@@ -324,6 +410,8 @@ move — i.e. relative to the untrimmed source rect, not to the trimmed bounding
 mechanical half of L2 and the reason `sourceSize`-style metadata exists at all.
 
 ---
+
+<a id="E3"></a>
 
 ## E3 · World size is DERIVED from texture pixels, never hand-authored
 
@@ -362,6 +450,8 @@ where the feet sit per family depends on how each piece of art was drawn        
 
 Both are recovered by measuring the project's own corpus, once, per family — not by citation.
 
+<a id="layer-b-locked-by-the-adopting-project-s-own-measurement"></a>
+
 # Layer B — locked by the adopting project's own measurement
 
 **No external standard fixes a sprite canvas in pixels.** The sweep checked engine importers, atlas
@@ -381,6 +471,8 @@ A project fills these slots in its conformance document, each with its provenanc
 
 ---
 
+<a id="layer-c-locked-by-nobody"></a>
+
 # Layer C — locked by nobody
 
 Values in this layer are legitimate, are chosen by the project, and **must never be quoted as
@@ -392,6 +484,8 @@ named external exemplar. Neither can be done with an argument alone.**
 
 ---
 
+<a id="the-anchor-tolerance-register-measured-from-external-corpora"></a>
+
 # The anchor tolerance register — measured from external corpora
 
 **These are the numbers nobody publishes.** The sweep confirmed that no tool publishes a cross-frame
@@ -402,6 +496,8 @@ with an instrument stated precisely enough that anyone can re-run it.
 
 That makes this a fourth class of evidence, distinct from the three below it: **EXTERNAL-MEASURED —
 not published anywhere, derived by measuring an external corpus.**
+
+<a id="method-stated-so-the-numbers-can-be-checked-not-trusted"></a>
 
 ## Method — stated so the numbers can be checked, not trusted
 
@@ -419,6 +515,8 @@ The two axes answer different questions and must never be merged. `inDir` may le
 — a stride lifts a foot, a lunge leaves the ground. `xDir` has no such excuse: nothing about any
 animation explains why the left-facing cycle should stand at a different height from the
 right-facing one.
+
+<a id="does-the-tolerance-scale-with-character-size-measured-and-no"></a>
 
 ## Does the tolerance scale with character size? — measured, and no
 
@@ -439,6 +537,8 @@ span.
 **The reason is physical.** This drift is an authoring alignment error, not a depiction of movement.
 An artist aligning to the pixel grid is off by a pixel or two regardless of how large the subject is
 — the error is bounded by the precision of the hand and the tool, not by the size of what is drawn.
+
+<a id="the-base"></a>
 
 ## The base
 
@@ -468,6 +568,8 @@ that half of good work already fails is not a spec.
 > **Applying it to a set of single-frame directions** — an eight-facing "turn" set, one frame per
 > direction — is the `xDir` pose-hold case, not `inDir`. The body is planted in every frame; only
 > the facing changes. **±1 px.**
+
+<a id="provenance-and-limits-of-these-numbers"></a>
 
 ## Provenance and limits of these numbers
 
@@ -505,11 +607,15 @@ re-derivation.
 
 ---
 
+<a id="the-tolerance-register-published-external-values"></a>
+
 # The tolerance register — published external values
 
 Every row carries its source and its strength. **Read the strength column before using a number**: a
 tool default is a considered choice by one vendor, not a rule, and this register keeps them apart
 deliberately.
+
+<a id="hard-a-gatekeeper-or-an-api-rejects-violations"></a>
 
 ## Hard — a gatekeeper or an API rejects violations
 
@@ -528,6 +634,8 @@ deliberately.
 **The 2:1 ratio rule is the strongest evidence this register contains** — it is a published
 tolerance expressed as a range rather than a point, by a gatekeeper that enforces it.
 
+<a id="recommendation-documented-cost-no-rejection"></a>
+
 ## Recommendation — documented cost, no rejection
 
 | quantity                     | guidance                                                                                            | source                                  |
@@ -535,6 +643,8 @@ tolerance expressed as a range rather than a point, by a gatekeeper that enforce
 | Power-of-two dimensions      | preferred; NPOT costs memory and sample speed                                                       | Unity, corroborated by Godot and Unreal |
 | Integer upscale factors      | fractional scaling distorts pixel-exact art; engines ship a floor() to avoid it                     | Godot 4, _Multiple resolutions_         |
 | Store listing aspect targets | 16:9 / 9:16 and similar are **highly recommended** for listing eligibility — **not** an upload gate | Google Play Console Help                |
+
+<a id="tool-default-one-vendor-s-considered-choice-cited-as-such"></a>
 
 ## Tool default — one vendor's considered choice, cited as such
 
@@ -551,6 +661,8 @@ tolerance expressed as a range rather than a point, by a gatekeeper that enforce
 > different quantity that happens to share the English word "padding". The sceptic pass caught this
 > register about to make exactly that substitution.
 
+<a id="derived-arithmetic-a-consequence-of-a-real-specification"></a>
+
 ## Derived arithmetic — a consequence of a real specification
 
 | quantity              | derivation                                                                                                                                                                                                 |
@@ -561,6 +673,8 @@ tolerance expressed as a range rather than a point, by a gatekeeper that enforce
 | Half-texel offset     | index-space `n − 0.5` and continuous texel-space `n` are the same point; a 0.5 gap between the two conventions is the half-texel offset, not a discrepancy (Microsoft Learn, _Bilinear Texture Filtering_) |
 
 ---
+
+<a id="the-unbounded-register-quantities-with-no-published-external-value"></a>
 
 # The unbounded register — quantities with no published external value
 
@@ -584,6 +698,8 @@ found nothing — and in most cases can say why nothing exists.
 | Requiring every frame of one set to share a canvas                                                          | **No format requires this, and the industry answer is the opposite**: carry the untrimmed frame of reference in per-frame metadata and let frames differ. A project may still adopt the stricter rule — but as its own Layer B choice, not as a standard.                                                                                                                                                                                                                                                        |
 | Device-fleet format support percentages                                                                     | Telemetry that moves month to month as the installed base turns over. Re-check at port-decision time; never carry the number forward.                                                                                                                                                                                                                                                                                                                                                                            |
 
+<a id="known-coverage-gap-in-this-register"></a>
+
 ## Known coverage gap in this register
 
 **Not one web-platform source appears in it.** Every finding above is a native engine, a desktop
@@ -593,6 +709,8 @@ concerning `devicePixelRatio`, CSS box sizing, `object-fit` behaviour, or browse
 **unsearched**, not absent. A future sweep should start there.
 
 ---
+
+<a id="conformance"></a>
 
 # Conformance
 

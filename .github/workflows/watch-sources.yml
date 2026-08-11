@@ -1,0 +1,65 @@
+# ---------------------------------------------------------------------------
+# INERT AS OF 2026-08-11.
+#
+# This repository has no remote, and the owner has not decided whether it will be
+# published. Until someone pushes it to GitHub this schedule fires nowhere. Run the
+# sweep by hand in the meantime — it needs nothing but node and a network:
+#
+#     node tools/watch-sources.mjs
+#
+# CADENCE: monthly, not daily. The sources this standard cites are specifications,
+# vendor documentation, and tool defaults — things that move on a scale of years. The
+# shortest interval in SOURCES.md is 90d, so a monthly sweep flags a row within a month
+# of it coming due, which is well inside the resolution of the thing being watched. A
+# daily job over the same sources would produce ~365 identical green reports a year and
+# teach everyone to close the tab, which is worse than no watch at all.
+#
+# TWO THINGS THAT CAN SILENTLY KILL THIS, once it is live:
+#   * GitHub disables scheduled workflows in a repository with no activity for 60 days.
+#     A quiet documentation repository hits that easily. Nothing announces it.
+#   * A scheduled run is best-effort and can be dropped entirely under load.
+# Neither shows up as a red run. If the sweeps in REVALIDATION.md stop appearing, that
+# is the failure, and only a reader noticing the gap will catch it.
+#
+# THIS JOB DOES NOT COMMIT. It uploads the updated register as an artifact and prints
+# the sweep into the job summary. A bot writing into an append-only human register would
+# make the register look maintained while nobody read a word of it — the exact false
+# confidence the register exists to prevent. A person lands the sweep.
+# ---------------------------------------------------------------------------
+
+name: watch-sources
+
+on:
+  schedule:
+    - cron: '0 6 1 * *' # 06:00 UTC on the 1st of each month
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Findings never fail this job. It reports; it does not judge. A dead link is a
+      # fact for a caretaker to act on, not a build failure — and a job that goes red
+      # because someone else's CDN had a bad morning gets muted within two months.
+      #
+      # BEING UNABLE TO LOOK does fail it, with exit 2: a missing or unreadable
+      # SOURCES.md would otherwise produce a green tick every month while nothing was
+      # watched at all, which is worse than the two silent-death modes named above
+      # because it looks like success. The script's stderr says what to do about it.
+      - name: Sweep the external sources
+        run: node tools/watch-sources.mjs >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: revalidation-${{ github.run_id }}
+          path: REVALIDATION.md
+          if-no-files-found: error

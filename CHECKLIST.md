@@ -13,7 +13,10 @@ That is the entire reason a checklist exists for something a compiler could othe
 
 ```
 [ ] The canvas size for this set is written down and agreed BEFORE the first frame.
-    No standard publishes one. Whatever you pick, every frame in the set shares it.        -> L1, E2
+    No standard publishes one, and no format REQUIRES every frame of a set to share
+    one either — the industry answer is the opposite. Sharing a canvas across the set
+    is a stricter rule a project may adopt as its own choice, and this one does.
+    Adopt it deliberately, not because a standard said so.       -> unbounded register
 
 [ ] You know every renderer that will consume these files, and the box each one draws into.
     One set of files feeding several consumers with different boxes is the failure this

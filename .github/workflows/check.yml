@@ -1,0 +1,41 @@
+# ---------------------------------------------------------------------------
+# INERT AS OF 2026-08-11.
+#
+# This repository has no remote, and the owner has not decided whether it will be
+# published. Until someone pushes it to GitHub, this file runs nowhere, has never run,
+# and proves nothing. It is here so that the day it is pushed the checks are already
+# wired, not because anything is watching today.
+#
+# Everything it does works right now, locally, with node alone and no install:
+#
+#     node tools/check.mjs
+#
+# If this repository is ever published, pin the two actions below to commit SHAs rather
+# than tags. A tag is mutable and this workflow has repository read access.
+# ---------------------------------------------------------------------------
+
+name: check
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # No npm install and no package.json: the checker has no dependencies. It does
+      # shell out to `npx prettier@3`, which pulls prettier from the npm registry on
+      # first use, so this job needs network. If prettier cannot run, the checker
+      # reports that as a failure rather than as a pass.
+      - run: node tools/check.mjs

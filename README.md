@@ -16,8 +16,12 @@ atlas packer, and no store publishes that number.** Four tools were checked; non
 anchor it could validate, so none can publish a tolerance on it.
 
 That gap is the problem. A team fills it by guessing, the guess becomes a convention, the convention
-becomes "the way it's done", and three renderers later nobody can say why a character is 81% taller
-standing than walking.
+becomes "the way it's done", and three renderers later nobody can say why the same character renders
+noticeably taller standing than walking.
+
+(That last one is a field report from the project this standard came out of, not a published value.
+The measurement lives in that project's own conformance record, so it cannot be re-derived from
+anything here — which is exactly why it is written as an anecdote rather than as a number.)
 
 This document does two things about it:
 
@@ -93,7 +97,7 @@ That is not modesty — a standard that hides its corrections cannot be audited.
 
 ## Licence
 
-© 2026 HetCreep / Katomnoi Studio. Released under
+© 2026 HetCreep. Released under
 [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/).
 
 **Free to read, cite, and conform to, with attribution.** Conforming to this document does not make
