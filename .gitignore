@@ -3,3 +3,6 @@ Thumbs.db
 *.tmp
 .vscode/
 .idea/
+
+# Local working rules, loaded by any Claude Code session here and never published.
+CLAUDE.local.md
