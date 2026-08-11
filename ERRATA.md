@@ -37,10 +37,11 @@ it. **The quoted text is the locator. The line number is a convenience.**
 
 ## Register
 
-| id              | location in `1.0.0`          | what it is                                                                                                                             | state    |
-| --------------- | ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| [E-001](#e-001) | `SPRITE-DESIGN-DATUM.md:625` | Unreal's 8192 ceiling **requires** a `BaseDeviceProfiles.ini` change, and an oversized import is silently clamped rather than rejected | reported |
-| [E-002](#e-002) | `SPRITE-DESIGN-DATUM.md:668` | The half-texel explanation is attributed to a page that does not contain it. The statement itself is correct                           | reported |
+| id              | location in `1.0.0`                          | what it is                                                                                                                                                                                                      | state    |
+| --------------- | -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| [E-001](#e-001) | `SPRITE-DESIGN-DATUM.md:625`                 | Unreal's 8192 ceiling **requires** a `BaseDeviceProfiles.ini` change, and an oversized import is silently clamped rather than rejected                                                                          | reported |
+| [E-002](#e-002) | `SPRITE-DESIGN-DATUM.md:668`                 | The half-texel explanation is attributed to a page that does not contain it. The statement itself is correct                                                                                                    | reported |
+| [E-003](#e-003) | `SPRITE-DESIGN-DATUM.md:464-470`, `:687-694` | Layer B and the unbounded register are sorted on **two different axes**, printed as though they were one. Three quantities appear in both lists, and for two of them that is correct rather than contradictory. |
 
 ---
 
@@ -173,3 +174,126 @@ catching rather than a reader.
 specification's texel-coordinate section, and that was **not verified**: Khronos returned HTTP 403
 to the chunked spec build on 2026-08-11. The Direct3D 10 page above was fetched and is quoted
 verbatim. The Vulkan half is recorded as unverified rather than assumed.
+
+---
+
+<a id="e-003"></a>
+
+### E-003 · Layer B and the unbounded register sort on different axes, and the document never says so
+
+| field        | value                                                                                            |
+| ------------ | ------------------------------------------------------------------------------------------------ |
+| **state**    | reported                                                                                         |
+| **reported** | 2026-08-11, by an opinion board of four independent seats, one of them blind to the framing      |
+| **found in** | 1.0.0, 1.1.0                                                                                     |
+| **location** | `SPRITE-DESIGN-DATUM.md:464-470` (the Layer B slot list) and `:687-694` (the unbounded register) |
+| **kind**     | **structural** — not a wrong value, a wrong question                                             |
+
+**What the standard says**
+
+Layer B lists five slots and closes with an entry condition:
+
+> A value enters Layer B only with a corpus measurement behind it, not a rationale.
+
+Three of those five also appear as rows in the unbounded register, which is Layer C. Read as a
+contradiction, that looks like three rows filed in two places at once.
+
+**What is actually wrong**
+
+It is not a filing error. **The two lists are answering different questions**, and the document
+prints them as though they were the same question.
+
+```
+Layer B asks             can the ADOPTING PROJECT measure this against its own material?
+the unbounded register   does any EXTERNAL BODY bound this?
+```
+
+Those are orthogonal. The register's own stated reasons prove it — every one of them is about
+external non-boundedness and none is about internal non-measurability:
+
+> "An animation-density choice traded against file count and RAM. Tools publish frame _ordering_
+> support and never a frame _count_ — there is no interoperation surface."
+
+That says no vendor cares. It does not say the project cannot count its own files.
+
+So a value can be **internally measurable and externally unbounded at the same time**, and two of
+the three overlaps are exactly that. Their appearance in both lists is correct. What is missing is
+the sentence saying it is allowed.
+
+**The three, separated**
+
+| quantity                   | can the project measure it?                                                             | does anything external bound it?                                             | belongs                                 |
+| -------------------------- | --------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | --------------------------------------- |
+| direction-to-index mapping | **no** — no instrument can output "index 0 means north" from pixels; it is a bare label | no                                                                           | **C only.** The one genuine mis-filing. |
+| frame count per direction  | **yes** — `ls                                                                           | wc -l`, fewer free parameters than reading a canvas size out of a PNG header | no                                      | **both, legitimately** |
+| playback cadence           | **yes** — a stored, re-derivable configuration value                                    | no                                                                           | **both, legitimately**                  |
+
+**Evidence the "measurable" half of the obvious fix does not hold either**
+
+The obvious repair — keep the two slots that are "genuinely measurable" and move the other three out
+— fails on its own premise. `EXAMPLE-CONFORMANCE.md:718` files **canvas dimensions at C**, not B,
+and says why at `:736-738`:
+
+> Canvas dimensions are a milder case of the same thing: a canvas is agreed before the first frame
+> exists, so there is no corpus to measure at the moment the decision is made. Ours are measurable
+> now, after the fact, and that is not the same as having been derived from a measurement.
+
+So the repository's own worked record already disagrees that canvas dimensions sit cleanly at B.
+Anchor position is the only slot with an uncontested chain, and even that has a stated failure case
+in the same file: a hovering character has no ground contact for the instrument to find.
+
+**A second mechanism keeps the ambiguity alive whatever the slot list says**
+
+`SPRITE-DESIGN-DATUM.md:482-483`:
+
+> **Promoting a value from C to B requires a corpus measurement. Promoting it to B-ext requires a
+> named external exemplar. Neither can be done with an argument alone.**
+
+Move frame count to C and this clause immediately licenses a reader to move it back, because
+counting the shipped files **is** a corpus measurement on its face. Two readers, the same frozen
+text, two defensible answers — which is the divergence the Conformance section exists to forbid.
+Editing the slot list alone cannot close it.
+
+**Smaller defects found while establishing the above**
+
+- `EXAMPLE-CONFORMANCE.md:713` says the project "could not file three of them where we were told
+  to". Its table two paragraphs later files **four** of five at C. Off by one, in the repository's
+  only worked model. `tools/check.mjs`'s count-word check cannot see it: the count word is followed
+  by a table, and the check only fires on an ordered list.
+- **`direction count`** — 4 directions versus 8, as distinct from the index mapping — appears
+  exactly once in the whole document, in the Layer B slot list. The unbounded register has no row
+  for it. Any repair that only moves slots out of B leaves it with no home at all.
+- Nothing mechanical depends on any of this. `tools/check.mjs` matches rule ids with `[APLE]\d`, so
+  **`B` and `C` cannot match by construction** — no check has ever inspected Layer B or C content.
+  Verified by applying the slot-list edit to a scratch copy: `6/6 checks pass`, before and after,
+  identically.
+
+**What the board converged on**
+
+Four seats, one of which never saw the options or the proposal, and all four landed on the same
+diagnosis: the discriminator in use — _did you measure it_ — is not the discriminator that separates
+these cases. The blind seat put the real one plainly:
+
+> A wrong value is either a bug against a fact that exists independent of the declaration, or it is
+> a different, equally legitimate design. If every candidate value is an equally legitimate design,
+> the quantity cannot be measured into Layer B no matter how mandatory it is to pick one.
+
+Eight frames or twelve, digit 2 or digit 5 for "down", 12 fps or 8 — none of these has a fact behind
+it to be wrong against. They are chosen, not measured well or badly. A canvas of 63 px when the file
+ships 64 px **is** a bug; feet declared at row 10 that render at row 40 **is** a bug. That test
+separates the cases; "did you measure it" does not.
+
+**One consequence nobody had raised**
+
+The direction-to-index mapping is **load-bearing at rest**. Shipped filenames already encode it, so
+Layer C's "free to change" is true about external constraint and false about cost: changing it
+invalidates every file already delivered under the old mapping. If it moves to C, that has to move
+with it, or the document tells someone a migration is free when it is not.
+
+**For the owner**
+
+This is frozen content and the fix is a judgement about what the standard means, not a correction of
+a fact. Reported, not proposed. Three things a ruling would need to settle: whether appearing in
+both lists is legitimate and should be said out loud; whether the Layer B entry condition should be
+re-cut on "would a wrong value be a bug" rather than "did you measure it"; and where
+`direction count` lives, since today it lives in exactly one sentence.
