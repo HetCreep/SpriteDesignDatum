@@ -1,0 +1,107 @@
+Copyright (c) 2026 HetCreep / Katomnoi Studio. All rights reserved.
+
+================================================================================
+LICENCE — Creative Commons Attribution-NonCommercial-NoDerivatives 4.0
+================================================================================
+
+Everything in this repository — SPRITE-DESIGN-DATUM.md, README.md, AGENTS.md,
+CHECKLIST.md, and CHANGELOG.md — is licensed under Creative Commons
+Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0).
+
+    https://creativecommons.org/licenses/by-nc-nd/4.0/
+
+WHAT YOU MAY DO, AT NO COST
+
+  * Read it.
+  * Cite it, and quote it with attribution.
+  * Conform any project of yours to it, including a commercial one.
+  * Ship what you BUILD from it — code, art, pipelines, tools — freely and
+    commercially, under whatever licence you choose.
+
+    Conforming to this standard does NOT make your project a derivative work of
+    this document. A building is not a derivative work of the building code.
+
+WHAT YOU MAY NOT DO WITHOUT A SEPARATE WRITTEN LICENCE
+
+  * Copy this document, or substantial portions of it, into another repository
+    or product.
+  * Publish an adapted, translated, rewritten, or excerpted version.
+  * Include it, or a derivative of it, in a paid product or service.
+
+  If you want your project to follow this standard, LINK to it and cite it, and
+  write your own conformance record in your own words. That is the intended use
+  and it needs no permission.
+
+TO REQUEST A COMMERCIAL OR ADAPTATION LICENCE
+
+  Open an issue on this repository, or contact the copyright holder through
+  github.com/HetCreep.
+
+================================================================================
+STANDING GRANT — Katomnoi Studio (github.com/KatomnoiStudio)
+================================================================================
+
+Katomnoi Studio is granted a perpetual, irrevocable, royalty-free licence to
+use, reproduce, modify, and create derivative works from this document, and to
+apply it in the Studio's own products and services, including commercially.
+
+This grant deliberately does NOT include the right to sublicense the document,
+or to distribute the document or substantial portions of it to third parties.
+An MIT-style grant would include both, and either one would release the document
+to anyone who received it — which is precisely what the CC BY-NC-ND terms above
+exist to prevent.
+
+The Studio may ship what it BUILDS from this document freely. The document
+itself stays the copyright holder's to license.
+
+================================================================================
+SCOPE AND LIMITS — read before relying on any of the above
+================================================================================
+
+*** THIS IS A DRAFT. IT IS NOT LEGAL ADVICE. ***
+
+It was written by an AI assistant at the copyright holder's direction and has
+NOT been reviewed by a lawyer. Four things a lawyer must settle before it is
+relied on in any dispute:
+
+  1. PRIOR PUBLICATION. Earlier revisions of this document were published in a
+     public repository under an MIT licence. An MIT grant already made cannot be
+     withdrawn for copies already distributed. This licence binds this and future
+     revisions; it does not reach back, and anyone holding an earlier copy holds
+     it under the terms it was given to them.
+
+  2. THE NAMED HOLDER. Enforcement requires a real legal person or a registered
+     entity. A project or studio name that is not registered is weak for this
+     purpose, and the standing grant above names one.
+
+  3. FACTS ARE NOT COPYRIGHTABLE. In most jurisdictions, measurements, numbers,
+     and facts cannot be owned. What copyright protects here is the EXPRESSION:
+     the prose, the structure, the layer framework, the way the argument is
+     assembled, and the selection and arrangement of what was measured. Anyone
+     may independently re-measure the same public corpora and publish their own
+     numbers. That is expected, and it is how a standard earns trust rather than
+     losing value.
+
+  4. CITED MATERIAL. This document quotes short passages from vendor
+     documentation and specifications for the purpose of identifying and
+     attributing external standards. Those passages remain the property of their
+     respective owners and are used here under fair dealing / fair use for
+     citation and commentary. Each is attributed at its point of use.
+
+MEASURED CORPORA
+
+  The tolerance figures in this document were derived by MEASURING two public
+  sprite corpora. No pixel of either corpus is reproduced in this repository —
+  only statistics computed from them, alongside a stated method so the numbers
+  can be re-derived rather than trusted. Both corpora are named and attributed at
+  the point of use, with their own licences, which govern the corpora and not
+  this document.
+
+NO WARRANTY
+
+  THIS DOCUMENT IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED. IT IS A DESCRIPTION OF EXTERNAL STANDARDS AND OF MEASUREMENTS TAKEN AT
+  A POINT IN TIME. EXTERNAL STANDARDS CHANGE, VENDOR DEFAULTS CHANGE, AND DEVICE
+  POPULATIONS TURN OVER. VERIFY ANY VERSION-SENSITIVE CLAIM AGAINST ITS CITED
+  SOURCE BEFORE RELYING ON IT. THE COPYRIGHT HOLDER IS NOT LIABLE FOR ANY CLAIM,
+  DAMAGE, OR OTHER LIABILITY ARISING FROM THE USE OF THIS DOCUMENT.
