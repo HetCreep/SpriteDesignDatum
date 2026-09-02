@@ -143,7 +143,7 @@ NO WARRANTY
   DAMAGE, OR OTHER LIABILITY ARISING FROM THE USE OF THIS DOCUMENT.
 ```
 
-**This is the same document as [`LICENSE`](LICENSE) at the repository root** — kept there too,
+**This is the same document as [`LICENSE`](https://github.com/HetCreep/SpriteDesignDatum/blob/main/LICENSE) at the repository root** — kept there too,
 unquoted, for machine licence-detection (GitHub, REUSE/SPDX tooling) that expects a root `LICENSE`
 file rather than a GitBook page. The two are edited together: a change to one is a change to the
 licence, and the other is updated in the same commit.
