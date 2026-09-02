@@ -29,7 +29,7 @@ it.
 decision. State the conflict, state what you would need, and stop. Producing a plausible number is
 worse than producing none, because a plausible number gets adopted.
 
-## Three rules that bind you on every edit
+## Rules that bind you on every edit
 
 1. **Every value states who locked it.** If you add a value and cannot say which layer it belongs
    to, it is Layer C — write it as unlocked. Do not promote it to spec to make a table look
@@ -45,6 +45,16 @@ worse than producing none, because a plausible number gets adopted.
 3. **Every citation states its class** — specification · vendor documentation · tool default ·
    recommendation. They do not weigh the same. A tutorial sentence is not a spec, and this document
    has already mis-attributed one.
+
+4. **Content keeps whatever Unicode normalization form it already carries — NFC if it is composed at
+   all, and never NFKC/NFKD.** <!-- coalmine: verified 2026-09-02 · exemplar UAX #15 §1.2
+   (unicode.org/reports/tr15/), conformed via TheColliery/.claude/rules/ecc/node/runtime.md:63 ·
+   revalidate 90d --> This is a FORMAL STANDARD's own rule, not a house invention — UAX #15 §1.2:
+   _"Normalization Forms KC and KD must **not** be blindly applied to arbitrary text... they may
+   remove distinctions that are important to the semantics of the text."_ This document is
+   English-primary, so the risk is lower than a majority-non-Latin corpus, but the rule is the same
+   rule and costs nothing to state here too: an editor or tool that "cleans up" this file's text
+   with NFKC/NFKD is not cleaning it, it is silently discarding distinctions the text depended on.
 
 ## What this standard cannot give you, and you must not pretend otherwise
 
