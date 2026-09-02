@@ -1,0 +1,8 @@
+# SUMMARY.md's FORM is owned by GitBook's Git Sync, not by us. Git Sync rewrites this file into
+# its own shape (list markers, headings) on every merge — see the zone's front/back law, rule 3:
+# "keep GitBook's SUMMARY.md form; reformatting it back starts a fight the sync will win every
+# time, forever." Prettier disagreeing with GitBook's marker choice IS that fight; this file
+# exempts SUMMARY.md rather than losing it on a schedule. The law is named rather than pathed on
+# purpose: a path rots on the next rename, which is exactly how this comment was wrong once already.
+# If SUMMARY.md is ever hand-authored again (Git Sync removed), delete this line.
+SUMMARY.md

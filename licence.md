@@ -143,13 +143,14 @@ NO WARRANTY
   DAMAGE, OR OTHER LIABILITY ARISING FROM THE USE OF THIS DOCUMENT.
 ```
 
-**This is the same document as [`LICENSE`](https://github.com/HetCreep/SpriteDesignDatum/blob/main/LICENSE) at the repository root** — kept there too,
-unquoted, for machine licence-detection (GitHub, REUSE/SPDX tooling) that expects a root `LICENSE`
-file rather than a GitBook page. The two are edited together: a change to one is a change to the
-licence, and the other is updated in the same commit.
+**This is the same document as
+[`LICENSE`](https://github.com/HetCreep/SpriteDesignDatum/blob/main/LICENSE) at the repository
+root** — kept there too, unquoted, for machine licence-detection (GitHub, REUSE/SPDX tooling) that
+expects a root `LICENSE` file rather than a GitBook page. The two are edited together: a change to
+one is a change to the licence, and the other is updated in the same commit.
 
 For the Creative Commons half specifically, the canonical legal code is published at
-[creativecommons.org/licenses/by-nc-nd/4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/) — the
-text above is this repository's own licence, which is more specific than (and does not replace) that
-general deed: it adds the dual documents/tooling split and the Katomnoi Studio standing grant, neither
-of which the bare CC legal code states.
+[creativecommons.org/licenses/by-nc-nd/4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/) —
+the text above is this repository's own licence, which is more specific than (and does not replace)
+that general deed: it adds the dual documents/tooling split and the Katomnoi Studio standing grant,
+neither of which the bare CC legal code states.
