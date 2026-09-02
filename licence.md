@@ -1,2 +1,155 @@
 # Licence
 
+This is the repository's own `LICENSE` file, reproduced in full below so a reader of this page never
+has to leave it to learn their rights. The two are one document on two faces — see the note at the
+end.
+
+```
+Copyright (c) 2026 HetCreep.
+
+Some rights are granted below. Katomnoi Studio holds a licence to this
+document, stated in STANDING GRANT; it is not a co-owner of the copyright.
+
+================================================================================
+LICENCE — Creative Commons Attribution-NonCommercial-NoDerivatives 4.0
+================================================================================
+
+This repository holds two different kinds of thing and they carry two
+different licences.
+
+  THE DOCUMENTS — CC BY-NC-ND 4.0.
+  Every markdown file, this LICENSE, CITATION.cff, and any prose added
+  later. The standard and everything written around it.
+
+  THE TOOLING — MIT (see tools/LICENSE).
+  tools/ and .github/workflows/. The checker, the source watch, and the
+  workflows that run them.
+
+  The split is deliberate. Restricting the DOCUMENT is the point of this
+  repository: it is the thing that took the work and it is the thing worth
+  licensing. Restricting the SCRIPTS would achieve nothing anyone wants — a
+  checker nobody may adapt is a checker nobody can use on their own project,
+  and helping other people hold themselves to this standard is the reason it
+  was published. The tooling carries no value that needs defending; the
+  document does.
+
+    https://creativecommons.org/licenses/by-nc-nd/4.0/
+
+  An earlier revision named five files explicitly. That was a closed list in a
+  repository that already tracked more than five, which left the remainder
+  outside the grant by a narrow reading. Naming no files is both shorter and
+  correct as the repository grows.
+
+WHAT YOU MAY DO, AT NO COST
+
+  * Read it.
+  * Cite it, and quote it with attribution.
+  * Conform any project of yours to it, including a commercial one.
+  * Ship what you BUILD from it — code, art, pipelines, tools — freely and
+    commercially, under whatever licence you choose.
+
+    Conforming to this standard does NOT make your project a derivative work of
+    this document. A building is not a derivative work of the building code.
+
+WHAT YOU MAY NOT DO WITHOUT A SEPARATE WRITTEN LICENCE
+
+  * Copy this document, or substantial portions of it, into another repository
+    or product.
+  * Publish an adapted, translated, rewritten, or excerpted version.
+  * Include it, or a derivative of it, in a paid product or service.
+
+  If you want your project to follow this standard, LINK to it and cite it, and
+  write your own conformance record in your own words. That is the intended use
+  and it needs no permission.
+
+TO REQUEST A COMMERCIAL OR ADAPTATION LICENCE
+
+  Contact the copyright holder through github.com/HetCreep.
+
+  An issue also works and is usually better, because it is public and a request
+  anyone can read is a request anyone can check:
+
+    https://github.com/HetCreep/SpriteDesignDatum/issues
+
+  CONTRIBUTING.md describes what a licence request or a correction should carry.
+
+================================================================================
+STANDING GRANT — Katomnoi Studio (github.com/KatomnoiStudio)
+================================================================================
+
+Katomnoi Studio is granted a perpetual, irrevocable, royalty-free licence to
+use, reproduce, modify, and create derivative works from this document, and to
+apply it in the Studio's own products and services, including commercially.
+
+This grant deliberately does NOT include the right to sublicense the document,
+or to distribute the document or substantial portions of it to third parties.
+An MIT-style grant would include both, and either one would release the document
+to anyone who received it — which is precisely what the CC BY-NC-ND terms above
+exist to prevent.
+
+The Studio may ship what it BUILDS from this document freely. The document
+itself stays the copyright holder's to license.
+
+================================================================================
+SCOPE AND LIMITS — read before relying on any of the above
+================================================================================
+
+*** THIS IS A DRAFT. IT IS NOT LEGAL ADVICE. ***
+
+It was written by an AI assistant at the copyright holder's direction and has
+NOT been reviewed by a lawyer. Four things a lawyer must settle before it is
+relied on in any dispute:
+
+  1. PRIOR PUBLICATION. Earlier revisions of this document were published in a
+     public repository under an MIT licence. An MIT grant already made cannot be
+     withdrawn for copies already distributed. This licence binds this and future
+     revisions; it does not reach back, and anyone holding an earlier copy holds
+     it under the terms it was given to them.
+
+  2. THE NAMED HOLDER. Enforcement requires a real legal person or a registered
+     entity. A project or studio name that is not registered is weak for this
+     purpose, and the standing grant above names one.
+
+  3. FACTS ARE NOT COPYRIGHTABLE. In most jurisdictions, measurements, numbers,
+     and facts cannot be owned. What copyright protects here is the EXPRESSION:
+     the prose, the structure, the layer framework, the way the argument is
+     assembled, and the selection and arrangement of what was measured. Anyone
+     may independently re-measure the same public corpora and publish their own
+     numbers. That is expected, and it is how a standard earns trust rather than
+     losing value.
+
+  4. CITED MATERIAL. This document quotes short passages from vendor
+     documentation and specifications for the purpose of identifying and
+     attributing external standards. Those passages remain the property of their
+     respective owners and are used here under fair dealing / fair use for
+     citation and commentary. Each is attributed at its point of use.
+
+MEASURED CORPORA
+
+  The tolerance figures in this document were derived by MEASURING two public
+  sprite corpora. No pixel of either corpus is reproduced in this repository —
+  only statistics computed from them, alongside a stated method so the numbers
+  can be re-derived rather than trusted. Both corpora are named and attributed at
+  the point of use, with their own licences, which govern the corpora and not
+  this document.
+
+NO WARRANTY
+
+  THIS DOCUMENT IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED. IT IS A DESCRIPTION OF EXTERNAL STANDARDS AND OF MEASUREMENTS TAKEN AT
+  A POINT IN TIME. EXTERNAL STANDARDS CHANGE, VENDOR DEFAULTS CHANGE, AND DEVICE
+  POPULATIONS TURN OVER. VERIFY ANY VERSION-SENSITIVE CLAIM AGAINST ITS CITED
+  SOURCE BEFORE RELYING ON IT. THE COPYRIGHT HOLDER IS NOT LIABLE FOR ANY CLAIM,
+  DAMAGE, OR OTHER LIABILITY ARISING FROM THE USE OF THIS DOCUMENT.
+```
+
+**This is the same document as [`LICENSE`](LICENSE) at the repository root** — kept there too,
+unquoted, for machine licence-detection (GitHub, REUSE/SPDX tooling) that expects a root `LICENSE`
+file rather than a GitBook page. The two are edited together: a change to one is a change to the
+licence, and the other is updated in the same commit.
+
+For the Creative Commons half specifically, the canonical legal code is published at
+[creativecommons.org/licenses/by-nc-nd/4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/) — the
+text above is this repository's own licence, which is more specific than (and does not replace) that
+general deed: it adds the dual documents/tooling split and the Katomnoi Studio standing grant, neither
+of which the bare CC legal code states.
