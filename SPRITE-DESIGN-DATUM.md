@@ -600,6 +600,13 @@ depicted movement     NOT absolute — a larger character's stride really does c
 | **locomotion** (walk, run, jump, climb)                 | **±2 px** (2 × base) | —                   | **≤ 27% of character height** |
 | **action** (slash, thrust, shoot, and similar)          | **±3 px** (3 × base) | —                   | **≤ 23% of character height** |
 
+![Table of anchor tolerance by animation kind: pose-hold ±1px with no depicted movement (body planted), locomotion ±2px alignment with depicted movement capped at 27% of character height, action ±3px alignment with depicted movement capped at 23% of character height — the movement ceiling narrows for action rather than escalating with the alignment tolerance.](assets/s2-anchor-tolerance-table.svg)
+
+_Figure — **derived from the table above**, restated visually. The table is the citable source: it
+is what `tools/check.mjs` cross-checks, what a reader cites by line at a tag, and what a screen
+reader reads as cells. **A change to the table means this figure is regenerated**; if the two ever
+disagree, the table wins._
+
 Every figure is the **p90 of the external corpora**, rounded up to a whole pixel. p90 rather than
 max because a corpus of that size contains its own defects, and rather than median because a spec
 that half of good work already fails is not a spec.

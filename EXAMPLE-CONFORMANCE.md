@@ -208,6 +208,11 @@ lines above.
 
 ### [`P1`](SPRITE-DESIGN-DATUM.md#P1) — our answer
 
+The rule text itself, quoted from the tagged citation above — a mirror, not a replacement; if this
+block ever disagrees with the tagged file, the tagged file wins:
+
+{% embed url="https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.2/SPRITE-DESIGN-DATUM.md#L272-L280" %}
+
 **Status: met.** Layer A-port. `COMPUTED` — this is arithmetic, and the standard is explicit that it
 is a theoretical ceiling and never a measurement of usage. We have not observed our real decoded
 footprint and do not claim to have.
