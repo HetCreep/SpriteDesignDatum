@@ -213,7 +213,22 @@ block ever disagrees with the tagged file, the tagged file wins.
 
 ---
 
-{% @github-files/github-code-block url="https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.2/SPRITE-DESIGN-DATUM.md#L272-L280" %}
+Shown as a plain code block rather than the GitHub Files embed for now — the integration currently
+mangles non-ASCII text on decode, and this quotation exists specifically to be byte-accurate, so a
+citation that corrupts its own characters is worse than no citation. Current limitation, not a
+permanent verdict.
+
+```
+## P1 · RAM ceiling
+
+Compute the decode ceiling as `frames × width × height × 4` bytes (RGBA8). State it as a
+**theoretical ceiling**, never as measured usage — browsers evict decoded bitmaps, and nothing on
+the page can observe the eviction policy.
+
+**No external source bounds the acceptability of that ceiling.** No vendor publishes a
+per-application texture-RAM budget for a browser tab; the real limit is set by the device, the tab
+count, and an eviction policy the page cannot see.
+```
 
 **Status: met.** Layer A-port. `COMPUTED` — this is arithmetic, and the standard is explicit that it
 is a theoretical ceiling and never a measurement of usage. We have not observed our real decoded

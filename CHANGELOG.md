@@ -41,10 +41,23 @@ is only as good as the thing it actually touched.
 - The `check.yml` header is repaired. It had been wrong twice in opposite directions, first claiming
   no remote existed and then left half-written during that repair, and now records both.
 
+PATCH — the fix is to citations and to how two files are described, not to any locked value.
+
+## 2.0.1 — 2026-08-11
+
 The standard is now published at **https://hetcreep.gitbook.io/hetcreep-docs**, which is the first
 time the instruction it has carried since 1.0.0 — _"LINK to it and cite it"_ — has had anything to
 point at. The front matter and `CITATION.cff` now carry that address, and the front matter states
 what a citation should look like: the id, the version, never the heading text.
+
+Sponsors is wired where it can actually be seen. `FUNDING.yml` exists and says plainly in its own
+comment that it is nearly inert — a private repository has no page for anyone to see a sponsor
+button on, and the readers this standard is written for arrive at the documentation site instead.
+The ask lives in `README.md`, which the site publishes, and it says there is no paywall behind it:
+the document is free to read, cite and conform to, sponsored or not. The paid thing is a licence to
+redistribute or adapt the document, which is a different transaction. Nothing was added to the
+normative text but the address — a standard that asks for money inside its own rules is worth less
+than one that does not.
 
 PATCH, and the version moves at all only because `GOVERNANCE.md` says a released version is
 immutable. 2.0.0 was tagged and pushed before these edits; changing its text and leaving the number
@@ -68,6 +81,8 @@ All four were found by the caretaker running offline, and all four are the same 
 that was true when written and quietly stopped being true. That is the thing this repository exists
 to catch, so finding four of them inside its own files on day one is the expected number, not an
 embarrassing one.
+
+## 2.0.0 — 2026-08-11
 
 **`E-003`.** Layer B and the unbounded register were sorted on two different axes and the document
 never said so, which made three quantities appear in both lists and read as a contradiction. For two
