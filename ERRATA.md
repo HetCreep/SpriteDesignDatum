@@ -1,4 +1,4 @@
-# ERRATA.md — defects found in published versions
+# ERRATA.md—defects found in published versions
 
 The standard's culture is to annotate a point where it was wrong rather than quietly delete it.
 Before publication that was done in place, in the text. After publication it cannot be: a released
@@ -9,7 +9,7 @@ once annotating in place is no longer available.
 **Entries are never removed. Not even rejected ones.** A rejected erratum keeps its evidence and the
 reasoning that rejected it, and that reasoning is the only thing standing between the next reader
 and an afternoon spent re-reporting something already settled. A register that quietly drops what it
-decided against is a register nobody can audit — which is the failure this whole document exists to
+decided against is a register nobody can audit—which is the failure this whole document exists to
 avoid.
 
 **Being listed here is not being fixed.** Nothing in this file changes `SPRITE-DESIGN-DATUM.md`. The
@@ -19,7 +19,7 @@ released text still says whatever it says; corrections ship in the next version.
 **Every entry pins the version it was found in and quotes the text**, because line numbers move. A
 line number on its own is a reference that rots at the next edit, and an erratum nobody can locate
 is an erratum that gets re-filed. The line numbers below were read against the working tree on
-2026-08-11 — and had already shifted by roughly a hundred lines between these two entries being
+2026-08-11—and had already shifted by roughly a hundred lines between these two entries being
 written and being filed, which is the argument for this rule rather than a hypothetical version of
 it. **The quoted text is the locator. The line number is a convenience.**
 
@@ -29,7 +29,7 @@ it. **The quoted text is the locator. The line number is a convenience.**
 | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **reported**                  | Written down with its evidence. Nobody has ruled on it yet.                                                                                                                                       |
 | **verified**                  | The owner has read the evidence and agrees the standard is wrong. What to do about it is not yet decided.                                                                                         |
-| **rejected**                  | The owner has ruled that the standard stands — the source is wrong, not authoritative enough, or read wrong. Reasoning stays in the entry.                                                        |
+| **rejected**                  | The owner has ruled that the standard stands—the source is wrong, not authoritative enough, or read wrong. Reasoning stays in the entry.                                                          |
 | **corrected in `X.Y.Z`**      | The correction has shipped in that version. The entry stays here forever: the published text of every earlier version still says the wrong thing, and a reader holding one needs to find out why. |
 | **held for the next version** | Verified, correction decided, waiting on a release. Until that release the published text still says the wrong thing.                                                                             |
 
@@ -49,13 +49,13 @@ it. **The quoted text is the locator. The line number is a convenience.**
 
 ### E-001 · Unreal's texture ceiling needs an `.INI` change, and nothing rejects you if you skip it
 
-| field        | value                                                                                                           |
-| ------------ | --------------------------------------------------------------------------------------------------------------- |
-| **state**    | **corrected in 1.1.0** — verified against the primary source, then fixed                                        |
-| **reported** | 2026-08-11, by the datum-caretaker, against primary sources                                                     |
-| **found in** | 1.0.0                                                                                                           |
-| **location** | `SPRITE-DESIGN-DATUM.md:625` — the tolerance register, under _Hard — a gatekeeper or an API rejects violations_ |
-| **kind**     | **wrong fact**, and **wrong strength class** — two defects on one row                                           |
+| field        | value                                                                                                       |
+| ------------ | ----------------------------------------------------------------------------------------------------------- |
+| **state**    | **corrected in 1.1.0**—verified against the primary source, then fixed                                      |
+| **reported** | 2026-08-11, by the datum-caretaker, against primary sources                                                 |
+| **found in** | 1.0.0                                                                                                       |
+| **location** | `SPRITE-DESIGN-DATUM.md:625`—the tolerance register, under _Hard—a gatekeeper or an API rejects violations_ |
+| **kind**     | **wrong fact**, and **wrong strength class**—two defects on one row                                         |
 
 **What the standard says**
 
@@ -63,7 +63,7 @@ it. **The quoted text is the locator. The line number is a convenience.**
 | Texture dimension ceiling | **8192 × 8192 px** without an engine configuration change | Unreal Engine, _Texture Format Support and Settings_ |
 ```
 
-**What the source says** — vendor documentation. Epic Games, _Texture Format Support and Settings in
+**What the source says**—vendor documentation. Epic Games, _Texture Format Support and Settings in
 Unreal Engine_, fetched 2026-08-11 from
 `https://dev.epicgames.com/documentation/en-us/unreal-engine/texture-format-support-and-settings-in-unreal-engine`:
 
@@ -84,14 +84,14 @@ under `[/Script/Engine.TextureLODSettings]`, and says the editor must be restart
 
 1. **The fact is inverted.** The register offers the ceiling as available _without an engine
    configuration change_. Epic's own sentence is that reaching it takes "some slight modifications
-   to .INI files" — specifically `MaxLODSize` in `BaseDeviceProfiles.ini`, then a restart. The
+   to .INI files"—specifically `MaxLODSize` in `BaseDeviceProfiles.ini`, then a restart. The
    register states the opposite of the source it cites.
 
-2. **The row is in the wrong strength class.** It sits under _Hard — a gatekeeper or an API rejects
+2. **The row is in the wrong strength class.** It sits under _Hard—a gatekeeper or an API rejects
    violations_, and **nothing here rejects anything.** An oversized import is accepted and then
    silently clamped: in Epic's words it "will only render up to mip1 of 4096", half the dimension
    the artist delivered, with no error at the point of failure. The Unity row immediately above it
-   (`:624`) is a genuine rejection — "importer will not accept larger" — and filing the two together
+   (`:624`) is a genuine rejection—"importer will not accept larger"—and filing the two together
    tells a reader they will be stopped when in fact they will be quietly downscaled.
 
    This is the more expensive half of the defect. A rejection is found in minutes by the person who
@@ -110,13 +110,13 @@ reconciling Epic's mip arithmetic with itself is not this register's job.
 
 ### E-002 · The half-texel row cites a page that does not contain the explanation
 
-| field        | value                                                                                             |
-| ------------ | ------------------------------------------------------------------------------------------------- |
-| **state**    | **corrected in 1.1.0** — verified against the primary source, then fixed                          |
-| **reported** | 2026-08-11, by the datum-caretaker, against primary sources                                       |
-| **found in** | 1.0.0                                                                                             |
-| **location** | `SPRITE-DESIGN-DATUM.md:668` — the tolerance register, under _Derived arithmetic_                 |
-| **kind**     | **wrong citation, correct substance** — a lesser defect than E-001, and deliberately filed as one |
+| field        | value                                                                                           |
+| ------------ | ----------------------------------------------------------------------------------------------- |
+| **state**    | **corrected in 1.1.0**—verified against the primary source, then fixed                          |
+| **reported** | 2026-08-11, by the datum-caretaker, against primary sources                                     |
+| **found in** | 1.0.0                                                                                           |
+| **location** | `SPRITE-DESIGN-DATUM.md:668`—the tolerance register, under _Derived arithmetic_                 |
+| **kind**     | **wrong citation, correct substance**—a lesser defect than E-001, and deliberately filed as one |
 
 **What the standard says**
 
@@ -124,7 +124,7 @@ reconciling Epic's mip arithmetic with itself is not this register's job.
 | Half-texel offset | index-space `n − 0.5` and continuous texel-space `n` are the same point; a 0.5 gap between the two conventions is the half-texel offset, not a discrepancy (Microsoft Learn, _Bilinear Texture Filtering_) |
 ```
 
-**What the cited page says** — vendor documentation. Microsoft Learn, _Bilinear Texture Filtering
+**What the cited page says**—vendor documentation. Microsoft Learn, _Bilinear Texture Filtering
 (Direct3D 9)_, fetched 2026-08-11 from
 `https://learn.microsoft.com/en-us/windows/win32/direct3d9/bilinear-texture-filtering` (page
 metadata: Direct3D 9, conceptual, 513 words, last updated 2025-03-11).
@@ -139,7 +139,7 @@ It contains **no index space, no continuous texel space, no statement that the t
 point, no 0.5 gap between conventions, and no `floor(U − 0.5)`.** The explanation attributed to it
 is not on it.
 
-**Where the substance actually comes from** — vendor documentation, and the closest thing to a
+**Where the substance actually comes from**—vendor documentation, and the closest thing to a
 normative statement Microsoft publishes on this. Microsoft Learn, _Coordinate Systems
 (Direct3D 10)_, fetched 2026-08-11 from
 `https://learn.microsoft.com/en-us/windows/win32/direct3d10/d3d10-graphics-programming-guide-resources-coordinates`:
@@ -165,10 +165,10 @@ document declines to run on.
 
 **This is the second occurrence of the same failure.** The standard's own third standing rule, at
 `SPRITE-DESIGN-DATUM.md:142-144`, records that it "has already mis-attributed a tutorial sentence to
-'the spec' once". This is that again — a Direct3D 9 tutorial cited for a coordinate-system rule — in
-the register the rule was written to protect. Filed as a repeat rather than an isolated slip,
-because one is an error and two is a class, and a class is something the release check should be
-catching rather than a reader.
+'the spec' once". This is that again—a Direct3D 9 tutorial cited for a coordinate-system rule—in the
+register the rule was written to protect. Filed as a repeat rather than an isolated slip, because
+one is an error and two is a class, and a class is something the release check should be catching
+rather than a reader.
 
 **What was not checked.** The register's substance is also supportable from the Vulkan
 specification's texel-coordinate section, and that was **not verified**: Khronos returned HTTP 403
@@ -183,11 +183,11 @@ verbatim. The Vulkan half is recorded as unverified rather than assumed.
 
 | field        | value                                                                                            |
 | ------------ | ------------------------------------------------------------------------------------------------ |
-| **state**    | **corrected in 2.0.0** — the board reported it, the owner ruled, the standard changed            |
+| **state**    | **corrected in 2.0.0**—the board reported it, the owner ruled, the standard changed              |
 | **reported** | 2026-08-11, by an opinion board of four independent seats, one of them blind to the framing      |
 | **found in** | 1.0.0, 1.1.0                                                                                     |
 | **location** | `SPRITE-DESIGN-DATUM.md:464-470` (the Layer B slot list) and `:687-694` (the unbounded register) |
-| **kind**     | **structural** — not a wrong value, a wrong question                                             |
+| **kind**     | **structural**—not a wrong value, a wrong question                                               |
 
 **What the standard says**
 
@@ -208,8 +208,8 @@ Layer B asks             can the ADOPTING PROJECT measure this against its own m
 the unbounded register   does any EXTERNAL BODY bound this?
 ```
 
-Those are orthogonal. The register's own stated reasons prove it — every one of them is about
-external non-boundedness and none is about internal non-measurability:
+Those are orthogonal. The register's own stated reasons prove it—every one of them is about external
+non-boundedness and none is about internal non-measurability:
 
 > "An animation-density choice traded against file count and RAM. Tools publish frame _ordering_
 > support and never a frame _count_ — there is no interoperation surface."
@@ -222,16 +222,16 @@ the sentence saying it is allowed.
 
 **The three, separated**
 
-| quantity                   | can the project measure it?                                                             | does anything external bound it?                                             | belongs                                 |
-| -------------------------- | --------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | --------------------------------------- |
-| direction-to-index mapping | **no** — no instrument can output "index 0 means north" from pixels; it is a bare label | no                                                                           | **C only.** The one genuine mis-filing. |
-| frame count per direction  | **yes** — `ls                                                                           | wc -l`, fewer free parameters than reading a canvas size out of a PNG header | no                                      | **both, legitimately** |
-| playback cadence           | **yes** — a stored, re-derivable configuration value                                    | no                                                                           | **both, legitimately**                  |
+| quantity                   | can the project measure it?                                                           | does anything external bound it?                                             | belongs                                 |
+| -------------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | --------------------------------------- |
+| direction-to-index mapping | **no**—no instrument can output "index 0 means north" from pixels; it is a bare label | no                                                                           | **C only.** The one genuine mis-filing. |
+| frame count per direction  | **yes**—`ls                                                                           | wc -l`, fewer free parameters than reading a canvas size out of a PNG header | no                                      | **both, legitimately** |
+| playback cadence           | **yes**—a stored, re-derivable configuration value                                    | no                                                                           | **both, legitimately**                  |
 
 **Evidence the "measurable" half of the obvious fix does not hold either**
 
-The obvious repair — keep the two slots that are "genuinely measurable" and move the other three out
-— fails on its own premise. `EXAMPLE-CONFORMANCE.md:718` files **canvas dimensions at C**, not B,
+The obvious repair—keep the two slots that are "genuinely measurable" and move the other three
+out—fails on its own premise. `EXAMPLE-CONFORMANCE.md:718` files **canvas dimensions at C**, not B,
 and says why at `:736-738`:
 
 > Canvas dimensions are a milder case of the same thing: a canvas is agreed before the first frame
@@ -251,7 +251,7 @@ in the same file: a hovering character has no ground contact for the instrument 
 
 Move frame count to C and this clause immediately licenses a reader to move it back, because
 counting the shipped files **is** a corpus measurement on its face. Two readers, the same frozen
-text, two defensible answers — which is the divergence the Conformance section exists to forbid.
+text, two defensible answers—which is the divergence the Conformance section exists to forbid.
 Editing the slot list alone cannot close it.
 
 **Smaller defects found while establishing the above**
@@ -260,25 +260,25 @@ Editing the slot list alone cannot close it.
   to". Its table two paragraphs later files **four** of five at C. Off by one, in the repository's
   only worked model. `tools/check.mjs`'s count-word check cannot see it: the count word is followed
   by a table, and the check only fires on an ordered list.
-- **`direction count`** — 4 directions versus 8, as distinct from the index mapping — appears
-  exactly once in the whole document, in the Layer B slot list. The unbounded register has no row
-  for it. Any repair that only moves slots out of B leaves it with no home at all.
+- **`direction count`**—4 directions versus 8, as distinct from the index mapping—appears exactly
+  once in the whole document, in the Layer B slot list. The unbounded register has no row for it.
+  Any repair that only moves slots out of B leaves it with no home at all.
 - Nothing mechanical depends on any of this. `tools/check.mjs` matches rule ids with `[APLE]\d`, so
-  **`B` and `C` cannot match by construction** — no check has ever inspected Layer B or C content.
+  **`B` and `C` cannot match by construction**—no check has ever inspected Layer B or C content.
   Verified by applying the slot-list edit to a scratch copy: `6/6 checks pass`, before and after,
   identically.
 
 **What the board converged on**
 
 Four seats, one of which never saw the options or the proposal, and all four landed on the same
-diagnosis: the discriminator in use — _did you measure it_ — is not the discriminator that separates
+diagnosis: the discriminator in use—_did you measure it_—is not the discriminator that separates
 these cases. The blind seat put the real one plainly:
 
 > A wrong value is either a bug against a fact that exists independent of the declaration, or it is
 > a different, equally legitimate design. If every candidate value is an equally legitimate design,
 > the quantity cannot be measured into Layer B no matter how mandatory it is to pick one.
 
-Eight frames or twelve, digit 2 or digit 5 for "down", 12 fps or 8 — none of these has a fact behind
+Eight frames or twelve, digit 2 or digit 5 for "down", 12 fps or 8—none of these has a fact behind
 it to be wrong against. They are chosen, not measured well or badly. A canvas of 63 px when the file
 ships 64 px **is** a bug; feet declared at row 10 that render at row 40 **is** a bug. That test
 separates the cases; "did you measure it" does not.

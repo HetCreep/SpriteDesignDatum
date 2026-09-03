@@ -1,13 +1,13 @@
-# AGENTS.md — how an AI agent uses this standard
+# AGENTS.md—how an AI agent uses this standard
 
 You are reading a **standard**, not a codebase. Nothing here is yours to change. Your job is to
 conform work to it and to answer for each rule honestly, including where the answer is "we do not
 meet this."
 
 **Read [`SPRITE-DESIGN-DATUM.md`](SPRITE-DESIGN-DATUM.md) in full before acting on sprite
-geometry.** Not a skim, and not a grep for the one number you came for — the layer table is what
-makes every number after it mean something, and a value lifted out of its layer is the specific
-failure this document exists to prevent.
+geometry.** Not a skim, and not a grep for the one number you came for—the layer table is what makes
+every number after it mean something, and a value lifted out of its layer is the specific failure
+this document exists to prevent.
 
 ---
 
@@ -16,14 +16,14 @@ failure this document exists to prevent.
 Every value in the standard is filed under **who locks it**. That determines what you may do with
 it.
 
-| layer      | locked by                               | may you change it?                                    |
-| ---------- | --------------------------------------- | ----------------------------------------------------- |
-| **A**      | the graphics API / hardware             | **no** — violating it breaks at the API level         |
-| **A-port** | the target device (RAM, DPR, renderer)  | **no** — re-measure per target, never carry forward   |
-| **L1–L4**  | the adopting project's owner            | **no** — owner ruling required, escalate and stop     |
-| **B-ext**  | external convention with real precedent | only by producing a **named counter-exemplar**        |
-| **B**      | the adopting project's own measurement  | only by **re-measuring the corpus** and showing how   |
-| **C**      | nobody                                  | free — but say it is free, and never quote it as spec |
+| layer      | locked by                               | may you change it?                                  |
+| ---------- | --------------------------------------- | --------------------------------------------------- |
+| **A**      | the graphics API / hardware             | **no**—violating it breaks at the API level         |
+| **A-port** | the target device (RAM, DPR, renderer)  | **no**—re-measure per target, never carry forward   |
+| **L1–L4**  | the adopting project's owner            | **no**—owner ruling required, escalate and stop     |
+| **B-ext**  | external convention with real precedent | only by producing a **named counter-exemplar**      |
+| **B**      | the adopting project's own measurement  | only by **re-measuring the corpus** and showing how |
+| **C**      | nobody                                  | free—but say it is free, and never quote it as spec |
 
 **Escalate, do not decide.** If a task requires changing an `L1`–`L4` value, that is an owner
 decision. State the conflict, state what you would need, and stop. Producing a plausible number is
@@ -32,24 +32,23 @@ worse than producing none, because a plausible number gets adopted.
 ## Rules that bind you on every edit
 
 1. **Every value states who locked it.** If you add a value and cannot say which layer it belongs
-   to, it is Layer C — write it as unlocked. Do not promote it to spec to make a table look
-   complete.
+   to, it is Layer C—write it as unlocked. Do not promote it to spec to make a table look complete.
 
 2. **A number measured live and a number computed are never presented as the same kind of thing.**
    One means an instrument was run against the real artifact; the other means arithmetic over other
-   numbers. Say which, in whatever words the surrounding text uses — the standard does this in prose
+   numbers. Say which, in whatever words the surrounding text uses—the standard does this in prose
    ("state it as a theoretical ceiling, never as measured usage") rather than with a fixed token,
    and either is fine as long as a reader can tell them apart. Blurring them has already produced a
    wrong document once.
 
-3. **Every citation states its class** — specification · vendor documentation · tool default ·
+3. **Every citation states its class**—specification · vendor documentation · tool default ·
    recommendation. They do not weigh the same. A tutorial sentence is not a spec, and this document
    has already mis-attributed one.
 
-4. **Content keeps whatever Unicode normalization form it already carries — NFC if it is composed at
+4. **Content keeps whatever Unicode normalization form it already carries—NFC if it is composed at
    all, and never NFKC/NFKD.** <!-- coalmine: verified 2026-09-02 · exemplar UAX #15 §1.2
    (unicode.org/reports/tr15/), conformed via TheColliery/.claude/rules/ecc/node/runtime.md:63 ·
-   revalidate 90d --> This is a FORMAL STANDARD's own rule, not a house invention — UAX #15 §1.2:
+   revalidate 90d --> This is a FORMAL STANDARD's own rule, not a house invention—UAX #15 §1.2:
    _"Normalization Forms KC and KD must **not** be blindly applied to arbitrary text... they may
    remove distinctions that are important to the semantics of the text."_ This document is
    English-primary, so the risk is lower than a majority-non-Latin corpus, but the rule is the same
@@ -72,9 +71,9 @@ not.
 
 ## Producing a conformance record
 
-A project adopting this standard keeps one file — suggested name `SPRITE-CONFORMANCE.md` — that
-walks **every** rule and states, for each: the project's value, where it came from, and its status
-(met · open · deliberately excluded, with the reason).
+A project adopting this standard keeps one file—suggested name `SPRITE-CONFORMANCE.md`—that walks
+**every** rule and states, for each: the project's value, where it came from, and its status (met ·
+open · deliberately excluded, with the reason).
 
 Rules for writing one:
 
@@ -99,10 +98,10 @@ establishes: mutate it, confirm the failure is actually detected, then restore b
 say so.
 
 **A check that has never failed proves nothing.** A test that reads the same constant on both sides
-proves only that arithmetic agrees with itself — compare a declared value against a _measured_ one,
+proves only that arithmetic agrees with itself—compare a declared value against a _measured_ one,
 always.
 
-## Licence — what you may do with this document
+## Licence—what you may do with this document
 
 © 2026 HetCreep, [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/).
 

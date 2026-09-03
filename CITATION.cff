@@ -8,7 +8,7 @@
 #   imperfect fits rather than a claim.
 #
 #   `software` is the wrong one. This repository deliberately ships no code, no linter, and no
-#   schema — see README, "What it deliberately does not do" — because a machine-readable copy of the
+#   schema—see README, "What it deliberately does not do"—because a machine-readable copy of the
 #   values would be a second source of truth for them.
 #
 #   `dataset` is the conventional CFF filing for a non-software research output, and the
@@ -22,14 +22,14 @@
 #   A citation has to resolve to the exact bytes it cites, and to the RULE inside them. The
 #   documentation site fails the second half: its renderer strips the explicit anchors, so a
 #   citation ending `#L1` lands at the top of the page instead of at L1. Measured on the served
-#   HTML — 0 of 13 rule anchors present. The file at a signed tag keeps all 13, so that is what a
+#   HTML—0 of 13 rule anchors present. The file at a signed tag keeps all 13, so that is what a
 #   citation carries. The site is a reading copy and is not cited.
 #
 # NOTE FOR WHOEVER MAINTAINS THIS
 #
 #   `version` below is a THIRD copy of the version string. The other two are the front matter of
 #   SPRITE-DESIGN-DATUM.md and the top heading of CHANGELOG.md. All three must move together, and
-#   `tools/check.mjs` check 4 enforces exactly that — it reads all three and fails on a mismatch,
+#   `tools/check.mjs` check 4 enforces exactly that—it reads all three and fails on a mismatch,
 #   and takes the tag being cut as an optional fourth. Do not add a fourth copy without telling it.
 
 cff-version: 1.2.0
@@ -41,7 +41,7 @@ type: dataset
 authors:
   # CFF splits authors into persons (given-names / family-names) and entities (a single `name`). The
   # author publishes under a handle, and LICENSE's scope section already flags the named-holder
-  # question as one a lawyer has to settle — so the entity form is used here rather than inventing a
+  # question as one a lawyer has to settle—so the entity form is used here rather than inventing a
   # split of a handle into a first and last name.
   - name: HetCreep
 url: 'https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.2/SPRITE-DESIGN-DATUM.md'
@@ -51,11 +51,11 @@ date-released: '2026-08-11'
 license: CC-BY-NC-ND-4.0
 abstract: >-
   A geometry standard for 2D sprite art, and a map of which parts of that geometry have a published
-  external source and which parts have none. Every value is filed under who locks it — a graphics
-  API, a device target, the adopting project's owner, an external convention with real precedent,
-  the adopting project's own measurement, or nobody — and a value nobody locks is written as
-  unlocked rather than promoted to specification to make a table look complete. Where no authority
-  exists, tolerances were recovered by measuring public sprite corpora with a stated, re-runnable
+  external source and which parts have none. Every value is filed under who locks it—a graphics API,
+  a device target, the adopting project's owner, an external convention with real precedent, the
+  adopting project's own measurement, or nobody—and a value nobody locks is written as unlocked
+  rather than promoted to specification to make a table look complete. Where no authority exists,
+  tolerances were recovered by measuring public sprite corpora with a stated, re-runnable
   instrument, and the method is published alongside the result so the numbers can be re-derived
   rather than trusted. The document names its own coverage gaps, including the absence of any
   web-platform source in its register of published values.

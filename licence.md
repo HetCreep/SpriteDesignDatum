@@ -1,7 +1,7 @@
 # Licence
 
 This is the repository's own `LICENSE` file, reproduced in full below so a reader of this page never
-has to leave it to learn their rights. The two are one document on two faces — see the note at the
+has to leave it to learn their rights. The two are one document on two faces—see the note at the
 end.
 
 ```
@@ -145,12 +145,12 @@ NO WARRANTY
 
 **This is the same document as
 [`LICENSE`](https://github.com/HetCreep/SpriteDesignDatum/blob/main/LICENSE) at the repository
-root** — kept there too, unquoted, for machine licence-detection (GitHub, REUSE/SPDX tooling) that
+root**—kept there too, unquoted, for machine licence-detection (GitHub, REUSE/SPDX tooling) that
 expects a root `LICENSE` file rather than a GitBook page. The two are edited together: a change to
 one is a change to the licence, and the other is updated in the same commit.
 
 For the Creative Commons half specifically, the canonical legal code is published at
-[creativecommons.org/licenses/by-nc-nd/4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/) —
-the text above is this repository's own licence, which is more specific than (and does not replace)
-that general deed: it adds the dual documents/tooling split and the Katomnoi Studio standing grant,
+[creativecommons.org/licenses/by-nc-nd/4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)—the
+text above is this repository's own licence, which is more specific than (and does not replace) that
+general deed: it adds the dual documents/tooling split and the Katomnoi Studio standing grant,
 neither of which the bare CC legal code states.

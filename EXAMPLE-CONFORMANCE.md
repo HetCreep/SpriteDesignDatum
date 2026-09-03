@@ -1,4 +1,4 @@
-# EXAMPLE — a worked conformance record
+# EXAMPLE—a worked conformance record
 
 > ⚠️ **The project below does not exist.** _Lanternfall_, its art, its commits, its file paths and
 > every number attached to them are **invented** for this example. Nothing here is a measurement of
@@ -11,15 +11,15 @@ a record and has never seen the thing they owe.
 
 **This is an example, not the standard.** It does not restate, extend, reinterpret or add to any
 rule. Every rule is referred to by its id; the rule text lives in the standard, once. Each answer
-heading below links to that rule's own anchor, which is what the anchors are for — a record cites
-the id, never the heading text, so the link survives a rewording. If this file and the standard ever
+heading below links to that rule's own anchor, which is what the anchors are for—a record cites the
+id, never the heading text, so the link survives a rewording. If this file and the standard ever
 disagree, the standard is right and this file is a defect.
 
 ---
 
 ## How to read a row
 
-Every answer below carries four things. They are the standard's own conventions, applied — the
+Every answer below carries four things. They are the standard's own conventions, applied—the
 standard states them, and a record is where a reader gets to see them used.
 
 ```
@@ -41,7 +41,7 @@ rejecting a file are not the same evidence, and the class column is the only pla
 survives.
 
 **A stricter rule we chose is labelled as ours.** Where we hold ourselves to more than the standard
-asks, the row says so and files the value under Layer B or C — never under the standard's authority.
+asks, the row says so and files the value under Layer B or C—never under the standard's authority.
 Borrowing the standard's authority for a house rule is how a project ends up unable to say which of
 its constraints it may relax.
 
@@ -115,7 +115,7 @@ wrong.
 | rule                      | status                                         | see                                |
 | ------------------------- | ---------------------------------------------- | ---------------------------------- |
 | `A1`                      | met                                            | geometry carries aspect            |
-| `A2`                      | met — condition not triggered                  | no WebGL1 target; NPOT cost taken  |
+| `A2`                      | met—condition not triggered                    | no WebGL1 target; NPOT cost taken  |
 | `A3`                      | **deliberately excluded**                      | no compressed containers shipped   |
 | `P1`                      | met                                            | 4,022,272 B ceiling, budget 8 MiB  |
 | `P2`                      | **open**                                       | fractional scale at 2560 × 1440    |
@@ -124,7 +124,7 @@ wrong.
 | `L2`                      | met                                            | hero canvas change, cost published |
 | `L3`                      | met                                            | answered once, both targets        |
 | `L4`                      | met (textures) / **excluded** (listing assets) | not our stores                     |
-| `E1`                      | met — provisional for `wisp`                   | blocked behind `E2`                |
+| `E1`                      | met—provisional for `wisp`                     | blocked behind `E2`                |
 | `E2`                      | **open**                                       | `wisp` trim, loader ignores source |
 | `E3`                      | met                                            | `pixel_size` 0.03125, derived      |
 | anchor tolerance register | 10 of 11 sets met, **1 open**                  | `hero` slash                       |
@@ -139,16 +139,16 @@ reader would stop looking.
 
 ## Layer A
 
-### [`A1`](SPRITE-DESIGN-DATUM.md#A1) — our answer
+### [`A1`](SPRITE-DESIGN-DATUM.md#A1)—our answer
 
 **Status: met.** Layer A. Nothing in our pipeline attaches an aspect ratio to a file and expects it
 to survive; the geometry carries it. Three consumers exist and all three were walked:
 
-| consumer                  | what pins the aspect                     | how A1 is satisfied                       |
-| ------------------------- | ---------------------------------------- | ----------------------------------------- |
-| 2D world sprite           | nothing — the quad takes the source size | fed matching art by construction          |
-| campfire billboard        | nothing — size derived, see `E3`         | fed matching art by construction          |
-| party-panel portrait (UI) | box is square, stretch mode covers       | compensated + provenance stated, see `L1` |
+| consumer                  | what pins the aspect                   | how A1 is satisfied                       |
+| ------------------------- | -------------------------------------- | ----------------------------------------- |
+| 2D world sprite           | nothing—the quad takes the source size | fed matching art by construction          |
+| campfire billboard        | nothing—size derived, see `E3`         | fed matching art by construction          |
+| party-panel portrait (UI) | box is square, stretch mode covers     | compensated + provenance stated, see `L1` |
 
 The invariant A1 names is the same one the published-values register carries as _one identical
 Pixels Per Unit across every sprite in a scene_ (`CITED`, VENDOR_DOC, Unity 2D Pixel Perfect 5.0).
@@ -159,9 +159,9 @@ We do not use that vendor's engine. We adopt the mechanism, not the product: one
 > and the consumer walk under `L1`, and we have reported the duplication upstream rather than
 > deciding which id owns it.
 
-### [`A2`](SPRITE-DESIGN-DATUM.md#A2) — our answer
+### [`A2`](SPRITE-DESIGN-DATUM.md#A2)—our answer
 
-**Status: met — the condition A2 makes it conditional on is not triggered.** Layer A.
+**Status: met—the condition A2 makes it conditional on is not triggered.** Layer A.
 
 Our render targets are Vulkan (desktop) and WebGL2 (web). We ship no WebGL1 fallback, so A2's hard
 half does not bind. What remains is the recommendation, and we take its cost rather than pretend we
@@ -177,15 +177,15 @@ re-opens                the day a WebGL1 fallback build is added. Nobody has pro
 ```
 
 We did not round the canvases up to powers of two. A 48 × 64 canvas padded to 64 × 64 would add 16
-px of dead width to every one of the hero's 72 frames — `COMPUTED`: 72 × 16 × 64 × 4 = 294,912 bytes
+px of dead width to every one of the hero's 72 frames—`COMPUTED`: 72 × 16 × 64 × 4 = 294,912 bytes
 of decode ceiling, a 33.3% rise on that family, to satisfy a recommendation whose stated cost is
 smaller than the fix.
 
-### [`A3`](SPRITE-DESIGN-DATUM.md#A3) — our answer
+### [`A3`](SPRITE-DESIGN-DATUM.md#A3)—our answer
 
 **Status: deliberately excluded.** Layer A.
 
-Reason: we ship uncompressed PNG on both targets and use no GPU-compressed container — no ASTC, no
+Reason: we ship uncompressed PNG on both targets and use no GPU-compressed container—no ASTC, no
 BCn, no ETC. A3's subject does not appear anywhere in our pipeline, so there is nothing to conform.
 
 This is the shape of a legitimate exclusion, and it is legitimate only because it names the
@@ -206,14 +206,14 @@ lines above.
 
 ## Layer A-port
 
-### [`P1`](SPRITE-DESIGN-DATUM.md#P1) — our answer
+### [`P1`](SPRITE-DESIGN-DATUM.md#P1)—our answer
 
-The rule text itself, quoted from the tagged citation above — a mirror, not a replacement; if this
+The rule text itself, quoted from the tagged citation above—a mirror, not a replacement; if this
 block ever disagrees with the tagged file, the tagged file wins.
 
 ---
 
-Shown as a plain code block rather than the GitHub Files embed for now — the integration currently
+Shown as a plain code block rather than the GitHub Files embed for now—the integration currently
 mangles non-ASCII text on decode, and this quotation exists specifically to be byte-accurate, so a
 citation that corrupts its own characters is worse than no citation. Current limitation, not a
 permanent verdict.
@@ -230,7 +230,7 @@ per-application texture-RAM budget for a browser tab; the real limit is set by t
 count, and an eviction policy the page cannot see.
 ```
 
-**Status: met.** Layer A-port. `COMPUTED` — this is arithmetic, and the standard is explicit that it
+**Status: met.** Layer A-port. `COMPUTED`—this is arithmetic, and the standard is explicit that it
 is a theoretical ceiling and never a measurement of usage. We have not observed our real decoded
 footprint and do not claim to have.
 
@@ -248,8 +248,8 @@ footprint and do not claim to have.
 
 4,022,272 B = 3,928 KiB = 3.84 MiB.
 
-**Acceptability of that ceiling has no external source** — the standard says so and we have not
-found one either. Our budget is therefore ours:
+**Acceptability of that ceiling has no external source**—the standard says so and we have not found
+one either. Our budget is therefore ours:
 
 ```
 decoded-texture budget   8 MiB          layer C — nobody locks this, it is our number
@@ -269,13 +269,13 @@ headroom                 3.84 MiB of 8 MiB — 48% used
    pixels; the GPU receives a packed sheet including its padding. Our packer takes 8 columns and
    `ceil(frames / 8)` rows, with 2 px between cells and at every edge. Worked for `hero`: 8 columns
    × 9 rows of 48 × 64 cells gives 8×48 + 9×2 = 402 wide and 9×64 + 10×2 = 596 high, so 402 × 596 ×
-   4 = **958,368 B** against the formula's 884,736 B — 73,632 B more, +8.3%, all of it padding
+   4 = **958,368 B** against the formula's 884,736 B—73,632 B more, +8.3%, all of it padding
    (239,592 sheet pixels − 221,184 frame pixels = 18,408 px × 4 B). All `COMPUTED`. The other five
    families are in `tools/atlas_report.json` and are not reproduced here. We report the formula's
    figure because that is what the standard asks for, and we report the gap because a reader
    budgeting RAM off the formula alone would be 8% short on this family.
 
-### [`P2`](SPRITE-DESIGN-DATUM.md#P2) — our answer
+### [`P2`](SPRITE-DESIGN-DATUM.md#P2)—our answer
 
 **Status: open.** Layer A-port. This is our largest unresolved defect.
 
@@ -295,7 +295,7 @@ campfire  fixed camera, no depth ramp. The scale factor has one value, not a ran
 Read literally, the comparison "required device pixels vs source width" fails for us at every scale:
 our art has fewer source pixels than the box demands, always, on purpose. That is what pixel art is.
 We do not claim to have met a floor we deliberately sit under, and we flag that the floor comparison
-as stated does not describe deliberately-upscaled art — reported upstream.
+as stated does not describe deliberately-upscaled art—reported upstream.
 
 **The integer half, which does bind us, and which we fail.** `MEASURED-LIVE`, screenshots at 2560 ×
 1440 diffed against a 4× reference:
@@ -309,20 +309,20 @@ consequence              33.3% of the hero's columns render one-third wider than
 ```
 
 This is exactly the defect the published-values register carries as a RECOMMENDATION from Godot 4,
-_Multiple resolutions_ (`CITED`, class RECOMMENDATION) — fractional scaling distorts pixel-exact
-art, which is why engines ship a floor().
+_Multiple resolutions_ (`CITED`, class RECOMMENDATION)—fractional scaling distorts pixel-exact art,
+which is why engines ship a floor().
 
 **What it would take to close it.** An integer-scale display mode: render 480 × 270 at 4× = 1920 ×
 1080 and letterbox inside 2560 × 1440, leaving 320 px bars left and right and 180 px top and bottom
 (`COMPUTED`). The cost is 25% of the window's width and 25% of its height given to bars, which is a
 product decision nobody has taken yet. Estimated at one day. Owner unassigned. Opened 2026-08-10.
 
-### [`P3`](SPRITE-DESIGN-DATUM.md#P3) — our answer
+### [`P3`](SPRITE-DESIGN-DATUM.md#P3)—our answer
 
 **Status: met.** Layer A-port.
 
-We already ship the two targets P3 distinguishes — a browser build and a desktop native build — and
-the contract did not change between them. Per-frame metadata (`sourceSize` / `spriteSourceSize`) is
+We already ship the two targets P3 distinguishes—a browser build and a desktop native build—and the
+contract did not change between them. Per-frame metadata (`sourceSize` / `spriteSourceSize`) is
 exported for every family and is present in every sheet's JSON at `c41e0b7`, `MEASURED-LIVE` by
 `tools/check_metadata.py` (292 frames checked, 292 carry both fields). Our loader reads it for five
 of six families; the sixth is `E2`, open.
@@ -335,14 +335,14 @@ of six families; the sixth is `E2`, open.
 
 ## The locked rules
 
-### [`L1`](SPRITE-DESIGN-DATUM.md#L1) — our answer
+### [`L1`](SPRITE-DESIGN-DATUM.md#L1)—our answer
 
-**Status: met, via (b).** Layer L1 — owner-locked; nothing below may be changed by an agent or a
+**Status: met, via (b).** Layer L1—owner-locked; nothing below may be changed by an agent or a
 contributor without an owner ruling.
 
 One consumer in Lanternfall pins an aspect ratio: the party-panel portrait control, whose box is 64
 × 64 and whose stretch mode covers rather than contains. It is fed the `hero` sheet's idle frame at
-48 × 64 — a 3:4 source into a 1:1 box. Half (a) is not satisfied and we do not claim it is.
+48 × 64—a 3:4 source into a 1:1 box. Half (a) is not satisfied and we do not claim it is.
 
 Half (b) is satisfied, and this is the whole of it, in the scene file at `ui/party_panel.tscn`:
 
@@ -359,11 +359,11 @@ The pinned number states its provenance, which is the half of `L1` that a record
 box; (85.33 − 64)/85.33 = **25.0%** of image height discarded.
 
 > The published-values register's contain-fit derivation, `min(boxW/srcW, boxH/srcH)`, does not
-> describe this consumer — we fit by cover, which takes the max. The register publishes contain and
+> describe this consumer—we fit by cover, which takes the max. The register publishes contain and
 > not cover, and cover is the mode that destroys art. Reported upstream. The arithmetic above is
 > ours and is labelled `COMPUTED`, not cited.
 
-### [`L2`](SPRITE-DESIGN-DATUM.md#L2) — our answer
+### [`L2`](SPRITE-DESIGN-DATUM.md#L2)—our answer
 
 **Status: met.** Layer L1–L4.
 
@@ -377,19 +377,19 @@ reading.
 
 `L2` obliges two things in the same commit. Both were done, in commit `7b2c084`:
 
-**1 — the original geometry recorded outside version-control history.** `art/GEOMETRY.md` carries
-the entry: previous canvas 48 × 56, new canvas 48 × 64, 8 px added at the TOP, foot line unchanged
-at 3 px above the bottom edge, character height unchanged at 54 px. A reader of that file does not
-need the git history to know what the art used to be, which is the point of the requirement.
+**1—the original geometry recorded outside version-control history.** `art/GEOMETRY.md` carries the
+entry: previous canvas 48 × 56, new canvas 48 × 64, 8 px added at the TOP, foot line unchanged at 3
+px above the bottom edge, character height unchanged at 54 px. A reader of that file does not need
+the git history to know what the art used to be, which is the point of the requirement.
 
-**2 — every consumer enumerated, with the effect on each.**
+**2—every consumer enumerated, with the effect on each.**
 
-| consumer             | effect                                                          |
-| -------------------- | --------------------------------------------------------------- |
-| 2D world sprite      | none — size derived from the source, foot line unmoved          |
-| campfire billboard   | none — same, see `E3`                                           |
-| party-panel portrait | **changed** — the pinned 1:1 box now discards more of the image |
-| atlas packing        | **changed** — sheet grew, see the cost table                    |
+| consumer             | effect                                                        |
+| -------------------- | ------------------------------------------------------------- |
+| 2D world sprite      | none—size derived from the source, foot line unmoved          |
+| campfire billboard   | none—same, see `E3`                                           |
+| party-panel portrait | **changed**—the pinned 1:1 box now discards more of the image |
+| atlas packing        | **changed**—sheet grew, see the cost table                    |
 
 **The cost, published rather than buried.**
 
@@ -404,28 +404,28 @@ cover fit scaled by 64/48 discards 1 − 48/56 = 14.3% of a 48 × 56 source and 
 `L1` comment. It was not discovered later; it was found by the consumer walk this rule requires,
 which is the only reason it is in a table instead of in a bug report.
 
-### [`L3`](SPRITE-DESIGN-DATUM.md#L3) — our answer
+### [`L3`](SPRITE-DESIGN-DATUM.md#L3)—our answer
 
 **Status: met.** Layer L1–L4.
 
-We ship two of the three targets in `L3`'s table — browser (WebGL2) and native — and we answer `L1`
-and `L2` once each, for both, rather than per target. Nothing in either answer is target-specific,
-which is the claim `L3` makes.
+We ship two of the three targets in `L3`'s table—browser (WebGL2) and native—and we answer `L1` and
+`L2` once each, for both, rather than per target. Nothing in either answer is target-specific, which
+is the claim `L3` makes.
 
 The one thing that genuinely differs is the one `L3` names: per-frame metadata matters more on the
 native side, and that is where `E2`'s open row bites hardest. It is recorded there, not here.
 
-### [`L4`](SPRITE-DESIGN-DATUM.md#L4) — our answer
+### [`L4`](SPRITE-DESIGN-DATUM.md#L4)—our answer
 
-**Status: split — met on textures, deliberately excluded on listing assets.** Layer L1–L4.
+**Status: split—met on textures, deliberately excluded on listing assets.** Layer L1–L4.
 
-**Textures — met, trivially, and stated rather than skipped.** No store publishes a dimension or
+**Textures—met, trivially, and stated rather than skipped.** No store publishes a dimension or
 aspect requirement for in-app textures, so there is nothing to violate. The one hard failure `L4`
 names is the Android App Bundle that targets texture-compression formats without a default-format
 directory. We ship no App Bundle and target no compression formats (see `A3`), so the failure mode
 is unreachable. `re-opens on`: a Play Store port, at which point this row is re-read alongside `A3`.
 
-**Listing assets — deliberately excluded.**
+**Listing assets—deliberately excluded.**
 
 ```
 reason      the published numbers in the standard's register are Google Play's and Apple's.
@@ -447,7 +447,7 @@ where that distinction is made visible.
 
 ## Layer B-ext
 
-### [`E1`](SPRITE-DESIGN-DATUM.md#E1) — our answer
+### [`E1`](SPRITE-DESIGN-DATUM.md#E1)—our answer
 
 **Status: met, provisional for `wisp` pending `E2`.** Layer B-ext, with the values themselves at
 Layer B.
@@ -460,8 +460,7 @@ citation vanished.
 
 The citation is corroboration and is labelled as such: `SpriteAlignment.BottomCenter` (`CITED`,
 class VENDOR_DOC). We do **not** claim bottom-centre is an industry default, and we do not cite
-Tiled — the standard records that Tiled argues the other way, and Lanternfall's view is not
-isometric.
+Tiled—the standard records that Tiled argues the other way, and Lanternfall's view is not isometric.
 
 Anchor position per family, `MEASURED-LIVE` by `tools/footline.py`, Layer B:
 
@@ -475,19 +474,19 @@ Anchor position per family, `MEASURED-LIVE` by `tools/footline.py`, Layer B:
 | `wisp`     | 32 × 32  |                see the note below |                         — |          15.5 |       provisional |
 
 Canvas centre is `(width − 1)/2` on a zero-indexed grid, which is why it is a half-pixel on every
-even canvas. The `warden`'s +1.5 px is real — the boss's weight is on its right leg and the artist
-drew it that way — and it is carried in the family's declared offset rather than corrected in the
-art. One family, one scale, one offset, read together.
+even canvas. The `warden`'s +1.5 px is real—the boss's weight is on its right leg and the artist
+drew it that way—and it is carried in the family's declared offset rather than corrected in the art.
+One family, one scale, one offset, read together.
 
 > **The `wisp` hovers, and the standard has no row for that.** Its own art never touches the ground,
 > so "lowest opaque row" measures the bottom of a floating creature and not its ground contact. We
 > resolved it without inventing anything: the `wisp` ships a paired shadow sheet (32 × 16, 8
 > frames), the instrument runs on the **shadow**, and the `wisp` body carries a hover offset of 6 px
-> above the shadow's foot line — 6 px being a Layer C authoring choice, ours, chosen for feel and
-> not derived from anything. That answer is sound and its measurement is currently unusable, because
+> above the shadow's foot line—6 px being a Layer C authoring choice, ours, chosen for feel and not
+> derived from anything. That answer is sound and its measurement is currently unusable, because
 > `E2` is open on this family. This row is provisional until it is not.
 
-### [`E2`](SPRITE-DESIGN-DATUM.md#E2) — our answer
+### [`E2`](SPRITE-DESIGN-DATUM.md#E2)—our answer
 
 **Status: open.** Layer B-ext. Opened 2026-08-10 by the run that produced this record.
 
@@ -508,7 +507,7 @@ consequence     the wisp separates from its own shadow by up to 4 px during the 
 
 Two ways to close it, and the cheaper one is also the better one:
 
-1. **Read `spriteSourceSize` in the loader.** The field is already in the JSON — `MEASURED-LIVE`,
+1. **Read `spriteSourceSize` in the loader.** The field is already in the JSON—`MEASURED-LIVE`,
    `tools/check_metadata.py` confirms it is present on all 8 float frames. No asset changes, no size
    cost. Estimated half a day.
 2. Drop `--trim` for consistency with our own shared-canvas choice (see the Layer C register). This
@@ -518,7 +517,7 @@ Until one ships, `E1`'s `wisp` row is provisional and this record says so in bot
 that closed `E1` on five families and stayed quiet about the sixth would be the exact failure the
 standard describes: the next reader stops looking.
 
-### [`E3`](SPRITE-DESIGN-DATUM.md#E3) — our answer
+### [`E3`](SPRITE-DESIGN-DATUM.md#E3)—our answer
 
 **Status: met.** Layer B-ext, with the constant at Layer B and its input at Layer C.
 
@@ -534,8 +533,8 @@ conversion         1 world unit = 32 texture px  ->  pixel_size = 1/32 = 0.03125
                    mechanism it exposes, which is what E3 asks for.
 ```
 
-World sizes, every one of them `COMPUTED` from a measured character height and the constant above —
-not one is typed anywhere:
+World sizes, every one of them `COMPUTED` from a measured character height and the constant
+above—not one is typed anywhere:
 
 | family     | character height | world height   | foot offset | world offset |
 | ---------- | ---------------: | -------------- | ----------: | -----------: |
@@ -556,7 +555,7 @@ size assignment to a sprite node. 0 hits at `c41e0b7`.
 > **We broke it deliberately before trusting it.** A literal `size = Vector2(48, 64)` was added to
 > the campfire scene, the check went red naming that line, and the file was restored byte-identical
 > (`git status` clean, verified). A check that has never failed proves nothing, and we would not
-> have known that this one greps a node type our campfire scene does not use until we tried it — it
+> have known that this one greps a node type our campfire scene does not use until we tried it—it
 > initially passed. The check was widened, then re-broken, then it failed correctly.
 
 ---
@@ -584,18 +583,18 @@ Kind classification is ours and is stated so a reader can disagree with it: `idl
 | `hound`    | bite  | action     |      1 |             — |             5 px |    5/28 = **17.9%** | ±3 / ≤23% | met      |
 | `wisp`     | float | —          |     \* |            \* |               \* |                   — | —         | blocked  |
 
-\* Measured on the paired shadow sheet, not the body sheet — see `E1`. The figures are withheld from
+\* Measured on the paired shadow sheet, not the body sheet—see `E1`. The figures are withheld from
 this table rather than reported, because `E2` is open on this family and a measurement taken through
 a known-broken placement path is not evidence. Reporting it with a footnote would have been the
 tidier-looking choice and the wrong one.
 
 **The one open row.** `hero` slash depicts 13 px of foot travel at a 54 px character height. The
-action ceiling is 23% of character height, which is 12.42 px here — so 12 px in whole pixels, and we
+action ceiling is 23% of character height, which is 12.42 px here—so 12 px in whole pixels, and we
 measure 13. Over by 0.58 px. To close: the artist re-plants frame 4 of the lunge to bring peak foot
 travel to ≤ 12 px. This is one frame of one set. It is open because it is not done, not because it
 is hard. Opened 2026-08-10, owner: the artist.
 
-Note that every `xDir` figure sits inside its band. The alignment axis — the one with no excuse — is
+Note that every `xDir` figure sits inside its band. The alignment axis—the one with no excuse—is
 clean across the corpus. What we fail is the depicted-movement axis on a single lunge, and the
 distinction matters: merging the two axes would have hidden a clean result behind a dirty one.
 
@@ -628,37 +627,37 @@ Every row answered. Most do not bind us, and saying so is the answer.
 
 **Hard**
 
-| register row                       | our answer                                                                                                                       |
-| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| Store screenshot, per side         | **excluded** — not our stores, see `L4`                                                                                          |
-| Store screenshot, aspect (≤ 2:1)   | **excluded** — same                                                                                                              |
-| Store icon                         | **excluded** — same                                                                                                              |
-| Store feature graphic              | **excluded** — same                                                                                                              |
-| Apple screenshot sizes             | **excluded** — same                                                                                                              |
-| Texture ceiling, 16384 (Unity)     | not applicable — not our engine. Our largest sheet is the `warden`'s, 786 × 782, `COMPUTED`                                      |
-| Texture ceiling, 8192 (Unreal)     | not applicable — not our engine, same figure                                                                                     |
-| Minimum size for tight sprite mesh | not applicable — not our engine, and we use no tight meshes                                                                      |
-| One identical PPU per scene        | **met, as a mechanism** — 32 px = 1 unit is shared by the 2D world and the campfire scene, `CITED` VENDOR_DOC, see `A1` and `E3` |
+| register row                       | our answer                                                                                                                     |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Store screenshot, per side         | **excluded**—not our stores, see `L4`                                                                                          |
+| Store screenshot, aspect (≤ 2:1)   | **excluded**—same                                                                                                              |
+| Store icon                         | **excluded**—same                                                                                                              |
+| Store feature graphic              | **excluded**—same                                                                                                              |
+| Apple screenshot sizes             | **excluded**—same                                                                                                              |
+| Texture ceiling, 16384 (Unity)     | not applicable—not our engine. Our largest sheet is the `warden`'s, 786 × 782, `COMPUTED`                                      |
+| Texture ceiling, 8192 (Unreal)     | not applicable—not our engine, same figure                                                                                     |
+| Minimum size for tight sprite mesh | not applicable—not our engine, and we use no tight meshes                                                                      |
+| One identical PPU per scene        | **met, as a mechanism**—32 px = 1 unit is shared by the 2D world and the campfire scene, `CITED` VENDOR_DOC, see `A1` and `E3` |
 
 > The register publishes texture ceilings for two engines and not for the engine it cites three
 > times elsewhere. We could not answer this row against our own engine from the standard alone. The
 > question is moot at 786 px and would not be at 8,000; noted upstream as a coverage gap rather than
 > an error. (`COMPUTED` from the packer rule under `P1`: 8×96 + 9×2 = 786 wide, ceil(44/8) = 6 rows,
-> 6×128 + 7×2 = 782 high, with 4 empty cells — the `hero` sheet is the one with no grid slack.)
+> 6×128 + 7×2 = 782 high, with 4 empty cells—the `hero` sheet is the one with no grid slack.)
 
 **Recommendation**
 
-| register row                 | our answer                                                                  |
-| ---------------------------- | --------------------------------------------------------------------------- |
-| Power-of-two dimensions      | not met, cost accepted and stated — see `A2`                                |
-| Integer upscale factors      | **open** at 2560 × 1440 — see `P2`. Met at every other supported resolution |
-| Store listing aspect targets | **excluded** — not our stores, see `L4`                                     |
+| register row                 | our answer                                                                |
+| ---------------------------- | ------------------------------------------------------------------------- |
+| Power-of-two dimensions      | not met, cost accepted and stated—see `A2`                                |
+| Integer upscale factors      | **open** at 2560 × 1440—see `P2`. Met at every other supported resolution |
+| Store listing aspect targets | **excluded**—not our stores, see `L4`                                     |
 
 **Tool default**
 
-| register row  | our answer                                                                                                                                                                                |
-| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Atlas padding | **2 px.** Layer B — ours, by measurement. The register's spread (4 / 2 / "at least 2" / 1) is `CITED` TOOL_DEFAULT and informed the choice; it did not make it. See the cost table below. |
+| register row  | our answer                                                                                                                                                                              |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Atlas padding | **2 px.** Layer B—ours, by measurement. The register's spread (4 / 2 / "at least 2" / 1) is `CITED` TOOL_DEFAULT and informed the choice; it did not make it. See the cost table below. |
 
 > We spent this number on the quantity it measures. Our 2 px is the gap **between cells sharing one
 > sheet**. The 3 px of empty canvas under the `hero`'s feet is a different quantity that happens to
@@ -667,35 +666,35 @@ Every row answered. Most do not bind us, and saying so is the answer.
 
 **Derived arithmetic**
 
-| register row          | our answer                                                                                                                                                                                                    |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Decode footprint      | applied — 4,022,272 B, see `P1`                                                                                                                                                                               |
-| Block-compressed size | **excluded** with `A3` — no compressed containers shipped                                                                                                                                                     |
-| Contain-fit scale     | does not describe our consumer; the portrait control fits by **cover**. Our cover arithmetic is under `L1`, `COMPUTED`, and is ours rather than cited                                                         |
-| Half-texel offset     | acknowledged, nothing to answer — we ship no bespoke sampling code and rely on engine defaults. This row is a definition rather than a tolerance, and a record cannot do more with it than say it has read it |
+| register row          | our answer                                                                                                                                                                                                  |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Decode footprint      | applied—4,022,272 B, see `P1`                                                                                                                                                                               |
+| Block-compressed size | **excluded** with `A3`—no compressed containers shipped                                                                                                                                                     |
+| Contain-fit scale     | does not describe our consumer; the portrait control fits by **cover**. Our cover arithmetic is under `L1`, `COMPUTED`, and is ours rather than cited                                                       |
+| Half-texel offset     | acknowledged, nothing to answer—we ship no bespoke sampling code and rely on engine defaults. This row is a definition rather than a tolerance, and a record cannot do more with it than say it has read it |
 
 ---
 
-## [The register of quantities nobody locks](SPRITE-DESIGN-DATUM.md#the-unbounded-register-quantities-with-no-published-external-value) — our Layer C values
+## [The register of quantities nobody locks](SPRITE-DESIGN-DATUM.md#the-unbounded-register-quantities-with-no-published-external-value)—our Layer C values
 
 **Every value in this section is Layer C: nobody locks it, we chose it, and none of it may be quoted
 as specification by anyone, including us.** That sentence is the reason the section exists.
 
-| quantity nobody locks                  | Lanternfall's value                                                                                                                                                                                                                     |
-| -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Per-frame anchor consistency           | not Layer C for us — the standard recovered it by measuring external corpora. Our numbers are in the anchor tolerance register above                                                                                                    |
-| Anchor tolerance in general            | same                                                                                                                                                                                                                                    |
-| Frame count per direction              | idle 4 · walk 8 · slash 6 · float 8 · burst 5 · slam 7 · run 8 · bite 3 · merchant idle 6. Four directions everywhere. Chosen by the artist for feel. No external source, none sought                                                   |
-| Direction-to-index mapping             | `0 = south (toward camera) · 1 = west · 2 = north · 3 = east`. This is the order our Aseprite tags happen to sit in. Nothing external bounds it. Getting it wrong produces no error — the character simply faces the wrong way, forever |
-| Filename templates                     | `{family}_{set}_{dir}_{frame:02}.png`. A private contract between our artist and our loader                                                                                                                                             |
-| Playback cadence                       | idle 200 ms/frame (0.8 s cycle) · walk 100 ms (0.8 s) · slash 60 ms (0.36 s). Feel-tuning. Changing these changes how the game feels and violates nothing                                                                               |
-| Component box geometry and margins     | party-panel portrait box 64 × 64 · in-frame margin under the `hero`'s feet 3 px, headroom 7 px (3 + 54 + 7 = 64)                                                                                                                        |
-| Cache lifetime for shipped assets      | content-hashed asset URLs at `max-age=31536000, immutable` (365 days); the HTML entry point at `no-cache`. A function of our deploy cadence, nothing else                                                                               |
-| Art payload budget                     | **6 MB** compressed. Derived from a 3 s first-load target on a 20 Mbit/s link = 2.5 MB/s × 3 s = 7.5 MB, minus headroom. Shipped art at `c41e0b7` is **1.8 MB** on disk                                                                 |
-| Image format choice                    | PNG on both targets                                                                                                                                                                                                                     |
-| Acceptability of a RAM ceiling         | **8 MiB** decoded. See `P1` — an observation on one Chromebook plus a margin, not a derivation                                                                                                                                          |
-| Every frame of one set shares a canvas | **we require it — as our own stricter choice.** See below                                                                                                                                                                               |
-| Device-fleet format support            | **excluded** with `A3` and `L4`. Telemetry that moves monthly; we will re-check at port-decision time and will not carry a number forward                                                                                               |
+| quantity nobody locks                  | Lanternfall's value                                                                                                                                                                                                                   |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Per-frame anchor consistency           | not Layer C for us—the standard recovered it by measuring external corpora. Our numbers are in the anchor tolerance register above                                                                                                    |
+| Anchor tolerance in general            | same                                                                                                                                                                                                                                  |
+| Frame count per direction              | idle 4 · walk 8 · slash 6 · float 8 · burst 5 · slam 7 · run 8 · bite 3 · merchant idle 6. Four directions everywhere. Chosen by the artist for feel. No external source, none sought                                                 |
+| Direction-to-index mapping             | `0 = south (toward camera) · 1 = west · 2 = north · 3 = east`. This is the order our Aseprite tags happen to sit in. Nothing external bounds it. Getting it wrong produces no error—the character simply faces the wrong way, forever |
+| Filename templates                     | `{family}_{set}_{dir}_{frame:02}.png`. A private contract between our artist and our loader                                                                                                                                           |
+| Playback cadence                       | idle 200 ms/frame (0.8 s cycle) · walk 100 ms (0.8 s) · slash 60 ms (0.36 s). Feel-tuning. Changing these changes how the game feels and violates nothing                                                                             |
+| Component box geometry and margins     | party-panel portrait box 64 × 64 · in-frame margin under the `hero`'s feet 3 px, headroom 7 px (3 + 54 + 7 = 64)                                                                                                                      |
+| Cache lifetime for shipped assets      | content-hashed asset URLs at `max-age=31536000, immutable` (365 days); the HTML entry point at `no-cache`. A function of our deploy cadence, nothing else                                                                             |
+| Art payload budget                     | **6 MB** compressed. Derived from a 3 s first-load target on a 20 Mbit/s link = 2.5 MB/s × 3 s = 7.5 MB, minus headroom. Shipped art at `c41e0b7` is **1.8 MB** on disk                                                               |
+| Image format choice                    | PNG on both targets                                                                                                                                                                                                                   |
+| Acceptability of a RAM ceiling         | **8 MiB** decoded. See `P1`—an observation on one Chromebook plus a margin, not a derivation                                                                                                                                          |
+| Every frame of one set shares a canvas | **we require it—as our own stricter choice.** See below                                                                                                                                                                               |
+| Device-fleet format support            | **excluded** with `A3` and `L4`. Telemetry that moves monthly; we will re-check at port-decision time and will not carry a number forward                                                                                             |
 
 > The 1.8 MB on disk and the 4,022,272 B decode ceiling measure different things and are not
 > comparable. PNG compresses sprite art heavily; the GPU receives none of that compression. A record
@@ -753,12 +752,12 @@ is not. We answer all five, and two of them are answered in two places on purpos
 > filed them at C, reasoning that a canvas is agreed before any frame exists so there is nothing to
 > measure at the moment of the decision. That reasoning was answering the old entry condition, which
 > asked whether a measurement stood behind the value. The test asks something else now: whether a
-> **wrong** value would be a demonstrable error. Ours would be — declare 47 px, ship 48 px, and
-> anyone can open the file and show it. So they are Layer B, and the earlier hedge is recorded here
-> rather than deleted, because the reasoning was sound against the rule it was written for.
+> **wrong** value would be a demonstrable error. Ours would be—declare 47 px, ship 48 px, and anyone
+> can open the file and show it. So they are Layer B, and the earlier hedge is recorded here rather
+> than deleted, because the reasoning was sound against the rule it was written for.
 >
 > **The direction-to-index mapping is not a Layer B slot at all**, and the standard now says so
-> outright. Nothing in the art can be measured to produce "0 means south" — it is a label. We note
+> outright. Nothing in the art can be measured to produce "0 means south"—it is a label. We note
 > what the standard notes: changing it is free of external constraint and **not** free of cost,
 > since every filename we have already delivered encodes it.
 

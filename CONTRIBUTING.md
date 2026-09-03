@@ -1,11 +1,11 @@
-# CONTRIBUTING.md — what is actually wanted here, and what is not
+# CONTRIBUTING.md—what is actually wanted here, and what is not
 
 Read this section before you write anything. This is not a codebase, and the usual contributing file
 would waste your afternoon.
 
 This document is licensed **CC BY-NC-ND 4.0** and has a single owner. **NoDerivatives** means nobody
 else may publish an adapted version of it, and a pull request that edits the text is an adaptation.
-So the ordinary open-source loop — fork, edit, PR — is not the model here, and there is no point
+So the ordinary open-source loop—fork, edit, PR—is not the model here, and there is no point
 pretending otherwise. Sending one is not rude; it is just something that cannot be merged.
 
 What **is** wanted is narrower and considerably more valuable: **evidence that something in it is
@@ -25,27 +25,27 @@ and it is the thing this project cannot do for itself at scale.
 
 The unit of a useful report is not "this is wrong". It is:
 
-- **the location** — the rule ID or the register row, and what the document says today, **quoted**;
-- **the source** — a URL to the vendor's or standards body's own page. Not a tutorial, not a forum
+- **the location**—the rule ID or the register row, and what the document says today, **quoted**;
+- **the source**—a URL to the vendor's or standards body's own page. Not a tutorial, not a forum
   answer, not a second-hand document that cites the first one;
-- **its class** — specification · vendor documentation · tool default · recommendation. These do not
+- **its class**—specification · vendor documentation · tool default · recommendation. These do not
   weigh the same, and a report that does not say which one it is has skipped the hard part;
 - **the exact wording you found there**, quoted rather than summarised;
 - **how the two differ**, in a sentence;
 - **the date you fetched it**, because the next reader needs to know how old your check is.
 
-**A report with no source cannot be acted on.** Not because it is unwelcome — because there is
-nothing to act on. "The Unity limit is different now" leaves the owner to do the whole job from
-scratch and to guess which page you were looking at. "Unity Manual, _Import a texture_, fetched
-2026-08-11, says X, the register says Y" is a decision someone can make in two minutes.
+**A report with no source cannot be acted on.** Not because it is unwelcome—because there is nothing
+to act on. "The Unity limit is different now" leaves the owner to do the whole job from scratch and
+to guess which page you were looking at. "Unity Manual, _Import a texture_, fetched 2026-08-11, says
+X, the register says Y" is a decision someone can make in two minutes.
 
 A verified defect is worth more than a polite one. If a number in here is wrong, say so bluntly and
 show the page.
 
 ### 2 · A named counter-exemplar
 
-For a `B-ext` value — an external convention with real precedent — the standard's own rule is that
-it moves **only with a named counter-exemplar**. Not "most projects do it differently". Not "in my
+For a `B-ext` value—an external convention with real precedent—the standard's own rule is that it
+moves **only with a named counter-exemplar**. Not "most projects do it differently". Not "in my
 experience". A real, shipped, nameable thing that does it another way, named specifically enough
 that someone else can go and look at it.
 
@@ -76,9 +76,9 @@ interesting outcome of the two.
 - **Anything that requires your text to be incorporated.** This is an **open question, not a
   policy**: `LICENSE` says what the world may do with this document and says nothing at all about
   what rights the owner would hold over text a contributor sends in. That gap is not something this
-  file gets to fill by inventing a CLA. Until a lawyer settles it — the same lawyer `LICENSE`
-  already says has not looked at any of this — **send evidence and let the owner write the words.**
-  It sidesteps the question entirely and costs you nothing, because the valuable part of your report
+  file gets to fill by inventing a CLA. Until a lawyer settles it—the same lawyer `LICENSE` already
+  says has not looked at any of this—**send evidence and let the owner write the words.** It
+  sidesteps the question entirely and costs you nothing, because the valuable part of your report
   was never the prose.
 
 ---
@@ -90,8 +90,8 @@ interesting outcome of the two.
 That is the route to use for a correction, a counter-exemplar, or a re-measurement. It is public, it
 is harder to lose than a message, and a report anyone can read is a report anyone can check.
 
-For a **licence request** — commercial use, adaptation, redistribution of the document — either an
-issue or a direct approach through **github.com/HetCreep** works. `LICENSE` names both.
+For a **licence request**—commercial use, adaptation, redistribution of the document—either an issue
+or a direct approach through **github.com/HetCreep** works. `LICENSE` names both.
 
 > An earlier revision of this section said there was no issue tracker, because there was no public
 > remote, and instructed that it "gets updated in the same commit that adds the remote". The remote
