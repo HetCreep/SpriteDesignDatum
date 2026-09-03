@@ -124,7 +124,7 @@ not the heading text.
   - [The base](#the-base)
   - [Provenance and limits of these numbers](#provenance-and-limits-of-these-numbers)
 - [The tolerance register—published external values](#the-tolerance-register-published-external-values)
-  - [Hard—a gatekeeper or an API rejects violations](#hard-a-gatekeeper-or-an-api-rejects-violations)
+  - [Hard—the violating result cannot exist](#hard-a-gatekeeper-or-an-api-rejects-violations)
   - [Recommendation—documented cost, no rejection](#recommendation-documented-cost-no-rejection)
   - [Tool default—one vendor's considered choice, cited as such](#tool-default-one-vendor-s-considered-choice-cited-as-such)
   - [Derived arithmetic—a consequence of a real specification](#derived-arithmetic-a-consequence-of-a-real-specification)
