@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" width="900" height="500" role="img" aria-labelledby="s2-title s2-desc">
+  <title id="s2-title">p90 anchor-tolerance ceilings by animation kind</title>
+  <desc id="s2-desc">Three panels, one per animation kind, each showing xDir alignment tolerance in pixels, inDir alignment tolerance in pixels where stated, and depicted-movement ceiling as a percent of character height where stated. pose-hold: xDir plus-or-minus 1px, inDir plus-or-minus 1px, depicted movement not applicable (body planted). locomotion: xDir plus-or-minus 2px, inDir not stated, depicted movement ceiling 27 percent of character height. action: xDir plus-or-minus 3px, inDir not stated, depicted movement ceiling 23 percent of character height, lower than locomotion's ceiling.</desc>
+
+  <style>
+    text { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; fill: #1a1a1a; }
+    .panel-title { font-size: 20px; font-weight: 700; }
+    .row-label { font-size: 15px; fill: #1a1a1a; }
+    .value-label { font-size: 15px; font-weight: 700; fill: #ffffff; }
+    .value-label-dark { font-size: 15px; font-weight: 700; fill: #1a1a1a; }
+    .na-label { font-size: 13px; fill: #1a1a1a; font-style: italic; }
+    .caption { font-size: 13px; fill: #1a1a1a; }
+  </style>
+
+  <rect x="0" y="0" width="900" height="500" fill="#ffffff"/>
+
+  <!-- Column headers -->
+  <text x="150" y="36" class="panel-title" text-anchor="middle">pose-hold</text>
+  <text x="450" y="36" class="panel-title" text-anchor="middle">locomotion</text>
+  <text x="750" y="36" class="panel-title" text-anchor="middle">action</text>
+
+  <!-- vertical separators -->
+  <line x1="300" y1="55" x2="300" y2="440" stroke="#767676" stroke-width="1"/>
+  <line x1="600" y1="55" x2="600" y2="440" stroke="#767676" stroke-width="1"/>
+
+  <!-- Row 1 label: xDir alignment tolerance -->
+  <text x="30" y="90" class="row-label" font-weight="700">xDir alignment tolerance</text>
+
+  <!-- xDir bars: max scale = 3px -> bar max width 200px, base width unit ~66.6px/px -->
+  <!-- pose-hold: 1px -->
+  <rect x="60" y="100" width="66" height="34" fill="#2b5f8a"/>
+  <text x="93" y="122" class="value-label" text-anchor="middle">&#177;1 px</text>
+  <!-- locomotion: 2px -->
+  <rect x="360" y="100" width="133" height="34" fill="#2b5f8a"/>
+  <text x="426" y="122" class="value-label" text-anchor="middle">&#177;2 px</text>
+  <!-- action: 3px -->
+  <rect x="660" y="100" width="200" height="34" fill="#2b5f8a"/>
+  <text x="760" y="122" class="value-label" text-anchor="middle">&#177;3 px</text>
+
+  <!-- Row 2 label: inDir alignment tolerance -->
+  <text x="30" y="190" class="row-label" font-weight="700">inDir alignment tolerance</text>
+
+  <!-- pose-hold: 1px stated -->
+  <rect x="60" y="200" width="66" height="34" fill="#2b5f8a"/>
+  <text x="93" y="222" class="value-label" text-anchor="middle">&#177;1 px</text>
+  <!-- locomotion: not stated -->
+  <rect x="360" y="200" width="200" height="34" fill="none" stroke="#767676" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="460" y="222" class="na-label" text-anchor="middle">not stated</text>
+  <!-- action: not stated -->
+  <rect x="660" y="200" width="200" height="34" fill="none" stroke="#767676" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="760" y="222" class="na-label" text-anchor="middle">not stated</text>
+
+  <!-- Row 3 label: depicted-movement ceiling -->
+  <text x="30" y="290" class="row-label" font-weight="700">depicted-movement ceiling</text>
+  <text x="30" y="308" class="caption">(% of character height)</text>
+
+  <!-- pose-hold: n/a, body planted -->
+  <rect x="60" y="316" width="200" height="34" fill="none" stroke="#767676" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="160" y="338" class="na-label" text-anchor="middle">n/a &#8212; body planted</text>
+
+  <!-- locomotion: 27% ceiling. scale: max 30% -> 200px, so 27% = 180px -->
+  <rect x="360" y="316" width="180" height="34" fill="#2b5f8a"/>
+  <text x="450" y="338" class="value-label" text-anchor="middle">&#8804;27%</text>
+
+  <!-- action: 23% ceiling -> 153px, bar center = 660 + 153/2 = 736.5 -->
+  <rect x="660" y="316" width="153" height="34" fill="#2b5f8a"/>
+  <text x="736" y="338" class="value-label" text-anchor="middle">&#8804;23%</text>
+
+  <!-- Note: 23% is LOWER than locomotion's 27% - state this explicitly, not smoothed over -->
+  <text x="450" y="400" class="caption" text-anchor="middle" font-style="italic">
+    Note: the movement ceiling narrows from locomotion (27%) to action (23%) &#8212;
+  </text>
+  <text x="450" y="418" class="caption" text-anchor="middle" font-style="italic">
+    it does not escalate with xDir. Shown as stated, not smoothed into a trend.
+  </text>
+
+  <text x="450" y="460" class="caption" text-anchor="middle">
+    Source: SPRITE-DESIGN-DATUM.md &#167; "The base" &#8212; p90 statistic, n=314 external corpus. Values verbatim, not re-derived.
+  </text>
+
+  <text x="450" y="480" class="caption" text-anchor="middle">
+    &#169; 2026 HetCreep &#8212; CC BY-NC-ND 4.0 (attribution, non-commercial, no derivatives)
+  </text>
+</svg>
