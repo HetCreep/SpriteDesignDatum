@@ -6,7 +6,7 @@ geometry have a real external standard and which parts nobody has ever published
 📄 **The standard itself: [`SPRITE-DESIGN-DATUM.md`](SPRITE-DESIGN-DATUM.md)**
 
 🔗 **Cite
-[`SPRITE-DESIGN-DATUM.md` at a signed tag](https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.2/SPRITE-DESIGN-DATUM.md)**—rule
+[`SPRITE-DESIGN-DATUM.md` at a signed tag](https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.3/SPRITE-DESIGN-DATUM.md)**—rule
 ids resolve as anchors there, so a conformance record in another project can point at `#L1` and keep
 working when a heading is reworded.
 

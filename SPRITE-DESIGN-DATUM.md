@@ -43,10 +43,10 @@
 
 # SPRITE DESIGN DATUM
 
-> **Version 2.0.2** · first published 2026-08-11 · © 2026 HetCreep
+> **Version 2.0.3** · first published 2026-08-11 · © 2026 HetCreep
 >
 > **Cite this at**
-> `https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.2/SPRITE-DESIGN-DATUM.md`—the file at a
+> `https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.3/SPRITE-DESIGN-DATUM.md`—the file at a
 > signed tag. Rule ids resolve as anchors there: append `#L1`, `#E3`, `#A2`. Cite the id, never the
 > heading text, and always name the version.
 >
@@ -704,18 +704,24 @@ expressed as a range rather than a point, by a gatekeeper that enforces it.
 
 ## Tool default—one vendor's considered choice, cited as such
 
-| quantity                             | value            | source               |
-| ------------------------------------ | ---------------- | -------------------- |
-| Atlas padding between packed sprites | **4 px** default | Unity Sprite Atlas   |
-| Atlas padding                        | **2 px**         | libGDX TexturePacker |
-| Atlas padding                        | **"at least 2"** | TexturePacker        |
-| Atlas padding                        | **1 px**         | Godot                |
+| quantity                             | value                   | source                       |
+| ------------------------------------ | ----------------------- | ---------------------------- |
+| Atlas padding between packed sprites | **4 px** default        | Unity Sprite Atlas           |
+| Atlas padding                        | **2 px**                | libGDX TexturePacker         |
+| Atlas padding                        | **"at least 2"**        | TexturePacker                |
+| Atlas padding around each tile       | **1 px**, on by default | Godot 4.x TileSetAtlasSource |
 
-> ⚠️ **Do not spend these numbers on the wrong quantity.** Every one of them measures the gap
-> **between two sprites sharing one texture**, so that bilinear filtering cannot sample a neighbour.
-> Empty canvas **inside a single frame**—margin under a character's feet, headroom above it—is a
-> different quantity that happens to share the English word "padding". The sceptic pass caught this
-> register about to make exactly that substitution.
+The Godot row is Godot's TileSet system, not its general image importer. `TileSetAtlasSource`'s
+`use_texture_padding` property is on by default and "generates an internal texture with an
+additional one pixel padding around each tile" (Godot 4.x documentation). Godot's generic
+sprite-sheet importer, `ResourceImporterTextureAtlas`, documents no padding property, so this row
+makes no claim about it.
+
+> ⚠️ **Do not spend these numbers on the wrong quantity.** Every one of them is a gutter inside one
+> packed texture—**between two sprites**, or for Godot **around each tile**—so that bilinear
+> filtering cannot sample a neighbour. Empty canvas **inside a single frame**—margin under a
+> character's feet, headroom above it—is a different quantity that happens to share the English word
+> "padding". The sceptic pass caught this register about to make exactly that substitution.
 
 <a id="derived-arithmetic-a-consequence-of-a-real-specification"></a>
 

@@ -7,6 +7,35 @@ Versions follow [Semantic Versioning](https://semver.org/) applied to a standard
 - **MINOR**—a rule or register entry is added; existing conforming work still conforms.
 - **PATCH**—wording, citations, corrections that do not move a value.
 
+## 2.0.3—2026-09-25
+
+**The Godot atlas-padding row named an engine where the documentation names a class.** The row read
+"Atlas padding · 1 px · Godot", the way its three siblings read for Unity Sprite Atlas, libGDX
+TexturePacker and TexturePacker, and a reader took it as Godot's default for atlas packing in
+general. Godot documents that default on one class only: `TileSetAtlasSource.use_texture_padding`,
+on by default, "an additional one pixel padding around each tile" (Godot 4.7, `stable`
+documentation). Godot's generic sprite-sheet importer documents no padding property. Recorded as
+`E-004` in `ERRATA.md`.
+
+**Changed**
+
+- The row now reads "Atlas padding around each tile · **1 px**, on by default · Godot 4.x
+  TileSetAtlasSource", and a paragraph under the table states that it is the TileSet system's
+  default and makes no claim about the general importer. **The value is unchanged.**
+- The warning note under that table said every number there "measures the gap between two sprites
+  sharing one texture". The Godot row is padding around each tile, so the note now says each number
+  is a gutter inside one packed texture, between two sprites or, for Godot, around each tile.
+- `SOURCES.md` S-041 carries the real locator. It had been recorded `UNREACHABLE`, because the
+  earlier search looked at the generic importer, not at the class that carries the default. The
+  negative result stays in that file as history.
+- The `line` column of `SOURCES.md` moved with the paragraph above (S-043, S-044, S-045). The Unity
+  and libGDX rows were re-read against their pages for the same defect and hold, so nothing else
+  changed.
+- Citations, `CITATION.cff` and the front matter now point at the `v2.0.3` tag.
+
+PATCH—the correction narrows a row's stated scope and moves no value. A conformance claim against
+`2.0.2` survives untouched.
+
 ## 2.0.2—2026-08-11
 
 **The address this document told everyone to cite could not resolve a single rule.** 2.0.1 published

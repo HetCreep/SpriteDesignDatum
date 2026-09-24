@@ -95,7 +95,7 @@ therefore recorded as unverified rather than guessed.
 | S-009 | "On WebGL1 specifically"—NPOT sampling restrictions      | 227  | SPECIFICATION | UNREACHABLE—403 on `registry.khronos.org/webgl/specs/latest/1.0/`                                                        | WebGL 1.0 / GLES 2.0    | 2026-08-11 | never      |
 | S-011 | "could not reach a Khronos _specification_" (ASTC)       | 252  | SPECIFICATION | UNREACHABLE—403 across `registry.khronos.org`                                                                            | —                       | 2026-08-11 | 2y         |
 | S-018 | OpenGL 1.0 (1992)                                        | 380  | SPECIFICATION | UNREACHABLE—403 on `registry.khronos.org/OpenGL/specs/gl/glspec10.pdf` and on `registry.khronos.org/OpenGL/index_gl.php` | 1.0 (1992)              | 2026-08-11 | never      |
-| S-043 | HTTP standards define the `max-age` **mechanism**        | 750  | SPECIFICATION | https://www.rfc-editor.org/rfc/rfc9111.html                                                                              | RFC 9111 (June 2022)    | 2026-08-11 | never      |
+| S-043 | HTTP standards define the `max-age` **mechanism**        | 756  | SPECIFICATION | https://www.rfc-editor.org/rfc/rfc9111.html                                                                              | RFC 9111 (June 2022)    | 2026-08-11 | never      |
 
 **`registry.khronos.org` blocks automated fetches.** Four distinct URLs on that host returned 403,
 including the one the standard's own honest-weakness note at line 252 (re-derived 2026-09-03; was
@@ -171,32 +171,43 @@ carries the shortest interval in the register.
 
 ## Tool defaults and atlas packers
 
-| id    | cited as             | line | class        | url                                                                                           | version                | accessed   | revalidate |
-| ----- | -------------------- | ---- | ------------ | --------------------------------------------------------------------------------------------- | ---------------------- | ---------- | ---------- |
-| S-020 | cocos2d-x            | 407  | TOOL_DEFAULT | https://docs.cocos2d-x.org/api-ref/cplusplus/v4x/d3/d5c/classcocos2d_1_1_sprite.html          | v4.x                   | 2026-08-11 | 1y         |
-| S-021 | Tiled                | 411  | TOOL_DEFAULT | https://doc.mapeditor.org/en/stable/manual/objects/                                           | `/en/stable/` → 1.12   | 2026-08-11 | 1y         |
-| S-038 | Unity Sprite Atlas   | 709  | TOOL_DEFAULT | https://docs.unity3d.com/6000.3/Documentation/Manual/sprite/atlas/sprite-atlas-reference.html | Unity 6.3 LTS (6000.3) | 2026-08-11 | 180d       |
-| S-039 | libGDX TexturePacker | 710  | TOOL_DEFAULT | https://libgdx.com/wiki/tools/texture-packer                                                  | unversioned (wiki)     | 2026-08-11 | 1y         |
-| S-040 | TexturePacker        | 711  | TOOL_DEFAULT | https://www.codeandweb.com/texturepacker/documentation/texture-settings                       | unversioned            | 2026-08-11 | 1y         |
-| S-041 | Godot                | 712  | TOOL_DEFAULT | UNREACHABLE—no such default located; see below                                                | —                      | 2026-08-11 | 180d       |
+| id    | cited as                     | line | class        | url                                                                                           | version                | accessed   | revalidate |
+| ----- | ---------------------------- | ---- | ------------ | --------------------------------------------------------------------------------------------- | ---------------------- | ---------- | ---------- |
+| S-020 | cocos2d-x                    | 407  | TOOL_DEFAULT | https://docs.cocos2d-x.org/api-ref/cplusplus/v4x/d3/d5c/classcocos2d_1_1_sprite.html          | v4.x                   | 2026-08-11 | 1y         |
+| S-021 | Tiled                        | 411  | TOOL_DEFAULT | https://doc.mapeditor.org/en/stable/manual/objects/                                           | `/en/stable/` → 1.12   | 2026-08-11 | 1y         |
+| S-038 | Unity Sprite Atlas           | 709  | TOOL_DEFAULT | https://docs.unity3d.com/6000.3/Documentation/Manual/sprite/atlas/sprite-atlas-reference.html | Unity 6.3 LTS (6000.3) | 2026-08-11 | 180d       |
+| S-039 | libGDX TexturePacker         | 710  | TOOL_DEFAULT | https://libgdx.com/wiki/tools/texture-packer                                                  | unversioned (wiki)     | 2026-08-11 | 1y         |
+| S-040 | TexturePacker                | 711  | TOOL_DEFAULT | https://www.codeandweb.com/texturepacker/documentation/texture-settings                       | unversioned            | 2026-08-11 | 1y         |
+| S-041 | Godot 4.x TileSetAtlasSource | 712  | TOOL_DEFAULT | https://docs.godotengine.org/en/stable/classes/class_tilesetatlassource.html                  | Godot 4.7 (`stable`)   | 2026-09-25 | 180d       |
 
 S-038 is the one row that had to be version-pinned: the versionless
 `docs.unity3d.com/Manual/sprite-atlas-reference.html` returns 404, and the page lives under a
 version-and-section path. Expect this locator to need repair sooner than its siblings.
 
-⚠️ **INCONSISTENCY, flagged not resolved (2026-09-03 re-derivation).** The standard now prints a
-Godot row at line 712 ("Atlas padding · 1 px · Godot") in the same table this row's `cited as` text
-matches—a specific value that did not exist there at 08-11, when this row was written as
-UNREACHABLE. This unit's scope is line re-derivation only; finding S-041 a URL is new research, not
-performed here. The owner/caretaker should re-check whether S-041 is still genuinely unreachable now
-that the standard itself asserts a value for it.
+**S-041 RESOLVED (2026-09-25, ARK-045 c).** The locator is Godot's `TileSetAtlasSource` class
+reference, property `use_texture_padding`: `bool use_texture_padding = true` (Godot 4.7, the
+`stable` documentation branch), described as "If `true`, generates an internal texture with an
+additional one pixel padding around each tile." The 4.0 class reference carries the same property,
+default and wording, which is why the row says 4.x. That is a documented, default-on 1 px, so the
+standard's number holds; the row is scoped to Godot's TileSet atlas, and the standard's row now says
+so. It is not an engine-wide claim: Godot's generic sprite-sheet importer,
+`ResourceImporterTextureAtlas`, documents no padding property. The two history paragraphs below stay
+as the record of the earlier pass, which searched that importer and found nothing.
 
-**S-041 could not be located** (as of 08-11). Godot's `ResourceImporterTextureAtlas` documents four
-import properties and none of them is a padding; the _Importing images_ tutorial documents no atlas
-padding; a site-restricted search of `docs.godotengine.org` surfaced no page stating one. What the
-search did surface was community guidance, which is not a tool default and must not be promoted to
-one. The row is recorded as unreachable rather than filled with a plausible URL. It is a third
-citation without a findable source, alongside the two the audit already named.
+History—⚠️ **INCONSISTENCY, flagged not resolved (2026-09-03 re-derivation; resolved above).** The
+standard now prints a Godot row at line 712 ("Atlas padding · 1 px · Godot") in the same table this
+row's `cited as` text matches—a specific value that did not exist there at 08-11, when this row was
+written as UNREACHABLE. This unit's scope is line re-derivation only; finding S-041 a URL is new
+research, not performed here. The owner/caretaker should re-check whether S-041 is still genuinely
+unreachable now that the standard itself asserts a value for it.
+
+History—**S-041 could not be located** (as of 08-11; resolved 2026-09-25, above). Godot's
+`ResourceImporterTextureAtlas` documents four import properties and none of them is a padding; the
+_Importing images_ tutorial documents no atlas padding; a site-restricted search of
+`docs.godotengine.org` surfaced no page stating one. What the search did surface was community
+guidance, which is not a tool default and must not be promoted to one. The row is recorded as
+unreachable rather than filled with a plausible URL. It is a third citation without a findable
+source, alongside the two the audit already named.
 
 S-040's page states the "at least" guidance the standard quotes but publishes no default value for
 it, which makes `TOOL_DEFAULT` the weaker of the two possible classes for that row; `RECOMMENDATION`
@@ -223,20 +234,20 @@ so the owner has the right URL in hand when deciding what, if anything, to do ab
 | id    | cited as                                                                  | line           | class         | url                                                                                                               | version                 | accessed   | revalidate |
 | ----- | ------------------------------------------------------------------------- | -------------- | ------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------- | ---------- | ---------- |
 | S-042 | Microsoft Learn, _Bilinear Texture Filtering_                             | **UNRESOLVED** | VENDOR_DOC    | https://learn.microsoft.com/en-us/windows/win32/direct3d9/bilinear-texture-filtering                              | page updated 2025-03-11 | 2026-08-11 | never      |
-| S-044 | _(not attributed)_—Coordinate Systems (Direct3D 10)                       | 729            | VENDOR_DOC    | https://learn.microsoft.com/en-us/windows/win32/direct3d10/d3d10-graphics-programming-guide-resources-coordinates | page updated 2025-03-11 | 2026-08-11 | never      |
-| S-045 | _(not attributed)_—Vulkan sampling coordinate systems                     | 729            | SPECIFICATION | https://docs.vulkan.org/spec/latest/chapters/textures.html                                                        | spec `latest` (rolling) | 2026-08-11 | 1y         |
+| S-044 | _(not attributed)_—Coordinate Systems (Direct3D 10)                       | 735            | VENDOR_DOC    | https://learn.microsoft.com/en-us/windows/win32/direct3d10/d3d10-graphics-programming-guide-resources-coordinates | page updated 2025-03-11 | 2026-08-11 | never      |
+| S-045 | _(not attributed)_—Vulkan sampling coordinate systems                     | 735            | SPECIFICATION | https://docs.vulkan.org/spec/latest/chapters/textures.html                                                        | spec `latest` (rolling) | 2026-08-11 | 1y         |
 | S-046 | _(not attributed)_—"block-compression documentation from tooling vendors" | 253            | VENDOR_DOC    | https://github.com/ARM-software/astc-encoder/blob/main/Docs/FileFormat.md                                         | `main`                  | 2026-08-11 | 1y         |
 
 **S-042's `line` is UNRESOLVED as of 2026-09-03**—no distinct citation of "Bilinear Texture
 Filtering" was found anywhere in the current standard; the half-texel-offset discussion this row
 used to sit beside (old line 668) has been consolidated into the single derived-arithmetic table row
-now carrying S-044/S-045 (line 729), and that row cites Coordinate Systems + Vulkan by name but not
+now carrying S-044/S-045 (line 735), and that row cites Coordinate Systems + Vulkan by name but not
 this URL. The url itself is not in question—only whether the standard still cites it at all. Left
 unresolved rather than pointed at the merged row it may no longer belong to.
 
 S-042 is live and the page is exactly what its title says, but the substance the standard attributes
 to it is not on it. S-044 and S-045 are where that substance actually lives—now consolidated into
-one table row (line 729) rather than the separate prose line each held at 08-11.
+one table row (line 735) rather than the separate prose line each held at 08-11.
 
 S-046 supplies the vendor-level locator for the ASTC padding correction. The standard states at line
 253 (re-derived 2026-09-03; was line 237 at 08-11) that the correction is "corroborated at **vendor
