@@ -42,6 +42,7 @@ it. **The quoted text is the locator. The line number is a convenience.**
 | [E-001](#e-001) | `SPRITE-DESIGN-DATUM.md:625`                 | Unreal's 8192 ceiling **requires** a `BaseDeviceProfiles.ini` change, and an oversized import is silently clamped rather than rejected                                                                          | **corrected in 1.1.0** |
 | [E-002](#e-002) | `SPRITE-DESIGN-DATUM.md:668`                 | The half-texel explanation is attributed to a page that does not contain it. The statement itself is correct                                                                                                    | **corrected in 1.1.0** |
 | [E-003](#e-003) | `SPRITE-DESIGN-DATUM.md:464-470`, `:687-694` | Layer B and the unbounded register are sorted on **two different axes**, printed as though they were one. Three quantities appear in both lists, and for two of them that is correct rather than contradictory. | **corrected in 2.0.0** |
+| [E-004](#e-004) | `SPRITE-DESIGN-DATUM.md:712` (in `2.0.2`)    | The Godot atlas-padding row reads as an engine-wide default. Godot documents 1 px padding only for the TileSet atlas (`TileSetAtlasSource`). The number is right, the scope was too wide                        | **corrected in 2.0.3** |
 
 ---
 
@@ -297,3 +298,55 @@ a fact. Reported, not proposed. Three things a ruling would need to settle: whet
 both lists is legitimate and should be said out loud; whether the Layer B entry condition should be
 re-cut on "would a wrong value be a bug" rather than "did you measure it"; and where
 `direction count` lives, since today it lives in exactly one sentence.
+
+---
+
+<a id="e-004"></a>
+
+### E-004 · The Godot atlas-padding row states a TileSet-atlas default as if it were Godot's
+
+| field        | value                                                                                             |
+| ------------ | ------------------------------------------------------------------------------------------------- |
+| **state**    | **corrected in 2.0.3**—the owner ruled the row's story be rewritten, 2026-09-05; the number stays |
+| **reported** | 2026-09-25, while applying the owner's ruling (queue row ARK-045 c), against primary sources      |
+| **found in** | 2.0.2 (earlier versions were not checked)                                                         |
+| **location** | `SPRITE-DESIGN-DATUM.md:712`—the tolerance register, under _Tool default_                         |
+| **kind**     | **over-general scope**, correct number                                                            |
+
+**What the standard says**
+
+```
+| Atlas padding | **1 px** | Godot |
+```
+
+Its three sibling rows name the tool they are read from (Unity Sprite Atlas, libGDX TexturePacker,
+TexturePacker). This one names only the engine, so a reader takes it as Godot's default for atlas
+packing in general.
+
+**What the source says**—vendor documentation. Godot Engine 4.7 (`stable`), class reference for
+`TileSetAtlasSource`, fetched 2026-09-25 from
+`https://docs.godotengine.org/en/stable/classes/class_tilesetatlassource.html`:
+
+> `bool use_texture_padding = true`
+
+> If `true`, generates an internal texture with an additional one pixel padding around each tile.
+> Texture padding avoids a common artifact where lines appear between tiles.
+
+**What is actually wrong**
+
+The number is right and the default is real: 1 px, on by default. The scope is wrong. The property
+belongs to Godot's TileSet system. Godot's generic sprite-sheet importer,
+`ResourceImporterTextureAtlas`, documents four import properties and none of them is a padding, so a
+sentence about "Godot" does not describe it. An earlier pass at `SOURCES.md` searched that importer,
+found nothing, and recorded the row `UNREACHABLE`, while the standard printed the value anyway. Both
+halves were the same mistake: the row was never tied to the class that carries the default.
+
+**What changes in 2.0.3**
+
+The row names its class (`Godot 4.x TileSetAtlasSource`, "around each tile", "on by default"), a
+paragraph under the table states the scope, and `SOURCES.md` S-041 carries the real locator. The
+warning note under that table said every number there "measures the gap between two sprites sharing
+one texture", which the Godot row contradicts; it now says each is a gutter inside one packed
+texture, between two sprites or, for Godot, around each tile. The value stays 1 px. The Unity and
+libGDX rows were re-read against their pages for the same defect and hold: each row already names
+the tool whose settings it reads.
