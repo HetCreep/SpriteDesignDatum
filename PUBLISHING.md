@@ -96,8 +96,8 @@ a **tracking** reason (a real public GitHub remote, where an untracked-but-not-i
 GitBook-side publication filter above. The `.gitignore` rules protect only files that are not yet
 tracked, by keeping them out of a routine `git add`; they do not stop a file that is already tracked
 from being pushed or published. For a tracked file, the GitBook allowlist and configuration
-(`.gitbook.yaml` and `SUMMARY.md`) remain the publication control; the `.gitignore` fence does not
-replace it.
+(`.gitbook.yaml` and `SUMMARY.md`) remain the control on what the site publishes; on GitHub a
+tracked file is public either way, and the fence does not replace either.
 
 ## What this document deliberately does not do
 
