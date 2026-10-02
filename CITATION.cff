@@ -7,9 +7,10 @@
 #   standards document and there is no third option to reach for, so this is the closer of two
 #   imperfect fits rather than a claim.
 #
-#   `software` is the wrong one. This repository deliberately ships no code, no linter, and no
-#   schema—see README, "What it deliberately does not do"—because a machine-readable copy of the
-#   values would be a second source of truth for them.
+#   `software` does not describe the standard being cited. This repository includes maintenance
+#   tools and CI workflows, but deliberately ships no machine-readable copy of the normative
+#   values, conformance linter, or schema—see README, "What it deliberately does not do". A separate
+#   copy of those values would be a second source of truth for them.
 #
 #   `dataset` is the conventional CFF filing for a non-software research output, and the
 #   load-bearing half of this document is measurement: tolerances recovered from named public sprite
