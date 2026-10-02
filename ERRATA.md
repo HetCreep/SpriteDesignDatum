@@ -226,7 +226,7 @@ the sentence saying it is allowed.
 | quantity                   | can the project measure it?                                                           | does anything external bound it?                                             | belongs                                 |
 | -------------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | --------------------------------------- |
 | direction-to-index mapping | **no**—no instrument can output "index 0 means north" from pixels; it is a bare label | no                                                                           | **C only.** The one genuine mis-filing. |
-| frame count per direction  | **yes**—`ls                                                                           | wc -l`, fewer free parameters than reading a canvas size out of a PNG header | no                                      | **both, legitimately** |
+| frame count per direction  | **yes**—`ls                                                                           \| wc -l`, fewer free parameters than reading a canvas size out of a PNG header | no                                      | **both, legitimately** |
 | playback cadence           | **yes**—a stored, re-derivable configuration value                                    | no                                                                           | **both, legitimately**                  |
 
 **Evidence the "measurable" half of the obvious fix does not hold either**
