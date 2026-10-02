@@ -303,7 +303,8 @@ as stated does not describe deliberately-upscaled art—reported upstream.
 ```
 hero destination width   48 source columns -> 256 destination columns at 5.333x
 distribution             16 columns get 6 destination px, 32 columns get 5   (16x6 + 32x5 = 256)
-consequence              33.3% of the hero's columns render one-third wider than the rest,
+consequence              one-third of the hero's source columns (16/48) receive 6 destination px,
+                         making them 20% wider than those receiving 5 ((6 - 5) / 5 = 20%),
                          and the sprite's vertical origin lands off the destination pixel grid
                          (64 x 5.333 = 341.33)
 ```

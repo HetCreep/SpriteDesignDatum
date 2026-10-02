@@ -87,16 +87,17 @@ Per `gitbook-github-two-faces.md` rule 1: `git pull --ff-only` before any push t
 GitBook's own Git Sync writes commits here without warning (exactly as `ffbc768` did)—a push built
 on a stale local diverges from a remote that already moved.
 
-## The `.gitignore` fence (ARK-016) and why internal material never publishes
+## The `.gitignore` fence (ARK-016) and its limits
 
 `SpriteDesignDatum/.gitignore` excludes `.claude/` and `scratchpad/` (added 2026-09-02,
 ARK-016)—agent governance stores, sweep logs, and session scratch material. These entries exist for
 a **tracking** reason (a real public GitHub remote, where an untracked-but-not-ignored file is one
 `git add -A` away from being committed and pushed) that is separate from, but reinforces, the
-GitBook-side publication filter above: even if `.gitbook.yaml`/`SUMMARY.md` somehow changed to
-include such a file, it would need to be tracked and pushed first, and the `.gitignore` fence stops
-that at the git layer before GitBook's own filter would ever need to. Two independent layers,
-neither alone sufficient, both now present.
+GitBook-side publication filter above. The `.gitignore` rules protect only files that are not yet
+tracked, by keeping them out of a routine `git add`; they do not stop a file that is already tracked
+from being pushed or published. For a tracked file, the GitBook allowlist and configuration
+(`.gitbook.yaml` and `SUMMARY.md`) remain the publication control; the `.gitignore` fence does not
+replace it.
 
 ## What this document deliberately does not do
 

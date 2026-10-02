@@ -85,9 +85,10 @@ change, and how to answer for each rule instead of quietly reinterpreting it.
 - **It does not tell you what canvas size to use.** No standard does. It tells you what happens when
   one set of files is consumed by several renderers that each decide size differently, which is the
   actual failure.
-- **It does not ship code, a linter, or a schema.** The numbers live in the document, once. A
-  machine-readable copy would be a second source of truth for the same values—the exact defect the
-  standard spends several pages warning about.
+- **It does not ship a machine-readable copy of the normative values, a conformance linter, or a
+  schema.** Repository tools and CI workflows check document consistency and watch external sources.
+  The normative values live in the document, once. A machine-readable copy would be a second source
+  of truth for the same values—the exact defect the standard spends several pages warning about.
 - **It does not claim completeness.** It names its own coverage gaps, including a large one: not a
   single web-platform source appears in its published-values register. `devicePixelRatio`, CSS box
   sizing, `object-fit`, and browser image decoding are _unsearched_, not absent.
