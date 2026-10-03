@@ -374,14 +374,14 @@ One event in this project's history is an `L2` event, and it is the reason this 
 reading.
 
 ```
-2026-07-22   the hero canvas changed from 48 x 56 to 48 x 64 to stop the slash lunge
+2026-07-22   the hero canvas changed from 48 x 57 to 48 x 64 to stop the slash lunge
              clipping at the top of the frame
 ```
 
 `L2` obliges two things in the same commit. Both were done, in commit `7b2c084`:
 
 **1—the original geometry recorded outside version-control history.** `art/GEOMETRY.md` carries the
-entry: previous canvas 48 × 56, new canvas 48 × 64, 8 px added at the TOP, foot line unchanged at 3
+entry: previous canvas 48 × 57, new canvas 48 × 64, 7 px added at the TOP, foot line unchanged at 3
 px above the bottom edge, character height unchanged at 54 px. A reader of that file does not need
 the git history to know what the art used to be, which is the point of the requirement.
 
@@ -396,13 +396,13 @@ the git history to know what the art used to be, which is the point of the requi
 
 **The cost, published rather than buried.**
 
-| what improved                                                             | what got worse                                                                     |
-| ------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| slash frames with alpha touching row 0: **2 of 24 → 0** (`MEASURED-LIVE`) | hero decode ceiling **774,144 B → 884,736 B**, +110,592 B, **+14.3%** (`COMPUTED`) |
-|                                                                           | portrait cover-crop **14.3% → 25.0%** of image height, **+10.7 pp** (`COMPUTED`)   |
+| what improved                                                             | what got worse                                                                    |
+| ------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| slash frames with alpha touching row 0: **2 of 24 → 0** (`MEASURED-LIVE`) | hero decode ceiling **787,968 B → 884,736 B**, +96,768 B, **+12.3%** (`COMPUTED`) |
+|                                                                           | portrait cover-crop **15.8% → 25.0%** of image height, **+9.2 pp** (`COMPUTED`)   |
 
-The two worsened numbers reconstruct: 72 × 48 × 56 × 4 = 774,144 and 72 × 48 × 64 × 4 = 884,736; a
-cover fit scaled by 64/48 discards 1 − 48/56 = 14.3% of a 48 × 56 source and 1 − 48/64 = 25.0% of a
+The two worsened numbers reconstruct: 72 × 48 × 57 × 4 = 787,968 and 72 × 48 × 64 × 4 = 884,736; a
+cover fit scaled by 64/48 discards 1 − 48/57 = 15.8% of a 48 × 57 source and 1 − 48/64 = 25.0% of a
 48 × 64 one. The portrait crop was accepted by the artist on the reasoning already quoted in the
 `L1` comment. It was not discovered later; it was found by the consumer walk this rule requires,
 which is the only reason it is in a table instead of in a bug report.
@@ -775,10 +775,10 @@ is not. We answer all five, and two of them are answered in two places on purpos
 
 Two changes. Both improved one number and worsened another, and both worsened numbers are here.
 
-| change                                                | what improved                                                                                                                                                   | what got worse                                                                                                     |
-| ----------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| hero canvas 48 × 56 → 48 × 64 (`7b2c084`, 2026-07-22) | slash frames clipping at canvas top: **2 of 24 → 0** (`MEASURED-LIVE`)                                                                                          | hero decode ceiling **+110,592 B / +14.3%**; portrait cover-crop **14.3% → 25.0%**, **+10.7 pp** (both `COMPUTED`) |
-| atlas padding 1 px → 2 px (`c41e0b7`, 2026-08-10)     | neighbour bleed at 5.333× on the hero's silhouette: a 1-px fringe present at 1 px padding, **absent** at 2 px (`MEASURED-LIVE`, screenshot diff at 2560 × 1440) | hero sheet decode **921,192 B → 958,368 B**, **+37,176 B / +4.0%** (`COMPUTED`)                                    |
+| change                                                | what improved                                                                                                                                                   | what got worse                                                                                                   |
+| ----------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| hero canvas 48 × 57 → 48 × 64 (`7b2c084`, 2026-07-22) | slash frames clipping at canvas top: **2 of 24 → 0** (`MEASURED-LIVE`)                                                                                          | hero decode ceiling **+96,768 B / +12.3%**; portrait cover-crop **15.8% → 25.0%**, **+9.2 pp** (both `COMPUTED`) |
+| atlas padding 1 px → 2 px (`c41e0b7`, 2026-08-10)     | neighbour bleed at 5.333× on the hero's silhouette: a 1-px fringe present at 1 px padding, **absent** at 2 px (`MEASURED-LIVE`, screenshot diff at 2560 × 1440) | hero sheet decode **921,192 B → 958,368 B**, **+37,176 B / +4.0%** (`COMPUTED`)                                  |
 
 The padding figures reconstruct from the sheet geometry: at 1 px, 8×48 + 9×1 = 393 wide and 9×64 +
 10×1 = 586 high → 921,192 B at RGBA8; at 2 px, 402 × 596 → 958,368 B.
