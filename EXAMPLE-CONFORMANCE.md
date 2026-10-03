@@ -668,8 +668,8 @@ Every row answered. Most do not bind us, and saying so is the answer.
 
 > We spent this number on the quantity it measures. Our 2 px is the gap **between cells sharing one
 > sheet**. The 3 px of empty canvas under the `hero`'s feet is a different quantity that happens to
-> share the word "padding"; it is Layer C, ours, and it appears in the Layer C register below and
-> nowhere near this row.
+> share the word "padding"; it is Layer C, ours, and it appears in the register of quantities nobody
+> locks below and nowhere near this row.
 
 **Derived arithmetic**
 
