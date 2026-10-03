@@ -23,7 +23,11 @@ different licences.
 
   THE TOOLING — MIT (see tools/LICENSE).
   tools/ and .github/workflows/. The checker, the source watch, and the
-  workflows that run them.
+  workflows that run them. The repository's configuration files belong here
+  too: the files that set up git, the formatter, the site and the funding
+  link (today .gitbook.yaml, .prettierrc.json, .prettierignore, .gitignore
+  and .github/FUNDING.yml). They make the tooling and the site run, and they
+  carry nothing of the document.
 
   The split is deliberate. Restricting the DOCUMENT is the point of this
   repository: it is the thing that took the work and it is the thing worth
@@ -37,8 +41,8 @@ different licences.
 
   An earlier revision named five files explicitly. That was a closed list in a
   repository that already tracked more than five, which left the remainder
-  outside the grant by a narrow reading. Naming no files is both shorter and
-  correct as the repository grows.
+  outside the grant by a narrow reading. Naming the classes, with today's files
+  only as examples, is both shorter and correct as the repository grows.
 
 WHAT YOU MAY DO, AT NO COST
 
