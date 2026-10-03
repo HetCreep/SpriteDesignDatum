@@ -1,0 +1,22 @@
+#!/bin/sh
+# Repo gate: the house secret scan, wired as BOTH pre-commit and pre-push (identical bytes).
+#
+# Enable once per clone: git deliberately refuses to let a repo configure its own hooks, so the files travel with the
+# clone but the pointer does not:
+#   git config core.hooksPath .githooks
+#
+# Fails CLOSED on purpose: a missing node or a missing script blocks the commit or push instead of passing quietly
+# (hooks-safety.md 1.0: a git pre-* hook MUST be able to abort).
+
+# The secret scan (scripts/secret-gate.mjs). A public repository gets GitHub's provider-token scan for free. This scan
+# catches three things: a provider-shaped token (refused before the push reaches GitHub), a private-key header, and a
+# high-entropy value assigned to a name like secret, token, password or key. It does NOT catch a credential inside a
+# URL or connection string (scheme://user:pass@host), an HTTP authentication header whose value is not on such a named
+# assignment, or a key split across lines. git hands
+# only pre-push the ref lines on stdin, so only pre-push passes --pre-push (every pushed commit, message and tag);
+# pre-commit scans the tracked tree. One file, two hook names, identical bytes: the branch is on the name git invoked.
+if [ "$(basename "$0")" = "pre-push" ]; then
+  node scripts/secret-gate.mjs --pre-push "--remote=$1" || exit 1
+else
+  node scripts/secret-gate.mjs || exit 1
+fi

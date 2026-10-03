@@ -6,3 +6,9 @@
 # purpose: a path rots on the next rename, which is exactly how this comment was wrong once already.
 # If SUMMARY.md is ever hand-authored again (Git Sync removed), delete this line.
 SUMMARY.md
+
+# The workflow files and the secret scan (scripts/) come from the org article template, copied by blob
+# id at each template sync. Their form is the template's, formatted to Prettier's defaults; this
+# repository's own print settings would rewrite them and break the byte match the sync is checked by.
+.github/workflows/
+scripts/
