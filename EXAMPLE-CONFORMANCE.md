@@ -113,24 +113,24 @@ wrong.
 
 ## Status at a glance
 
-| rule                      | status                                         | see                                |
-| ------------------------- | ---------------------------------------------- | ---------------------------------- |
-| `A1`                      | met                                            | geometry carries aspect            |
-| `A2`                      | met—condition not triggered                    | no WebGL1 target; NPOT cost taken  |
-| `A3`                      | **deliberately excluded**                      | no compressed containers shipped   |
-| `P1`                      | met                                            | 4,022,272 B ceiling, budget 8 MiB  |
-| `P2`                      | **open**                                       | fractional scale at 2560 × 1440    |
-| `P3`                      | met                                            | per-frame metadata carried         |
-| `L1`                      | met via (b)                                    | portrait control, provenance noted |
-| `L2`                      | met                                            | hero canvas change, cost published |
-| `L3`                      | met                                            | answered once, both targets        |
-| `L4`                      | met (textures) / **excluded** (listing assets) | not our stores                     |
-| `E1`                      | met—provisional for `wisp`                     | blocked behind `E2`                |
-| `E2`                      | **open**                                       | `wisp` trim, loader ignores source |
-| `E3`                      | met                                            | `pixel_size` 0.03125, derived      |
-| anchor tolerance register | 10 of 11 sets met, **1 open**                  | `hero` slash                       |
-| published-values register | answered row by row                            | most rows do not bind us           |
-| quantities nobody locks   | listed as Layer C                              | our values, written as unlocked    |
+| rule                      | status                                                                | see                                |
+| ------------------------- | --------------------------------------------------------------------- | ---------------------------------- |
+| `A1`                      | met                                                                   | geometry carries aspect            |
+| `A2`                      | met—condition not triggered                                           | no WebGL1 target; NPOT cost taken  |
+| `A3`                      | **deliberately excluded**                                             | no compressed containers shipped   |
+| `P1`                      | met                                                                   | 4,022,272 B ceiling, budget 8 MiB  |
+| `P2`                      | **open**                                                              | fractional scale at 2560 × 1440    |
+| `P3`                      | met                                                                   | per-frame metadata carried         |
+| `L1`                      | met via (b)                                                           | portrait control, provenance noted |
+| `L2`                      | met                                                                   | hero canvas change, cost published |
+| `L3`                      | met                                                                   | answered once, both targets        |
+| `L4`                      | met (textures) / **excluded** (listing assets)                        | not our stores                     |
+| `E1`                      | met—provisional for `wisp`                                            | blocked behind `E2`                |
+| `E2`                      | **open**                                                              | `wisp` trim, loader ignores source |
+| `E3`                      | met                                                                   | `pixel_size` 0.03125, derived      |
+| anchor tolerance register | 10 of 11 measured sets met, **1 open**; 2 `wisp` sets blocked by `E2` | `hero` slash                       |
+| published-values register | answered row by row                                                   | most rows do not bind us           |
+| quantities nobody locks   | listed as Layer C                                                     | our values, written as unlocked    |
 
 Three rules are open. That is not a failure of the record; it is the record working. A version of
 this file with fifteen "met" rows and no evidence would be worth less than nothing, because the next
@@ -151,10 +151,10 @@ to survive; the geometry carries it. Three consumers exist and all three were wa
 | campfire billboard        | nothing—size derived, see `E3`         | fed matching art by construction          |
 | party-panel portrait (UI) | box is square, stretch mode covers     | compensated + provenance stated, see `L1` |
 
-The invariant A1 names is the same one the published-values register carries as _one identical
-Pixels Per Unit across every sprite in a scene_ (`CITED`, VENDOR_DOC, Unity 2D Pixel Perfect 5.0).
-We do not use that vendor's engine. We adopt the mechanism, not the product: one px→world conversion
-(32 px = 1 unit) is shared by the 2D world and the campfire scene, and no sprite carries its own.
+The invariant A1 names is the one A1 itself cites: _one identical Pixels Per Unit across every
+sprite in a scene_ (`CITED`, VENDOR_DOC, Unity 2D Pixel Perfect 5.0). We do not use that vendor's
+engine. We adopt the mechanism, not the product: one px→world conversion (32 px = 1 unit) is shared
+by the 2D world and the campfire scene, and no sprite carries its own.
 
 > A1's rule paragraph and `L1` state the same obligation under two ids. We answer the invariant here
 > and the consumer walk under `L1`, and we have reported the duplication upstream rather than
@@ -223,8 +223,8 @@ permanent verdict.
 ## P1 · RAM ceiling
 
 Compute the decode ceiling as `frames × width × height × 4` bytes (RGBA8). State it as a
-**theoretical ceiling**, never as measured usage — browsers evict decoded bitmaps, and nothing on
-the page can observe the eviction policy.
+**theoretical ceiling**, never as measured usage—browsers evict decoded bitmaps, and nothing on the
+page can observe the eviction policy.
 
 **No external source bounds the acceptability of that ceiling.** No vendor publishes a
 per-application texture-RAM budget for a browser tab; the real limit is set by the device, the tab
@@ -323,11 +323,12 @@ product decision nobody has taken yet. Estimated at one day. Owner unassigned. O
 
 **Status: met.** Layer A-port.
 
-We already ship the two targets P3 distinguishes—a browser build and a desktop native build—and the
-contract did not change between them. Per-frame metadata (`sourceSize` / `spriteSourceSize`) is
-exported for every family and is present in every sheet's JSON at `c41e0b7`, `MEASURED-LIVE` by
-`tools/check_metadata.py` (292 frames checked, 292 carry both fields). Our loader reads it for five
-of six families; the sixth is `E2`, open.
+We ship a native-engine target—the port P3 says changes the whole pipeline—beside our browser build,
+and the contract did not change between them. We ship no WebView port, so P3's first sentence does
+not apply to us. Per-frame metadata (`sourceSize` / `spriteSourceSize`) is exported for every family
+and is present in every sheet's JSON at `c41e0b7`, `MEASURED-LIVE` by `tools/check_metadata.py` (292
+frames checked, 292 carry both fields). Our loader reads it for five of six families; the sixth is
+`E2`, open.
 
 > P3 asks for a judgement about ports rather than a value, so this row states a position rather than
 > a number. We have flagged upstream that P3 is the one rule in the standard for which we could not
@@ -512,8 +513,9 @@ Two ways to close it, and the cheaper one is also the better one:
 1. **Read `spriteSourceSize` in the loader.** The field is already in the JSON—`MEASURED-LIVE`,
    `tools/check_metadata.py` confirms it is present on all 8 float frames. No asset changes, no size
    cost. Estimated half a day.
-2. Drop `--trim` for consistency with our own shared-canvas choice (see the Layer C register). This
-   would raise the `wisp` sheet toward its 212,992 B ceiling and is the fallback, not the plan.
+2. Drop `--trim` for consistency with our own shared-canvas choice (see the stricter rule we
+   adopted, under the unbounded register). This would raise the `wisp` sheet toward its 212,992 B
+   ceiling and is the fallback, not the plan.
 
 Until one ships, `E1`'s `wisp` row is provisional and this record says so in both places. A record
 that closed `E1` on five families and stayed quiet about the sixth would be the exact failure the
@@ -584,6 +586,7 @@ Kind classification is ours and is stated so a reader can disagree with it: `idl
 | `hound`    | run   | locomotion |      1 |             — |             7 px |    7/28 = **25.0%** | ±2 / ≤27% | met      |
 | `hound`    | bite  | action     |      1 |             — |             5 px |    5/28 = **17.9%** | ±3 / ≤23% | met      |
 | `wisp`     | float | —          |     \* |            \* |               \* |                   — | —         | blocked  |
+| `wisp`     | burst | —          |     \* |            \* |               \* |                   — | —         | blocked  |
 
 \* Measured on the paired shadow sheet, not the body sheet—see `E1`. The figures are withheld from
 this table rather than reported, because `E2` is open on this family and a measurement taken through
@@ -602,14 +605,16 @@ distinction matters: merging the two axes would have hidden a clean result behin
 
 ### A stricter target we set for ourselves, and did not get from the standard
 
-**Layer B. Ours, not the standard's.** The register's pose-hold ceiling is ±1 px. Our internal
+**Layer C. Ours, not the standard's.** The register's pose-hold ceiling is ±1 px. Our internal
 acceptance for pose-hold is **0 px**, on both axes.
 
 ```
 why            MEASURED-LIVE: 4 of the 5 families the instrument applies to already measure 0
                on both axes for pose-hold (hero, villager, merchant, hound). Only warden
                measures 1. Zero is demonstrably achievable in our pipeline, on our corpus.
-what this is   our own target, derived from our own best work. It is NOT a claim that the
+what this is   our own target, derived from our own best work. It sits at Layer C: no
+               material makes ±1 a wrong target and 0 a right one, and the standard does
+               not promote a value on a measurement alone. It is NOT a claim that the
                standard's ±1 is wrong, and it is not a number anyone may cite from here.
 where we still quote ±1
                when judging incoming contractor art. Holding an outside artist to our house
@@ -629,37 +634,37 @@ Every row answered. Most do not bind us, and saying so is the answer.
 
 **Hard**
 
-| register row                       | our answer                                                                                                                     |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| Store screenshot, per side         | **excluded**—not our stores, see `L4`                                                                                          |
-| Store screenshot, aspect (≤ 2:1)   | **excluded**—same                                                                                                              |
-| Store icon                         | **excluded**—same                                                                                                              |
-| Store feature graphic              | **excluded**—same                                                                                                              |
-| Apple screenshot sizes             | **excluded**—same                                                                                                              |
-| Texture ceiling, 16384 (Unity)     | not applicable—not our engine. Our largest sheet is the `warden`'s, 786 × 782, `COMPUTED`                                      |
-| Texture ceiling, 8192 (Unreal)     | not applicable—not our engine, same figure                                                                                     |
-| Minimum size for tight sprite mesh | not applicable—not our engine, and we use no tight meshes                                                                      |
-| One identical PPU per scene        | **met, as a mechanism**—32 px = 1 unit is shared by the 2D world and the campfire scene, `CITED` VENDOR_DOC, see `A1` and `E3` |
+| register row                       | our answer                                                                                |
+| ---------------------------------- | ----------------------------------------------------------------------------------------- |
+| Store screenshot, per side         | **excluded**—not our stores, see `L4`                                                     |
+| Store screenshot, aspect (≤ 2:1)   | **excluded**—same                                                                         |
+| Store icon                         | **excluded**—same                                                                         |
+| Store feature graphic              | **excluded**—same                                                                         |
+| Apple screenshot sizes             | **excluded**—same                                                                         |
+| Texture ceiling, 16384 (Unity)     | not applicable—not our engine. Our largest sheet is the `warden`'s, 786 × 782, `COMPUTED` |
+| Texture ceiling, 8192 (Unreal)     | not applicable—not our engine, same figure                                                |
+| Minimum size for tight sprite mesh | not applicable—not our engine, and we use no tight meshes                                 |
 
 > The register publishes texture ceilings for two engines and not for the engine it cites three
 > times elsewhere. We could not answer this row against our own engine from the standard alone. The
 > question is moot at 786 px and would not be at 8,000; noted upstream as a coverage gap rather than
 > an error. (`COMPUTED` from the packer rule under `P1`: 8×96 + 9×2 = 786 wide, ceil(44/8) = 6 rows,
-> 6×128 + 7×2 = 782 high, with 4 empty cells—the `hero` sheet is the one with no grid slack.)
+> 6×128 + 7×2 = 782 high, with 4 empty cells—`hero`, `villager` and `merchant` fill their grids
+> exactly.)
 
 **Recommendation**
 
-| register row                 | our answer                                                                |
-| ---------------------------- | ------------------------------------------------------------------------- |
-| Power-of-two dimensions      | not met, cost accepted and stated—see `A2`                                |
-| Integer upscale factors      | **open** at 2560 × 1440—see `P2`. Met at every other supported resolution |
-| Store listing aspect targets | **excluded**—not our stores, see `L4`                                     |
+| register row                | our answer                                                                                                 |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Power-of-two dimensions     | not met, cost accepted and stated—see `A2`                                                                 |
+| Integer upscale factors     | **open** at 2560 × 1440—see `P2`. Met at every other supported resolution                                  |
+| One identical PPU per scene | **met, as a mechanism**—32 px = 1 unit is shared by the 2D world and the campfire scene; see `A1` and `E3` |
 
 **Tool default**
 
-| register row  | our answer                                                                                                                                                                              |
-| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Atlas padding | **2 px.** Layer B—ours, by measurement. The register's spread (4 / 2 / "at least 2" / 1) is `CITED` TOOL_DEFAULT and informed the choice; it did not make it. See the cost table below. |
+| register row  | our answer                                                                                                                                                                                                                                                                                                                 |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Atlas padding | **2 px.** Layer B—ours, by measurement. The register's padding between packed sprites (4 / 2 / "at least 2") is `CITED` TOOL_DEFAULT and informed the choice; it did not make it. Its fourth row, Godot's 1 px around each tile, belongs to Godot's TileSet system, which our sheets do not use. See the cost table below. |
 
 > We spent this number on the quantity it measures. Our 2 px is the gap **between cells sharing one
 > sheet**. The 3 px of empty canvas under the `hero`'s feet is a different quantity that happens to
@@ -677,10 +682,11 @@ Every row answered. Most do not bind us, and saying so is the answer.
 
 ---
 
-## [The register of quantities nobody locks](https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.3/SPRITE-DESIGN-DATUM.md#the-unbounded-register-quantities-with-no-published-external-value)—our Layer C values
+## [The register of quantities nobody locks](https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.3/SPRITE-DESIGN-DATUM.md#the-unbounded-register-quantities-with-no-published-external-value)—our values
 
-**Every value in this section is Layer C: nobody locks it, we chose it, and none of it may be quoted
-as specification by anyone, including us.** That sentence is the reason the section exists.
+**Every value in this section is one no external body bounds: we chose it, and none of it may be
+quoted as specification by anyone, including us.** Most are Layer C; where a row also sits at Layer
+B, that row and the Layer B slots below say so. That sentence is the reason the section exists.
 
 | quantity nobody locks                  | Lanternfall's value                                                                                                                                                                                                                   |
 | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
