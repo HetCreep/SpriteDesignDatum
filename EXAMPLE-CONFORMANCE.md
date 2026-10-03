@@ -5,9 +5,10 @@
 > anything real, and no figure in it may be cited as evidence for anything. What is real is the
 > **shape**: this is what a conformance record looks like when it is written honestly.
 
-This file exists because [`SPRITE-DESIGN-DATUM.md`](SPRITE-DESIGN-DATUM.md) requires every adopting
-project to keep a record and never shows one. A reader who has finished the standard knows they owe
-a record and has never seen the thing they owe.
+This file exists because
+[`SPRITE-DESIGN-DATUM.md`](https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.3/SPRITE-DESIGN-DATUM.md)
+requires every adopting project to keep a record and never shows one. A reader who has finished the
+standard knows they owe a record and has never seen the thing they owe.
 
 **This is an example, not the standard.** It does not restate, extend, reinterpret or add to any
 rule. Every rule is referred to by its id; the rule text lives in the standard, once. Each answer
@@ -61,7 +62,7 @@ art pipeline    one Aseprite source per character family
 world           2D scene tree, sprites sorted by ground position
 3D surface      one — the campfire screen, where the party is drawn as billboards in a 3D scene
 tile grid       32 px = 1 world unit
-record against  SPRITE-DESIGN-DATUM.md v1.0.0
+record against  SPRITE-DESIGN-DATUM.md v2.0.3
 record date     2026-08-11 · shipped corpus at commit c41e0b7
 ```
 
@@ -139,7 +140,7 @@ reader would stop looking.
 
 ## Layer A
 
-### [`A1`](SPRITE-DESIGN-DATUM.md#A1)—our answer
+### [`A1`](https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.3/SPRITE-DESIGN-DATUM.md#A1)—our answer
 
 **Status: met.** Layer A. Nothing in our pipeline attaches an aspect ratio to a file and expects it
 to survive; the geometry carries it. Three consumers exist and all three were walked:
@@ -159,7 +160,7 @@ We do not use that vendor's engine. We adopt the mechanism, not the product: one
 > and the consumer walk under `L1`, and we have reported the duplication upstream rather than
 > deciding which id owns it.
 
-### [`A2`](SPRITE-DESIGN-DATUM.md#A2)—our answer
+### [`A2`](https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.3/SPRITE-DESIGN-DATUM.md#A2)—our answer
 
 **Status: met—the condition A2 makes it conditional on is not triggered.** Layer A.
 
@@ -181,7 +182,7 @@ px of dead width to every one of the hero's 72 frames—`COMPUTED`: 72 × 16 × 
 of decode ceiling, a 33.3% rise on that family, to satisfy a recommendation whose stated cost is
 smaller than the fix.
 
-### [`A3`](SPRITE-DESIGN-DATUM.md#A3)—our answer
+### [`A3`](https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.3/SPRITE-DESIGN-DATUM.md#A3)—our answer
 
 **Status: deliberately excluded.** Layer A.
 
@@ -206,7 +207,7 @@ lines above.
 
 ## Layer A-port
 
-### [`P1`](SPRITE-DESIGN-DATUM.md#P1)—our answer
+### [`P1`](https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.3/SPRITE-DESIGN-DATUM.md#P1)—our answer
 
 The rule text itself, quoted from the tagged citation above—a mirror, not a replacement; if this
 block ever disagrees with the tagged file, the tagged file wins.
@@ -275,7 +276,7 @@ headroom                 3.84 MiB of 8 MiB — 48% used
    figure because that is what the standard asks for, and we report the gap because a reader
    budgeting RAM off the formula alone would be 8% short on this family.
 
-### [`P2`](SPRITE-DESIGN-DATUM.md#P2)—our answer
+### [`P2`](https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.3/SPRITE-DESIGN-DATUM.md#P2)—our answer
 
 **Status: open.** Layer A-port. This is our largest unresolved defect.
 
@@ -318,7 +319,7 @@ which is why engines ship a floor().
 (`COMPUTED`). The cost is 25% of the window's width and 25% of its height given to bars, which is a
 product decision nobody has taken yet. Estimated at one day. Owner unassigned. Opened 2026-08-10.
 
-### [`P3`](SPRITE-DESIGN-DATUM.md#P3)—our answer
+### [`P3`](https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.3/SPRITE-DESIGN-DATUM.md#P3)—our answer
 
 **Status: met.** Layer A-port.
 
@@ -336,7 +337,7 @@ of six families; the sixth is `E2`, open.
 
 ## The locked rules
 
-### [`L1`](SPRITE-DESIGN-DATUM.md#L1)—our answer
+### [`L1`](https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.3/SPRITE-DESIGN-DATUM.md#L1)—our answer
 
 **Status: met, via (b).** Layer L1—owner-locked; nothing below may be changed by an agent or a
 contributor without an owner ruling.
@@ -364,7 +365,7 @@ box; (85.33 − 64)/85.33 = **25.0%** of image height discarded.
 > not cover, and cover is the mode that destroys art. Reported upstream. The arithmetic above is
 > ours and is labelled `COMPUTED`, not cited.
 
-### [`L2`](SPRITE-DESIGN-DATUM.md#L2)—our answer
+### [`L2`](https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.3/SPRITE-DESIGN-DATUM.md#L2)—our answer
 
 **Status: met.** Layer L1–L4.
 
@@ -405,7 +406,7 @@ cover fit scaled by 64/48 discards 1 − 48/56 = 14.3% of a 48 × 56 source and 
 `L1` comment. It was not discovered later; it was found by the consumer walk this rule requires,
 which is the only reason it is in a table instead of in a bug report.
 
-### [`L3`](SPRITE-DESIGN-DATUM.md#L3)—our answer
+### [`L3`](https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.3/SPRITE-DESIGN-DATUM.md#L3)—our answer
 
 **Status: met.** Layer L1–L4.
 
@@ -416,7 +417,7 @@ is the claim `L3` makes.
 The one thing that genuinely differs is the one `L3` names: per-frame metadata matters more on the
 native side, and that is where `E2`'s open row bites hardest. It is recorded there, not here.
 
-### [`L4`](SPRITE-DESIGN-DATUM.md#L4)—our answer
+### [`L4`](https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.3/SPRITE-DESIGN-DATUM.md#L4)—our answer
 
 **Status: split—met on textures, deliberately excluded on listing assets.** Layer L1–L4.
 
@@ -448,7 +449,7 @@ where that distinction is made visible.
 
 ## Layer B-ext
 
-### [`E1`](SPRITE-DESIGN-DATUM.md#E1)—our answer
+### [`E1`](https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.3/SPRITE-DESIGN-DATUM.md#E1)—our answer
 
 **Status: met, provisional for `wisp` pending `E2`.** Layer B-ext, with the values themselves at
 Layer B.
@@ -487,7 +488,7 @@ One family, one scale, one offset, read together.
 > derived from anything. That answer is sound and its measurement is currently unusable, because
 > `E2` is open on this family. This row is provisional until it is not.
 
-### [`E2`](SPRITE-DESIGN-DATUM.md#E2)—our answer
+### [`E2`](https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.3/SPRITE-DESIGN-DATUM.md#E2)—our answer
 
 **Status: open.** Layer B-ext. Opened 2026-08-10 by the run that produced this record.
 
@@ -518,7 +519,7 @@ Until one ships, `E1`'s `wisp` row is provisional and this record says so in bot
 that closed `E1` on five families and stayed quiet about the sixth would be the exact failure the
 standard describes: the next reader stops looking.
 
-### [`E3`](SPRITE-DESIGN-DATUM.md#E3)—our answer
+### [`E3`](https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.3/SPRITE-DESIGN-DATUM.md#E3)—our answer
 
 **Status: met.** Layer B-ext, with the constant at Layer B and its input at Layer C.
 
@@ -561,7 +562,7 @@ size assignment to a sprite node. 0 hits at `c41e0b7`.
 
 ---
 
-## [The anchor tolerance register](SPRITE-DESIGN-DATUM.md#the-anchor-tolerance-register-measured-from-external-corpora)
+## [The anchor tolerance register](https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.3/SPRITE-DESIGN-DATUM.md#the-anchor-tolerance-register-measured-from-external-corpora)
 
 Layer: the register's ceilings are the standard's, derived by measuring external corpora. Our
 numbers below are ours, `MEASURED-LIVE`, and are compared against those ceilings.
@@ -622,7 +623,7 @@ consequence    warden idle is inside the standard's ceiling and outside our own 
 
 ---
 
-## [The published-values register](SPRITE-DESIGN-DATUM.md#the-tolerance-register-published-external-values)
+## [The published-values register](https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.3/SPRITE-DESIGN-DATUM.md#the-tolerance-register-published-external-values)
 
 Every row answered. Most do not bind us, and saying so is the answer.
 
@@ -676,7 +677,7 @@ Every row answered. Most do not bind us, and saying so is the answer.
 
 ---
 
-## [The register of quantities nobody locks](SPRITE-DESIGN-DATUM.md#the-unbounded-register-quantities-with-no-published-external-value)—our Layer C values
+## [The register of quantities nobody locks](https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.3/SPRITE-DESIGN-DATUM.md#the-unbounded-register-quantities-with-no-published-external-value)—our Layer C values
 
 **Every value in this section is Layer C: nobody locks it, we chose it, and none of it may be quoted
 as specification by anyone, including us.** That sentence is the reason the section exists.
@@ -730,7 +731,7 @@ what it is not    a standard. If someone reads this record and adopts a shared c
 
 ---
 
-## [The Layer B slots](SPRITE-DESIGN-DATUM.md#layer-b-locked-by-the-adopting-project-s-own-measurement)
+## [The Layer B slots](https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.3/SPRITE-DESIGN-DATUM.md#layer-b-locked-by-the-adopting-project-s-own-measurement)
 
 The standard names four slots a project fills at Layer B, and one thing that looks like a slot and
 is not. We answer all five, and two of them are answered in two places on purpose.
