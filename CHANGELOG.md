@@ -7,6 +7,24 @@ Versions follow [Semantic Versioning](https://semver.org/) applied to a standard
 - **MINOR**—a rule or register entry is added; existing conforming work still conforms.
 - **PATCH**—wording, citations, corrections that do not move a value.
 
+## 2.0.4—2026-10-03
+
+**P3's WebView sentence claimed more than L3 shows.** P3 said "A WebView port keeps the same
+renderer and the same contract", for any WebView. The L3 table, which is the evidence for that
+sentence, lists one WebView row only: `WebView (Capacitor / Cordova)`, "binding—same engine". A
+WebView host outside those two can bring its own renderer, and nothing in the standard shows the
+contract holds there. Recorded as `E-005` in `ERRATA.md`.
+
+**Changed**
+
+- P3 now reads "A WebView port to a target L3 lists (Capacitor / Cordova) keeps the same renderer
+  and the same contract; the standard makes no claim for any other WebView host." The L3 table is
+  unchanged.
+- Citations, `CITATION.cff` and the front matter now point at the `v2.0.4` tag.
+
+PATCH—the correction narrows a sentence's stated scope and moves no value. A conformance claim
+against `2.0.3` survives untouched, unless it relied on P3 for a WebView host L3 does not list.
+
 ## 2.0.3—2026-09-25
 
 **The Godot atlas-padding row named an engine where the documentation names a class.** The row read

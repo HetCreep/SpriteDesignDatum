@@ -43,6 +43,7 @@ it. **The quoted text is the locator. The line number is a convenience.**
 | [E-002](#e-002) | `SPRITE-DESIGN-DATUM.md:668`                 | The half-texel explanation is attributed to a page that does not contain it. The statement itself is correct                                                                                                    | **corrected in 1.1.0** |
 | [E-003](#e-003) | `SPRITE-DESIGN-DATUM.md:464-470`, `:687-694` | Layer B and the unbounded register are sorted on **two different axes**, printed as though they were one. Three quantities appear in both lists, and for two of them that is correct rather than contradictory. | **corrected in 2.0.0** |
 | [E-004](#e-004) | `SPRITE-DESIGN-DATUM.md:712` (in `2.0.2`)    | The Godot atlas-padding row reads as an engine-wide default. Godot documents 1 px padding only for the TileSet atlas (`TileSetAtlasSource`). The number is right, the scope was too wide                        | **corrected in 2.0.3** |
+| [E-005](#e-005) | `SPRITE-DESIGN-DATUM.md:304` (in `2.0.3`)    | P3 says any WebView port keeps the same renderer and contract. L3, its evidence, lists only Capacitor / Cordova. The claim was wider than the table                                                             | **corrected in 2.0.4** |
 
 ---
 
@@ -350,3 +351,40 @@ one texture", which the Godot row contradicts; it now says each is a gutter insi
 texture, between two sprites or, for Godot, around each tile. The value stays 1 px. The Unity and
 libGDX rows were re-read against their pages for the same defect and hold: each row already names
 the tool whose settings it reads.
+
+---
+
+<a id="e-005"></a>
+
+### E-005 · P3 promises the same renderer for every WebView, and L3 shows it for two
+
+| field        | value                                                                                          |
+| ------------ | ---------------------------------------------------------------------------------------------- |
+| **state**    | **corrected in 2.0.4**—the owner signed the narrowing, 2026-10-03                              |
+| **reported** | 2026-10-02, by a CodeRabbit review of the repository, read against the standard's own L3 table |
+| **found in** | 2.0.3 (earlier versions were not checked)                                                      |
+| **location** | `SPRITE-DESIGN-DATUM.md:304`—P3, Render target                                                 |
+| **kind**     | **over-general scope**, no value involved                                                      |
+
+**What the standard says**
+
+```
+A WebView port keeps the same renderer and the same contract.
+```
+
+**What the evidence says**—the standard's own L3 table, the only place a WebView target is assessed:
+
+```
+| WebView (Capacitor / Cordova)  | binding—same engine | binding |
+```
+
+**What is actually wrong**
+
+L3 shows the contract holding for one WebView row, Capacitor / Cordova, and P3 generalised it to
+every WebView. A host that brings its own renderer is not covered by anything the standard shows.
+The statement may be true more widely; the standard does not show it, so it does not say it.
+
+**What changes in 2.0.4**
+
+P3 names the targets L3 lists and states that it makes no claim for any other WebView host. L3 is
+unchanged.

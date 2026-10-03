@@ -43,10 +43,10 @@
 
 # SPRITE DESIGN DATUM
 
-> **Version 2.0.3** · first published 2026-08-11 · © 2026 HetCreep
+> **Version 2.0.4** · first published 2026-08-11 · © 2026 HetCreep
 >
 > **Cite this at**
-> `https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.3/SPRITE-DESIGN-DATUM.md`—the file at a
+> `https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.4/SPRITE-DESIGN-DATUM.md`—the file at a
 > signed tag. Rule ids resolve as anchors there: append `#L1`, `#E3`, `#A2`. Cite the id, never the
 > heading text, and always name the version.
 >
@@ -301,9 +301,10 @@ for this class of art, and at least one engine ships a floor() to prevent them.
 
 ## P3 · Render target
 
-A WebView port keeps the same renderer and the same contract. A native-engine port changes the whole
-pipeline, and **per-frame metadata becomes more valuable, not less**, because every engine already
-expects a pivot/offset per sprite.
+A WebView port to a target [L3](#L3) lists (Capacitor / Cordova) keeps the same renderer and the
+same contract; the standard makes no claim for any other WebView host. A native-engine port changes
+the whole pipeline, and **per-frame metadata becomes more valuable, not less**, because every engine
+already expects a pivot/offset per sprite.
 
 ---
 

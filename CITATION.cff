@@ -45,10 +45,10 @@ authors:
   # question as one a lawyer has to settle—so the entity form is used here rather than inventing a
   # split of a handle into a first and last name.
   - name: HetCreep
-url: 'https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.3/SPRITE-DESIGN-DATUM.md'
+url: 'https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.4/SPRITE-DESIGN-DATUM.md'
 repository-code: 'https://github.com/HetCreep/SpriteDesignDatum'
-version: 2.0.3
-date-released: '2026-09-25'
+version: 2.0.4
+date-released: '2026-10-03'
 license: CC-BY-NC-ND-4.0
 abstract: >-
   A geometry standard for 2D sprite art, and a map of which parts of that geometry have a published
