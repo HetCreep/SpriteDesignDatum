@@ -1,18 +1,9 @@
-# ---------------------------------------------------------------------------
-# INERT AS OF 2026-08-11.
-#
-# This repository has no remote, and the owner has not decided whether it will be
-# published. Until someone pushes it to GitHub this schedule fires nowhere. Run the
-# sweep by hand in the meantime — it needs nothing but node and a network:
-#
-#     node tools/watch-sources.mjs
-#
-# CADENCE: monthly, not daily. The sources this standard cites are specifications,
-# vendor documentation, and tool defaults — things that move on a scale of years. The
-# shortest interval in SOURCES.md is 90d, so a monthly sweep flags a row within a month
-# of it coming due, which is well inside the resolution of the thing being watched. A
-# daily job over the same sources would produce ~365 identical green reports a year and
-# teach everyone to close the tab, which is worse than no watch at all.
+name: watch-sources
+
+# CADENCE: monthly, not daily. The sources an article cites are specifications, vendor
+# documentation, and tool defaults — things that move on a scale of years. A daily job
+# over the same sources would produce ~365 identical green reports a year and teach
+# everyone to close the tab, which is worse than no watch at all.
 #
 # TWO THINGS THAT CAN SILENTLY KILL THIS, once it is live:
 #   * GitHub disables scheduled workflows in a repository with no activity for 60 days.
@@ -23,11 +14,7 @@
 #
 # THIS JOB DOES NOT COMMIT. It uploads the updated register as an artifact and prints
 # the sweep into the job summary. A bot writing into an append-only human register would
-# make the register look maintained while nobody read a word of it — the exact false
-# confidence the register exists to prevent. A person lands the sweep.
-# ---------------------------------------------------------------------------
-
-name: watch-sources
+# make the register look maintained while nobody read a word of it. A person lands the sweep.
 
 on:
   schedule:
@@ -36,6 +23,14 @@ on:
 
 permissions:
   contents: read
+
+# cancel-in-progress: TRUE -- the sweep uploads a per-run ARTIFACT, not a shared Release/tag
+# asset; a cancelled run simply never uploads it, with no partial or corrupted shared state
+# left behind (unlike claude-ai-zips.yml's per-tag Release asset). Monthly-cron besides, so
+# overlap is vanishingly rare (SKILL-REPO-PATTERN.md's concurrency MUST, cited not restated).
+concurrency:
+  group: watch-sources-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   watch:
@@ -52,19 +47,32 @@ jobs:
         with:
           node-version: 22
 
-      # Findings never fail this job. It reports; it does not judge. A dead link is a
-      # fact for a caretaker to act on, not a build failure — and a job that goes red
-      # because someone else's CDN had a bad morning gets muted within two months.
+      # Findings never fail this job. It reports; it does not judge. Being UNABLE TO LOOK
+      # does fail it, with exit 2: a missing or unreadable SOURCES.md would otherwise
+      # produce a green tick every month while nothing was watched at all.
       #
-      # BEING UNABLE TO LOOK does fail it, with exit 2: a missing or unreadable
-      # SOURCES.md would otherwise produce a green tick every month while nothing was
-      # watched at all, which is worse than the two silent-death modes named above
-      # because it looks like success. The script's stderr says what to do about it.
+      # GATED ON tools/watch-sources.mjs EXISTING — this skeleton ships the workflow,
+      # never the sweeper itself (genuinely bespoke per article repo). Both steps below
+      # would otherwise fail permanently on a bare "Use this template" repo: the sweep
+      # has nothing to run, and the artifact upload has no REVALIDATION.md to find.
+      # hashFiles() returns '' when nothing matches, so both are cleanly SKIPPED (not
+      # silently passed) until the room's own sweeper lands.
       - name: Sweep the external sources
+        if: hashFiles('tools/watch-sources.mjs') != ''
         run: node tools/watch-sources.mjs >> "$GITHUB_STEP_SUMMARY"
 
+      # UMB-163 step 2: an explicit retention-days beats the vendor default of 90 (GitHub's
+      # own actions/upload-artifact README) for a monthly report nobody keeps past the month
+      # it lands in -- one cadence (~30 days) plus a buffer for a person to notice and land
+      # the sweep before the artifact is gone. Within the action's own 1-90 range; the
+      # separate org/repo Actions-artifact-retention SETTING (an owner/head UI click,
+      # 1-90 days on a public repo) is a ceiling on this value, never set here.
+      # !cancelled() keeps the report when the sweep step itself fails (a source that moved is what the sweep reports);
+      # a cancelled run still uploads nothing.
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        if: ${{ !cancelled() && hashFiles('tools/watch-sources.mjs') != '' }}
         with:
           name: revalidation-${{ github.run_id }}
           path: REVALIDATION.md
           if-no-files-found: error
+          retention-days: 35
