@@ -16,7 +16,11 @@ different licences.
 
   THE TOOLING — MIT (see tools/LICENSE).
   tools/ and .github/workflows/. The checker, the source watch, and the
-  workflows that run them.
+  workflows that run them. The repository's configuration files belong here
+  too: the files that set up git, the formatter, the site and the funding
+  link (today .gitbook.yaml, .prettierrc.json, .prettierignore, .gitignore
+  and .github/FUNDING.yml). They make the tooling and the site run, and they
+  carry nothing of the document.
 
   The split is deliberate. Restricting the DOCUMENT is the point of this
   repository: it is the thing that took the work and it is the thing worth

@@ -2,7 +2,9 @@ MIT License
 
 Copyright (c) 2026 HetCreep
 
-Applies to `tools/` and `.github/workflows/` in this repository. The documents —
+Applies to `tools/`, `.github/workflows/` and the repository's configuration files
+(today `.gitbook.yaml`, `.prettierrc.json`, `.prettierignore`, `.gitignore` and
+`.github/FUNDING.yml`) in this repository. The documents —
 SPRITE-DESIGN-DATUM.md and the prose around it — are NOT under this licence; see
 ../LICENSE for their terms.
 
