@@ -21,9 +21,9 @@ row into the place of a removed row and the row kept that row's source cell. Rec
   removed "Store listing aspect targets" row, is marked as removed in 1.1.0 and no longer
   revalidated.
 - `EXAMPLE-CONFORMANCE.md`: the example's hero canvas before its change was 48 × 56, which cannot
-  hold the 3 px foot margin and the 54 px character it also states. It is now 48 × 57, and the three
-  figures that follow are recomputed: the decode ceiling 787,968 B → 884,736 B (+96,768 B, +12.3%),
-  and the portrait cover-crop 15.8% → 25.0% (+9.2 pp).
+  hold the 3 px foot margin and the 54 px character it also states. The record now gives it as 48 ×
+  57, and the three figures that follow are recomputed: the decode ceiling 787,968 B → 884,736 B
+  (+96,768 B, +12.3%), and the portrait cover-crop 15.8% → 25.0% (+9.2 pp).
 - Citations, `CITATION.cff` and the front matter now point at the `v2.0.5` tag.
 
 PATCH—a citation is corrected and no value in the standard moves. The example's figures are the

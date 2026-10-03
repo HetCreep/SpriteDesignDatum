@@ -7,8 +7,8 @@
 # If SUMMARY.md is ever hand-authored again (Git Sync removed), delete this line.
 SUMMARY.md
 
-# The workflow files and the secret scan (scripts/) come from the org article template, copied by blob
-# id at each template sync. Their form is the template's, formatted to Prettier's defaults; this
-# repository's own print settings would rewrite them and break the byte match the sync is checked by.
+# The workflow files and the secret scan (scripts/) come from the org article template at each template sync, by blob id
+# except check.yml, which carries one named step of its own. Their form is the template's, formatted to Prettier's defaults;
+# this repository's own print settings would rewrite them, and every later sync would then be a reformat plus the real diff.
 .github/workflows/
 scripts/

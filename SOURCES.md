@@ -38,8 +38,8 @@ standard's line count changes.
 since 08-11—several prose citations moved into consolidated tables), by `grep -n` for the row's own
 distinguishing citation text, not by offsetting the old numbers. Method: for each row, the shortest
 substring of its `cited as` text that is unique in the file was located, and the line it resolves to
-today is recorded. Two rows could not be re-derived this way and are marked `UNRESOLVED` in
-place—see their notes.
+today is recorded. Two rows could not be re-derived this way and were marked `UNRESOLVED` in place
+(S-034 was resolved in 2.0.5; S-042 still is)—see their notes.
 
 ## Class
 
@@ -71,6 +71,9 @@ Chosen by how fast each class actually moves, not per row:
 | Frozen specifications (OpenGL 1.0, WebGL1/GLES2, D3D9/D3D10, RFC 9111) | `never`  | Published and closed. They do not move; only their hosting does.                   |
 
 `UNREACHABLE` is a state, not a schedule—such a row keeps its class's interval.
+
+A row no longer cited by the standard (S-037) keeps its id and is set to `never`: it is not swept,
+because nothing depends on it.
 
 ---
 
