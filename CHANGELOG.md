@@ -7,6 +7,29 @@ Versions follow [Semantic Versioning](https://semver.org/) applied to a standard
 - **MINOR**—a rule or register entry is added; existing conforming work still conforms.
 - **PATCH**—wording, citations, corrections that do not move a value.
 
+## 2.0.5—2026-10-03
+
+**The Pixel-exact rendering row named the wrong source.** Its source cell read "Google Play Console
+Help", a store-listing page, for a fact that is Unity 2D Pixel Perfect's. Version 1.1.0 moved the
+row into the place of a removed row and the row kept that row's source cell. Recorded as `E-006` in
+`ERRATA.md`.
+
+**Changed**
+
+- The row's source reads "Unity 2D Pixel Perfect 5.0", as it did in 1.0.0.
+- `SOURCES.md`: S-034 points at the row again (it was unresolved), and S-037, the citation of the
+  removed "Store listing aspect targets" row, is marked as removed in 1.1.0 and no longer
+  revalidated.
+- `EXAMPLE-CONFORMANCE.md`: the example's hero canvas before its change was 48 × 56, which cannot
+  hold the 3 px foot margin and the 54 px character it also states. It is now 48 × 57, and the three
+  figures that follow are recomputed: the decode ceiling 787,968 B → 884,736 B (+96,768 B, +12.3%),
+  and the portrait cover-crop 15.8% → 25.0% (+9.2 pp).
+- Citations, `CITATION.cff` and the front matter now point at the `v2.0.5` tag.
+
+PATCH—a citation is corrected and no value in the standard moves. The example's figures are the
+example's own invented data, not values of the standard. A conformance claim against `2.0.4`
+survives untouched.
+
 ## 2.0.4—2026-10-03
 
 **P3's WebView sentence claimed more than L3 shows.** P3 said "A WebView port keeps the same

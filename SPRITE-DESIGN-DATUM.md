@@ -43,10 +43,10 @@
 
 # SPRITE DESIGN DATUM
 
-> **Version 2.0.4** · first published 2026-08-11 · © 2026 HetCreep
+> **Version 2.0.5** · first published 2026-08-11 · © 2026 HetCreep
 >
 > **Cite this at**
-> `https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.4/SPRITE-DESIGN-DATUM.md`—the file at a
+> `https://github.com/HetCreep/SpriteDesignDatum/blob/v2.0.5/SPRITE-DESIGN-DATUM.md`—the file at a
 > signed tag. Rule ids resolve as anchors there: append `#L1`, `#E3`, `#A2`. Cite the id, never the
 > heading text, and always name the version.
 >
@@ -699,7 +699,7 @@ expressed as a range rather than a point, by a gatekeeper that enforces it.
 | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
 | Power-of-two dimensions | preferred; NPOT costs memory and sample speed                                                                                           | Unity, corroborated by Godot and Unreal |
 | Integer upscale factors | fractional scaling distorts pixel-exact art; engines ship a floor() to avoid it                                                         | Godot 4, _Multiple resolutions_         |
-| Pixel-exact rendering   | one identical Pixels Per Unit across every sprite in a scene—nothing rejects, clamps, or detects a mismatch; it renders and looks wrong | Google Play Console Help                |
+| Pixel-exact rendering   | one identical Pixels Per Unit across every sprite in a scene—nothing rejects, clamps, or detects a mismatch; it renders and looks wrong | Unity 2D Pixel Perfect 5.0              |
 
 <a id="tool-default-one-vendor-s-considered-choice-cited-as-such"></a>
 
