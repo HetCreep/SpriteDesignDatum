@@ -21,6 +21,7 @@ contract holds there. Recorded as `E-005` in `ERRATA.md`.
   and the same contract; the standard makes no claim for any other WebView host." The L3 table is
   unchanged.
 - Citations, `CITATION.cff` and the front matter now point at the `v2.0.4` tag.
+- The `line` column of `SOURCES.md` moved by one for every row after P3.
 
 PATCH—the correction narrows a sentence's stated scope and moves no value. A conformance claim
 against `2.0.3` survives untouched, unless it relied on P3 for a WebView host L3 does not list.
