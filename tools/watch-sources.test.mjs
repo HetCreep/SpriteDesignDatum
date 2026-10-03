@@ -29,7 +29,7 @@ function run(rows) {
       encoding: 'utf8',
       timeout: 60000,
     })
-    return { status: r.status, out: (r.stdout || '') + (r.stderr || '') }
+    return { status: r.status, stderr: r.stderr || '', out: (r.stdout || '') + (r.stderr || '') }
   } finally {
     rmSync(root, { recursive: true, force: true })
   }
@@ -38,7 +38,7 @@ function run(rows) {
 test('a revalidating row with a blank url cell fails the run as CANNOT_WATCH', () => {
   const r = run(['| S-901 | Example spec | 10 | SPECIFICATION |  | 1.0 | 2026-09-01 | 90d |'])
   assert.equal(r.status, CANNOT_WATCH, r.out)
-  assert.match(r.out, /S-901/)
+  assert.match(r.stderr, /revalidate but carry no URL: S-901/)
 })
 
 test('a url cell holding text but no URL fails the run as CANNOT_WATCH', () => {
@@ -46,7 +46,7 @@ test('a url cell holding text but no URL fails the run as CANNOT_WATCH', () => {
     '| S-902 | Example spec | 10 | SPECIFICATION | see the spec | 1.0 | 2026-09-01 | 90d |',
   ])
   assert.equal(r.status, CANNOT_WATCH, r.out)
-  assert.match(r.out, /S-902/)
+  assert.match(r.stderr, /revalidate but carry no URL: S-902/)
 })
 
 test('an UNREACHABLE row with a finite interval is still skipped, and the run passes', () => {
