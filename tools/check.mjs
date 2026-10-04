@@ -276,7 +276,8 @@ check('version-string coupling', (fail, note) => {
   else fail('SPRITE-DESIGN-DATUM.md', 'no "**Version X.Y.Z**" in the front matter')
 
   const log = read('CHANGELOG.md')
-  const lm = log && /^##\s+v?(\d+\.\d+\.\d+[\w.-]*)\b/m.exec(log)
+  // The canon heading, "## [X.Y.Z] - YYYY-MM-DD", which the release workflow's parser reads.
+  const lm = log && /^##\s+\[v?(\d+\.\d+\.\d+[\w.-]*)\]/m.exec(log)
   if (lm) found.push({ v: lm[1], where: `CHANGELOG.md:${lineOfIndex(log, lm.index)}` })
   else fail('CHANGELOG.md', 'no "## X.Y.Z" release heading')
 

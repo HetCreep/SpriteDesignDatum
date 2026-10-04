@@ -7,7 +7,9 @@ Versions follow [Semantic Versioning](https://semver.org/) applied to a standard
 - **MINOR**—a rule or register entry is added; existing conforming work still conforms.
 - **PATCH**—wording, citations, corrections that do not move a value.
 
-## 2.0.5—2026-10-03
+## [2.0.5] - 2026-10-03
+
+Correct the Pixel-exact row's source to Unity 2D Pixel Perfect
 
 **The Pixel-exact rendering row named the wrong source.** Its source cell read "Google Play Console
 Help", a store-listing page, for a fact that is Unity 2D Pixel Perfect's. Version 1.1.0 moved the
@@ -30,7 +32,9 @@ PATCH—a citation is corrected and no value in the standard moves. The example'
 example's own invented data, not values of the standard. A conformance claim against `2.0.4`
 survives untouched.
 
-## 2.0.4—2026-10-03
+## [2.0.4] - 2026-10-03
+
+Narrow P3's WebView claim to the hosts the L3 table lists
 
 **P3's WebView sentence claimed more than L3 shows.** P3 said "A WebView port keeps the same
 renderer and the same contract", for any WebView. The L3 table, which is the evidence for that
@@ -49,7 +53,9 @@ contract holds there. Recorded as `E-005` in `ERRATA.md`.
 PATCH—the correction narrows a sentence's stated scope and moves no value. A conformance claim
 against `2.0.3` survives untouched, unless it relied on P3 for a WebView host L3 does not list.
 
-## 2.0.3—2026-09-25
+## [2.0.3] - 2026-09-25
+
+Narrow the Godot padding row to TileSetAtlasSource, value unchanged
 
 **The Godot atlas-padding row named an engine where the documentation names a class.** The row read
 "Atlas padding · 1 px · Godot", the way its three siblings read for Unity Sprite Atlas, libGDX
@@ -78,7 +84,9 @@ documentation). Godot's generic sprite-sheet importer documents no padding prope
 PATCH—the correction narrows a row's stated scope and moves no value. A conformance claim against
 `2.0.2` survives untouched.
 
-## 2.0.2—2026-08-11
+## [2.0.2] - 2026-08-11
+
+Cite the signed tag, not the site: anchors resolve only there
 
 **The address this document told everyone to cite could not resolve a single rule.** 2.0.1 published
 at a documentation site and said "rule ids are stable anchors: `#L1`, `#E3`, `#A2`". They are not,
@@ -114,7 +122,9 @@ as good as the thing it actually touched.
 
 PATCH—the fix is to citations and to how two files are described, not to any locked value.
 
-## 2.0.1—2026-08-11
+## [2.0.1] - 2026-08-11
+
+Publish at a documentation site and correct four stale files
 
 The standard is now published at **https://hetcreep.gitbook.io/hetcreep-docs**, which is the first
 time the instruction it has carried since 1.0.0—_"LINK to it and cite it"_—has had anything to point
@@ -153,7 +163,9 @@ that was true when written and quietly stopped being true. That is the thing thi
 to catch, so finding four of them inside its own files on day one is the expected number, not an
 embarrassing one.
 
-## 2.0.0—2026-08-11
+## [2.0.0] - 2026-08-11
+
+Redefine the Layer B entry condition and revise its slot list
 
 **`E-003`.** Layer B and the unbounded register were sorted on two different axes and the document
 never said so, which made three quantities appear in both lists and read as a contradiction. For two
@@ -212,7 +224,9 @@ first. The rule uses _or_, not _and_. Calling it MINOR because the document is o
 nobody outside has adopted it yet would have been choosing the number by convenience rather than by
 the test—which is the habit this document exists to make harder.
 
-## 1.1.0—2026-08-11
+## [1.1.0] - 2026-08-11
+
+Correct two errata: Unreal texture ceiling and half-texel source
 
 Two errata verified against their primary sources and corrected, plus the taxonomy defect that let
 one of them hide. `ERRATA.md` keeps both entries permanently—1.0.0's text still says the wrong
@@ -250,7 +264,9 @@ the honesty of its strength class. Moving a row out of _Hard_ makes it **less** 
 project that met the stricter reading still conforms. A correction that only loosens, or that adds
 information about a third party's behaviour, does not break anyone downstream.
 
-## 1.0.0—2026-08-11
+## [1.0.0] - 2026-08-11
+
+Publish the first standalone edition without project references
 
 First standalone publication. The document existed before this as an internal design lock inside one
 game project; this release is that document with every project-specific reference removed, so it
