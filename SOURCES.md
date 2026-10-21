@@ -190,6 +190,10 @@ S-038 is the one row that had to be version-pinned: the versionless
 `docs.unity3d.com/Manual/sprite-atlas-reference.html` returns 404, and the page lives under a
 version-and-section path. Expect this locator to need repair sooner than its siblings.
 
+S-038 open residual: the re-read of 2026-09-25 confirmed Unity's 4 px default on this Sprite Atlas
+(V1) reference page. Whether a Sprite Atlas V2 asset shares that default is not on this page and is
+not verified anywhere in this repository.
+
 **S-041 RESOLVED (2026-09-25, ARK-045 c).** The locator is Godot's `TileSetAtlasSource` class
 reference, property `use_texture_padding`: `bool use_texture_padding = true` (Godot 4.7, the
 `stable` documentation branch), described as "If `true`, generates an internal texture with an
