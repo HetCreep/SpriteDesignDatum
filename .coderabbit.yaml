@@ -73,9 +73,9 @@ reviews:
   # so there is nothing to override) and knowledge_base.automatic_linking_mode (the knowledge base is off at the zone, opt_out: true,
   # the owner's switch, which a repository file never flips).
   auto_review:
-    # coderabbit/base is the base branch of the house's full-repository review vehicle; 0 means a review is never paused by the count of reviewed commits.
+    # coderabbit/base, anchored because the value is a regular expression, is the base branch of the house's full-repository review vehicle; 0 means a review is never paused by the count of reviewed commits.
     base_branches:
-      - coderabbit/base
+      - '^coderabbit/base$'
     auto_pause_after_reviewed_commits: 0
     # Pull requests opened by these two bots are not reviewed.
     ignore_usernames:
@@ -95,7 +95,7 @@ reviews:
     # Restates DOC-PATTERN.md: "Data is verbatim from its source, never invented" and "a behaviour claim = the code".
     - path: "{README,SECURITY,CONTRIBUTING}.md"
       instructions: |
-        A claim about behavior must match what the code actually does, and any data shown (a version, a model ID, a benchmark figure, a count) must match its authoritative source verbatim: a version is the one in plugin.json, a benchmark figure links to its record instead of being copied, a behavior claim is whatever the code does. Report a claim the code contradicts or a figure that differs from its source.
+        A claim about behavior must match what the code actually does, and any data shown (a version, a model ID, a benchmark figure, a count) must match its authoritative source verbatim. A version comes from the repository's manifest (plugin.json, package.json or pyproject.toml) or, where there is no manifest, from the top `## [X.Y.Z]` entry of CHANGELOG.md, the entry a release is derived from; a repository with neither shows no version, so a version shown there is itself a finding. A benchmark figure links to its record instead of being copied, and a behavior claim is whatever the code does. Report a claim the code contradicts or a figure that differs from its source.
     # Restates SKILL-REPO-PATTERN.md: the SHA-pinned workflow set, the concurrency: groups rule, and the persist-credentials sentence added beside them.
     - path: ".github/workflows/**"
       instructions: |
