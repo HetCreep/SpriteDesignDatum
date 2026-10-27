@@ -1,0 +1,17 @@
+# SUMMARY.md's FORM is owned by GitBook's Git Sync, not by us. Git Sync rewrites this file into
+# its own shape (list markers, headings) on every merge — see the zone's front/back law, rule 3:
+# "keep GitBook's SUMMARY.md form; reformatting it back starts a fight the sync will win every
+# time, forever." Prettier disagreeing with GitBook's marker choice IS that fight; this file
+# exempts SUMMARY.md rather than losing it on a schedule. The law is named rather than pathed on
+# purpose: a path rots on the next rename, which is exactly how this comment was wrong once already.
+# If SUMMARY.md is ever hand-authored again (Git Sync removed), delete this line.
+SUMMARY.md
+
+# The workflow files and the secret scan (scripts/) come from the org article template at each template sync, by blob id
+# except check.yml, which carries one named step of its own. Their form is the template's, formatted to Prettier's defaults;
+# this repository's own print settings would rewrite them, and every later sync would then be a reformat plus the real diff.
+.github/workflows/
+scripts/
+# .coderabbit.yaml starts from the org article template's CodeRabbit configuration (BB-82) and adds this repository's own
+# settings; it stays out of Prettier so its canon blocks keep the template's form, for the same reason.
+.coderabbit.yaml

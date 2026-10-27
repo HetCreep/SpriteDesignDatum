@@ -1,0 +1,83 @@
+name: check
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# cancel-in-progress: TRUE off the default branch -- the corpus checker reads and reports; it publishes nothing
+# and touches no external state, so a superseded run has nothing to leave half-done (SKILL-REPO-PATTERN.md's
+# concurrency MUST, cited not restated). On the default branch a run is NEVER cancelled: the GitBook-commit guard below
+# reads each push's range, and a cancelled run would let a commit in its range escape.
+concurrency:
+  group: check-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != format('refs/heads/{0}', github.event.repository.default_branch) }}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15 # testing.md: every run has a finite clock; a room re-sizes this from its own measured suite time
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # This job pushes nothing, so the workflow token has no business staying in .git/config for the
+          # rest of the job, readable by every later step (SKILL-REPO-PATTERN.md, Layer 5).
+          persist-credentials: false
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 22
+
+      # No npm install and no package.json: the checker has no dependencies. It may shell
+      # out to `npx prettier@3`, which pulls prettier from the npm registry on first use,
+      # so this job needs network. If prettier cannot run, the checker reports that as a
+      # failure rather than as a pass.
+      #
+      # GATED ON tools/check.mjs EXISTING — this skeleton ships the workflow, never the
+      # checker itself (genuinely bespoke per article repo, per this template's own
+      # README). A bare "Use this template" click must not leave a permanently red
+      # Actions tab with no fix available; hashFiles() returns '' when nothing matches,
+      # so the step is cleanly SKIPPED (not silently passed) until the real script lands.
+      - name: Run the corpus checker
+        if: hashFiles('tools/check.mjs') != ''
+        run: node tools/check.mjs
+      # Named divergence from the article template: this repository's source sweeper carries its own test, and the
+      # template's job runs only the corpus checker. Gated the same way, so the step skips if the test is ever removed.
+      - name: Test the source sweeper
+        if: hashFiles('tools/watch-sources.test.mjs') != ''
+        run: node --test tools/watch-sources.test.mjs
+
+  # AX-3: the platform's sync can carry an edit made in the GitBook editor back into this repository as a commit whose
+  # subject starts with GITBOOK-. The site is not a write surface (state it in this repository's governance statement), so such a commit on the default branch
+  # means that rule failed: this job fails the push it arrives on. It reads the pushed range (the whole range, so a
+  # superseded run elsewhere cannot hide a commit: the workflow above never cancels a run on the default branch), and for a
+  # first push only the tip. The inputs reach bash through env, never a run: line.
+  gitbook-commit-guard:
+    if: github.event_name == 'push' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Nothing is pushed from here, so the workflow token has no business staying in .git/config.
+          persist-credentials: false
+          fetch-depth: 0 # the pushed range needs the commits before it
+
+      - name: Refuse a commit made by GitBook on the default branch
+        env:
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+        run: |
+          set -uo pipefail
+          if [[ "${BEFORE}" =~ ^0+$ ]]; then range=(-1 "${AFTER}"); else range=("${BEFORE}..${AFTER}"); fi
+          if ! subjects=$(git log --format='%h %s' "${range[@]}"); then
+            echo "::error::could not list the pushed commits, so the check for a GitBook-made commit did not run; run it again"; exit 1
+          fi
+          bad=$(grep -E '^[0-9a-f]+ GITBOOK-' <<< "${subjects}" | cut -d' ' -f1 || true)
+          if [[ -n "${bad}" ]]; then
+            echo "::error::a commit made by GitBook is on the default branch (short hash: $(tr '\n' ' ' <<< "${bad}")). The site is not a write surface: report it and roll it back, never merge it as an edit"; exit 1
+          fi
+          echo "no commit in this push was made by GitBook"

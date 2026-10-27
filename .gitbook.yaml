@@ -1,0 +1,17 @@
+# What the documentation site is allowed to publish.
+#
+# Without this, GitBook publishes every tracked file, which put the agent seat
+# definition, the audit report, and the tooling on the public web as pages nobody
+# meant to write for readers. The site is a reading copy of the STANDARD and the
+# few documents around it, and nothing else.
+#
+# Note the limit honestly: this is a publication filter, not a privacy control. The
+# repository is public, so everything here is readable on GitHub either way. What
+# this stops is the site presenting internal working files as though they were part
+# of the standard.
+
+root: ./
+
+structure:
+  readme: README.md
+  summary: SUMMARY.md

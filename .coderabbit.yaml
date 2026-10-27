@@ -1,0 +1,132 @@
+# CodeRabbit configuration for the article repo kind (BB-82, owner 2026-10-08), DERIVED from the published-code canon, never retyped:
+# the hooks and scripts/** blocks are dropped (an article repository ships no hooks and no scripts of its own beyond the parity-held scanner copies, which keep their block);
+# the doc, workflow and scanner blocks and the knowledge_base block are the canon's, byte for byte (scripts/template-workflows.test.mjs holds that).
+#
+# CodeRabbit configuration for the published-code repo kind (AR-46, owner-signed 2026-09-21).
+#
+# It carries two things and only two:
+#   1. reviews.profile: assertive -- a MEASURED TRIAL against the organization's Chill profile, to be
+#      judged on the next snapshot round. It is not a verdict on the profile, and the organization-level
+#      setting stays Chill until that measurement reads.
+#   2. reviews.path_instructions that restate this org's written CONTRACTS. Each block names the
+#      document it restates. There is no tone_instructions key and no taste in any block: an
+#      instruction here may encode a contract, never a preference.
+#   3. knowledge_base: the Learnings posture (BB-82, owner 2026-10-08). Learnings stay repository-local and wait the
+#      maximum approval delay, so the owner approves or rejects each one in the dashboard before it applies. The
+#      knowledge-base switch itself (data retention) is the organization's dashboard setting and the owner's click;
+#      this file never flips it, so opt_out is not set here (a private repository sets opt_out: true in its own file).
+#      THE OWNER'S LAW ON TEACHING, 2026-10-08, verbatim: ถ้าจะสอน CodeRabbit อย่าสอนให้เข้าพวก เพราะตัวตรวจจับ จะไม่เป็นตัวตรวจจับอีกต่อไป
+#      -- an instruction or a learning encodes a fact or a contract (what a file is, where its fix lands, which
+#      standard binds); it never tells the reviewer to stay quiet on a class, never grants an exception and never
+#      carries our conclusion about a finding. A learning that would lower the number of findings is rejected at
+#      the approval step. A detector taught to agree with its subject is no longer a detector.
+#
+# THIS FILE NOW ALSO CARRIES WHAT THE REPOSITORY UI PAGE HELD (the head's order, 2026-10-26): the auto-review settings,
+# the path filters, the repository's own path instructions and its switch-offs. One home: whether a repository file
+# merges the UI layer is undocumented, so a setting kept in two places could silently read as only one of them.
+#
+# PRECEDENCE, from the vendor (docs.coderabbit.ai/guides/configuration-overview, "Understanding
+# configuration priority"): "Configuration sources don't merge by default." The repository
+# .coderabbit.yaml (priority 2) outranks Repository settings (4) and Organization settings (5), but NOT
+# the Workspace and Organization global overrides (0 and 1), which "take precedence over all other
+# configuration sources, including repository .coderabbit.yaml files" -- if the organization sets a
+# profile as a global override, the assertive below is silently ignored. Inheritance is opt-in
+# (docs.coderabbit.ai/configuration/configuration-inheritance: "Inheritance is disabled by default. You
+# must explicitly enable it by adding inheritance: true to your configuration file"); without the line
+# below this file would REPLACE the organization's other settings with schema defaults instead of adding
+# to them. Read the merged result on any pull request with the comment: @coderabbitai configuration
+inheritance: true
+# A published standard is reviewed on the vendor's released features only.
+early_access: false
+chat:
+  # Chat, and so learning creation, is limited to organization members. The UI page held it; the zone's Global overrides do not, and this file is its one home.
+  allow_non_org_members: false
+issue_enrichment:
+  auto_enrich:
+    # Issues here are reports to the owner, not tasks to enrich.
+    enabled: false
+knowledge_base:
+  learnings:
+    scope: local
+    approval_delay: 30
+  code_guidelines:
+    # Off, on the owner's law of 2026-10-08 (the header above): since 2026-10-05 CodeRabbit reads a SKILL.md at skills/<name>/
+    # in the repository root as an Agent Skill code guideline, so the product under review becomes the reviewer's own rule
+    # (14 pull requests in the org list one, UMB3-066). filePatterns can only add patterns, never drop a default, so this
+    # switch is the only way to stop it (docs.coderabbit.ai/knowledge-base/code-guidelines, read 2026-10-21).
+    enabled: false
+reviews:
+  profile: assertive
+  # Findings are read by people and pressed through Fix comments; the extra AI-agent prompt block in each comment adds nothing here.
+  enable_prompt_for_ai_agents: false
+  # Slop detection posts an automatic public label on an outsider's pull request; the conduct rule answers an outsider through a person first (CoalBoard D4, kept off when the owner asked).
+  slop_detection:
+    enabled: false
+  auto_approvals:
+    # A person merges every pull request in this repository.
+    enabled: false
+  finishing_touches:
+    simplify:
+      # Nothing here is code to simplify; the document's wording is the owner's.
+      enabled: false
+  # Considered and not written: reviews.pre_merge_checks.override_requested_reviewers_only (every pre-merge check is off at the zone,
+  # so there is nothing to override) and knowledge_base.automatic_linking_mode (the knowledge base is off at the zone, opt_out: true,
+  # the owner's switch, which a repository file never flips).
+  auto_review:
+    # coderabbit/base, anchored because the value is a regular expression, is the base branch of the house's full-repository review vehicle; 0 means a review is never paused by the count of reviewed commits.
+    base_branches:
+      - '^coderabbit/base$'
+    auto_pause_after_reviewed_commits: 0
+    # Pull requests opened by these two bots are not reviewed.
+    ignore_usernames:
+      - dependabot[bot]
+      - github-actions[bot]
+  # A filter stays only for a licence, a generated file or a binary. A filter on a hand-written record would hide it from the
+  # reviewer, which is a suppression, so none exists: those files keep their path instruction instead.
+  path_filters:
+    - "!LICENSE"
+    - "!licence.md"
+    - "!tools/LICENSE"
+    # SUMMARY.md's form is written by GitBook's Git Sync (the zone's two-faces rule 3).
+    - "!SUMMARY.md"
+    # SVG and image files.
+    - "!assets/**"
+  path_instructions:
+    # Restates DOC-PATTERN.md: "Data is verbatim from its source, never invented" and "a behaviour claim = the code".
+    - path: "{README,SECURITY,CONTRIBUTING}.md"
+      instructions: |
+        A claim about behavior must match what the code actually does, and any data shown (a version, a model ID, a benchmark figure, a count) must match its authoritative source verbatim. A version comes from the repository's manifest (plugin.json, package.json or pyproject.toml) or, where there is no manifest, from the top `## [X.Y.Z]` entry of CHANGELOG.md, the entry a release is derived from; a repository with neither shows no version, so a version shown there is itself a finding. A benchmark figure links to its record instead of being copied, and a behavior claim is whatever the code does. Report a claim the code contradicts or a figure that differs from its source.
+    # Restates SKILL-REPO-PATTERN.md: the SHA-pinned workflow set, the concurrency: groups rule, and the persist-credentials sentence added beside them.
+    - path: ".github/workflows/**"
+      instructions: |
+        Report a change that breaks any of these:
+        - Every third-party action is pinned to a full 40-character commit SHA with a version comment, never a bare tag or branch.
+        - Every workflow has a concurrency group. cancel-in-progress is true for CI, lint and CodeQL, and never true for a job that uploads a Release or tag asset.
+        - A checkout that pushes nothing sets persist-credentials: false.
+    # Restates the scanner canon's parity contract (the umbrella's scripts/scanner-parity.mjs): these four files are byte-equal copies of one source room's scanner and gate, and a copy is never edited locally.
+    - path: "scripts/{lib/secret-scan.mjs,secret-scan.test.mjs,secret-gate.mjs,secret-gate.test.mjs}"
+      instructions: |
+        These files are byte-equal copies of the organization's scanner canon, held equal to their source by a parity check; a local edit breaks the parity on purpose. Review them on their merits exactly as any other file and report every finding at its severity. Add to each finding that the fix is made at the canon's source and arrives here by blob id at the next sync, so the author routes it there instead of editing this copy. Never lower a severity, drop a finding or accept a local patch because the file is a copy.
+    # Ported from the Repository UI page, rewritten as facts and contracts (the teaching law in the header). Where a path below equals a canon path above, both apply.
+    - path: "SPRITE-DESIGN-DATUM.md"
+      instructions: |
+        This is a published standard, not a codebase, and every value is filed under an authority layer (A, A-port, L1 to L4, B-ext, B, C) that says who may change it. A plausible number that gets adopted is the failure this document exists to prevent, so a number moves only through its layer's authority. Report a value that disagrees with its layer, its stated source or another file. Headings carry explicit HTML id anchors on purpose so links survive rewording, and a table-of-contents link's display text is kept as written: report an anchor or link that no longer resolves.
+    - path: "**/*.md"
+      instructions: |
+        House typography: the em dash is unspaced (word—word, the Google, Microsoft and Chicago convention), deliberately, across every file. Text keeps whatever Unicode normalization it already carries; NFKC and NFKD discard distinctions the text depends on (UAX 15 section 1.2). Prose wording throughout is the owner's own voice. Report a factual contradiction with the code, the workflows or another file.
+    - path: "{SOURCES,REVALIDATION,AUDIT-2026-08-11}.md"
+      instructions: |
+        A dated evidence record. Every accessed date and every past reading is a historical fact, correct as of the day it was taken, and a new reading is a new dated entry. Report a row that contradicts another file.
+    - path: "ERRATA.md"
+      instructions: |
+        Corrections are appended here and the original stays readable. A correction is recorded here as an erratum and is not applied back into the corrected file, and an erratum stays in this file.
+    - path: "CHANGELOG.md"
+      instructions: |
+        A released entry is immutable; a correction gets a new entry. The version string appears in three places that must move together, and tools/check.mjs fails if they disagree.
+    - path: "tools/*.mjs"
+      instructions: |
+        Zero-dependency by design: Node built-ins only, no package.json, no lockfile, no node_modules. The absence of a dependency manifest is the design, so report code that imports anything other than a Node built-in.
+    # CONTRIBUTING.md is also matched by the canon block above: both apply.
+    - path: "{CONTRIBUTING,GOVERNANCE,CHECKLIST}.md"
+      instructions: |
+        Process text owned by the repository's owner. Report an instruction that contradicts what the code or workflows actually do.
