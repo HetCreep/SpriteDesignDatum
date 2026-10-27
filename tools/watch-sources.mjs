@@ -156,6 +156,7 @@ const verdicts = []
 const overdue = []
 const schemaNotes = []
 const classNotes = []
+const blankUrls = []
 
 for (const row of rows) {
   const raw = (row.url || '').trim()
@@ -204,13 +205,17 @@ for (const row of rows) {
     verdicts.push({ id: row.id, url, http: '-', verdict: 'skipped', note: 'revalidate never' })
     continue
   }
+  // Reached only by a row that is neither marked UNREACHABLE nor set to revalidate never, so
+  // it is meant to be watched and cannot be. Recorded and swept past, then the run fails: a
+  // watch that skips such a row and exits 0 reports a check that never happened.
   if (!url) {
+    blankUrls.push(row.id)
     verdicts.push({
       id: row.id,
       url: raw,
       http: '-',
-      verdict: 'skipped',
-      note: 'no URL in the row',
+      verdict: 'no-url',
+      note: 'no URL in a row that revalidates (schema error)',
     })
     continue
   }
@@ -261,13 +266,14 @@ for (const row of rows) {
 
 // --- write the sweep into the register --------------------------------------
 
-const fetched = verdicts.filter((v) => v.verdict !== 'skipped')
+const fetched = verdicts.filter((v) => v.verdict !== 'skipped' && v.verdict !== 'no-url')
 const count = (v) => fetched.filter((x) => x.verdict === v).length
 const esc = (s) => String(s).replace(/\|/g, '\\|')
 
 let out = `\n## Sweep ${TODAY}\n\n`
 out += `Run by \`tools/watch-sources.mjs\`. ${rows.length} rows in \`SOURCES.md\`, ${fetched.length} fetched, `
-out += `${verdicts.length - fetched.length} skipped (UNREACHABLE or revalidate \`never\`). `
+out += `${verdicts.length - fetched.length - blankUrls.length} skipped (UNREACHABLE or revalidate \`never\`), `
+out += `${blankUrls.length} with no URL to watch. `
 out += `${count('reachable')} reachable, ${count('moved')} moved, ${count('dead')} dead.\n\n`
 out += `**This is a reachability sweep and nothing more.** No row below is marked **held**: `
 out += `whether a page still says what the standard says it says is a judgement a person has to `
@@ -301,8 +307,21 @@ if (classNotes.length)
 
 console.log(out)
 
+// Called on both paths, after the sweep's output, so the rows that could be watched are still
+// reported (and, without --dry-run, still recorded) before the run fails.
+function failOnBlankUrls() {
+  if (!blankUrls.length) return
+  console.error(
+    `${blankUrls.length} row(s) revalidate but carry no URL: ${blankUrls.join(', ')}. ` +
+      'Those rows were not checked, so this is not a pass. Give each a URL, or mark it ' +
+      'UNREACHABLE with the reason, or set its revalidate to never.',
+  )
+  process.exit(CANNOT_WATCH)
+}
+
 if (DRY) {
   console.log('--dry-run: REVALIDATION.md was not written.')
+  failOnBlankUrls()
   process.exit(0)
 }
 
@@ -326,3 +345,4 @@ spawnSync(
 )
 
 console.log(`Appended sweep ${TODAY} to REVALIDATION.md.`)
+failOnBlankUrls()

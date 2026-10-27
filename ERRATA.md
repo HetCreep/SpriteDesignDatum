@@ -43,6 +43,8 @@ it. **The quoted text is the locator. The line number is a convenience.**
 | [E-002](#e-002) | `SPRITE-DESIGN-DATUM.md:668`                 | The half-texel explanation is attributed to a page that does not contain it. The statement itself is correct                                                                                                    | **corrected in 1.1.0** |
 | [E-003](#e-003) | `SPRITE-DESIGN-DATUM.md:464-470`, `:687-694` | Layer B and the unbounded register are sorted on **two different axes**, printed as though they were one. Three quantities appear in both lists, and for two of them that is correct rather than contradictory. | **corrected in 2.0.0** |
 | [E-004](#e-004) | `SPRITE-DESIGN-DATUM.md:712` (in `2.0.2`)    | The Godot atlas-padding row reads as an engine-wide default. Godot documents 1 px padding only for the TileSet atlas (`TileSetAtlasSource`). The number is right, the scope was too wide                        | **corrected in 2.0.3** |
+| [E-005](#e-005) | `SPRITE-DESIGN-DATUM.md:304` (in `2.0.3`)    | P3 says any WebView port keeps the same renderer and contract. L3, its evidence, lists only Capacitor / Cordova. The claim was wider than the table                                                             | **corrected in 2.0.4** |
+| [E-006](#e-006) | `SPRITE-DESIGN-DATUM.md:702` (in `2.0.4`)    | The Pixel-exact rendering row names Google Play Console Help as its source. The fact is Unity 2D Pixel Perfect's; the row took the source cell of the row it replaced in 1.1.0                                  | **corrected in 2.0.5** |
 
 ---
 
@@ -223,11 +225,11 @@ the sentence saying it is allowed.
 
 **The three, separated**
 
-| quantity                   | can the project measure it?                                                           | does anything external bound it?                                             | belongs                                 |
-| -------------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | --------------------------------------- |
-| direction-to-index mapping | **no**—no instrument can output "index 0 means north" from pixels; it is a bare label | no                                                                           | **C only.** The one genuine mis-filing. |
-| frame count per direction  | **yes**—`ls                                                                           \| wc -l`, fewer free parameters than reading a canvas size out of a PNG header | no                                      | **both, legitimately** |
-| playback cadence           | **yes**—a stored, re-derivable configuration value                                    | no                                                                           | **both, legitimately**                  |
+| quantity                   | can the project measure it?                                                                 | does anything external bound it? | belongs                                 |
+| -------------------------- | ------------------------------------------------------------------------------------------- | -------------------------------- | --------------------------------------- |
+| direction-to-index mapping | **no**—no instrument can output "index 0 means north" from pixels; it is a bare label       | no                               | **C only.** The one genuine mis-filing. |
+| frame count per direction  | **yes**—`ls \| wc -l`, fewer free parameters than reading a canvas size out of a PNG header | no                               | **both, legitimately**                  |
+| playback cadence           | **yes**—a stored, re-derivable configuration value                                          | no                               | **both, legitimately**                  |
 
 **Evidence the "measurable" half of the obvious fix does not hold either**
 
@@ -350,3 +352,81 @@ one texture", which the Godot row contradicts; it now says each is a gutter insi
 texture, between two sprites or, for Godot, around each tile. The value stays 1 px. The Unity and
 libGDX rows were re-read against their pages for the same defect and hold: each row already names
 the tool whose settings it reads.
+
+---
+
+<a id="e-005"></a>
+
+### E-005 · P3 promises the same renderer for every WebView, and L3 shows it for two
+
+| field        | value                                                                                          |
+| ------------ | ---------------------------------------------------------------------------------------------- |
+| **state**    | **corrected in 2.0.4**—the owner signed the narrowing, 2026-10-03                              |
+| **reported** | 2026-10-02, by a CodeRabbit review of the repository, read against the standard's own L3 table |
+| **found in** | 2.0.3 (earlier versions were not checked)                                                      |
+| **location** | `SPRITE-DESIGN-DATUM.md:304`—P3, Render target                                                 |
+| **kind**     | **over-general scope**, no value involved                                                      |
+
+**What the standard says**
+
+```
+A WebView port keeps the same renderer and the same contract.
+```
+
+**What the evidence says**—the standard's own L3 table, the only place a WebView target is assessed:
+
+```
+| WebView (Capacitor / Cordova)  | binding—same engine | binding |
+```
+
+**What is actually wrong**
+
+L3 shows the contract holding for one WebView row, Capacitor / Cordova, and P3 generalised it to
+every WebView. A host that brings its own renderer is not covered by anything the standard shows.
+The statement may be true more widely; the standard does not show it, so it does not say it.
+
+**What changes in 2.0.4**
+
+P3 names the targets L3 lists and states that it makes no claim for any other WebView host. L3 is
+unchanged.
+
+---
+
+<a id="e-006"></a>
+
+### E-006 · The Pixel-exact rendering row names Google Play as its source
+
+| field        | value                                                                                                    |
+| ------------ | -------------------------------------------------------------------------------------------------------- |
+| **state**    | **corrected in 2.0.5**—the owner signed the correction, 2026-10-03                                       |
+| **reported** | 2026-10-03, by a review of the conformance example, read against the standard's history and `SOURCES.md` |
+| **found in** | 2.0.4; present since 1.1.0                                                                               |
+| **location** | `SPRITE-DESIGN-DATUM.md:702`—Recommendation, Pixel-exact rendering                                       |
+| **kind**     | **wrong source attribution**, no value involved                                                          |
+
+**What the standard says**
+
+```
+| Pixel-exact rendering | one identical Pixels Per Unit across every sprite in a scene—nothing rejects, clamps, or detects a mismatch; it renders and looks wrong | Google Play Console Help |
+```
+
+**What the evidence says**—version 1.0.0, where the row sat among the hard limits:
+
+```
+| Pixel-exact rendering | **one identical Pixels Per Unit across every sprite in a scene** | Unity 2D Pixel Perfect 5.0 |
+```
+
+The same package is the one A1 quotes (`SOURCES.md`, S-006). Google Play Console Help is the page
+the standard cites for store-listing assets.
+
+**What is actually wrong**
+
+Version 1.1.0 moved this row to the Recommendation table, into the place of a row it removed, "Store
+listing aspect targets", whose source was Google Play Console Help. The moved row kept that source
+cell. The value was never affected; the attribution was. `SOURCES.md` went on mapping the line to
+the removed row (S-037) and could not find the Unity citation (S-034, recorded as unresolved).
+
+**What changes in 2.0.5**
+
+The row's source reads "Unity 2D Pixel Perfect 5.0" again. In `SOURCES.md`, S-034 points at the row
+and S-037 is marked as removed in 1.1.0.

@@ -38,8 +38,8 @@ standard's line count changes.
 since 08-11—several prose citations moved into consolidated tables), by `grep -n` for the row's own
 distinguishing citation text, not by offsetting the old numbers. Method: for each row, the shortest
 substring of its `cited as` text that is unique in the file was located, and the line it resolves to
-today is recorded. Two rows could not be re-derived this way and are marked `UNRESOLVED` in
-place—see their notes.
+today is recorded. Two rows could not be re-derived this way and were marked `UNRESOLVED` in place
+(S-034 was resolved in 2.0.5; S-042 still is)—see their notes.
 
 ## Class
 
@@ -72,6 +72,9 @@ Chosen by how fast each class actually moves, not per row:
 
 `UNREACHABLE` is a state, not a schedule—such a row keeps its class's interval.
 
+A row no longer cited by the standard (S-037) keeps its id and is set to `never`: it is not swept,
+because nothing depends on it.
+
 ---
 
 ## Standards named in prose
@@ -94,8 +97,8 @@ therefore recorded as unverified rather than guessed.
 | S-005 | `constexpr sampler s(coord::pixel, …)`                   | 187  | SPECIFICATION | https://developer.apple.com/metal/Metal-Shading-Language-Specification.pdf                                               | unversioned at the URL  | 2026-08-11 | 1y         |
 | S-009 | "On WebGL1 specifically"—NPOT sampling restrictions      | 227  | SPECIFICATION | UNREACHABLE—403 on `registry.khronos.org/webgl/specs/latest/1.0/`                                                        | WebGL 1.0 / GLES 2.0    | 2026-08-11 | never      |
 | S-011 | "could not reach a Khronos _specification_" (ASTC)       | 252  | SPECIFICATION | UNREACHABLE—403 across `registry.khronos.org`                                                                            | —                       | 2026-08-11 | 2y         |
-| S-018 | OpenGL 1.0 (1992)                                        | 380  | SPECIFICATION | UNREACHABLE—403 on `registry.khronos.org/OpenGL/specs/gl/glspec10.pdf` and on `registry.khronos.org/OpenGL/index_gl.php` | 1.0 (1992)              | 2026-08-11 | never      |
-| S-043 | HTTP standards define the `max-age` **mechanism**        | 756  | SPECIFICATION | https://www.rfc-editor.org/rfc/rfc9111.html                                                                              | RFC 9111 (June 2022)    | 2026-08-11 | never      |
+| S-018 | OpenGL 1.0 (1992)                                        | 381  | SPECIFICATION | UNREACHABLE—403 on `registry.khronos.org/OpenGL/specs/gl/glspec10.pdf` and on `registry.khronos.org/OpenGL/index_gl.php` | 1.0 (1992)              | 2026-08-11 | never      |
+| S-043 | HTTP standards define the `max-age` **mechanism**        | 757  | SPECIFICATION | https://www.rfc-editor.org/rfc/rfc9111.html                                                                              | RFC 9111 (June 2022)    | 2026-08-11 | never      |
 
 **`registry.khronos.org` blocks automated fetches.** Four distinct URLs on that host returned 403,
 including the one the standard's own honest-weakness note at line 252 (re-derived 2026-09-03; was
@@ -109,26 +112,26 @@ version string are unread. The locator is confirmed live; the citation is not co
 
 ## Engine and runtime vendor documentation
 
-| id    | cited as                                                     | line           | class          | url                                                                                                                     | version                  | accessed   | revalidate |
-| ----- | ------------------------------------------------------------ | -------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------ | ---------- | ---------- |
-| S-006 | Unity 2D Pixel Perfect package 5.0, _Pixel Perfect Camera_   | 203            | VENDOR_DOC     | https://docs.unity3d.com/Packages/com.unity.2d.pixel-perfect@5.0/manual/index.html                                      | package 5.0.3            | 2026-08-11 | 180d       |
-| S-007 | Unity Manual, _Import a texture_                             | 215            | RECOMMENDATION | https://docs.unity3d.com/Manual/ImportingTextures.html                                                                  | Unity 6.5 (6000.5)       | 2026-08-11 | 180d       |
-| S-008 | Unity Manual, _Import a texture_                             | 225            | VENDOR_DOC     | https://docs.unity3d.com/Manual/ImportingTextures.html                                                                  | Unity 6.5 (6000.5)       | 2026-08-11 | 180d       |
-| S-010 | "MDN tutorial prose"                                         | 231            | VENDOR_DOC     | https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Tutorial/Using_textures_in_WebGL                             | unversioned              | 2026-08-11 | 180d       |
-| S-012 | BCn on **Direct3D 11 and earlier**                           | 249            | VENDOR_DOC     | https://learn.microsoft.com/en-us/windows/win32/direct3d10/d3d10-graphics-programming-guide-resources-block-compression | page updated 2025-04-15  | 2026-08-11 | never      |
-| S-013 | Godot 4 documentation, _Multiple resolutions_                | 297            | RECOMMENDATION | https://docs.godotengine.org/en/stable/tutorials/rendering/multiple_resolutions.html                                    | `/en/stable/` serves 4.7 | 2026-08-11 | 180d       |
-| S-014 | Aseprite (`sourceSize` / `spriteSourceSize`)                 | 338            | VENDOR_DOC     | https://gist.github.com/dacap/db18e5747a4b6e208d3c                                                                      | unversioned              | 2026-08-11 | 1y         |
-| S-015 | libGDX (`offsetX` / `originalWidth`)                         | 338            | VENDOR_DOC     | https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/graphics/g2d/TextureAtlas.java                    | `master`                 | 2026-08-11 | 1y         |
-| S-016 | Unity (`Sprite.pivot` in import metadata)                    | 338            | VENDOR_DOC     | https://docs.unity3d.com/ScriptReference/Sprite-pivot.html                                                              | Unity 6.5 (6000.5)       | 2026-08-11 | 180d       |
-| S-019 | `SpriteAlignment.BottomCenter`—Unity ScriptReference         | 396            | VENDOR_DOC     | https://docs.unity3d.com/ScriptReference/SpriteAlignment.BottomCenter.html                                              | Unity 6.5 (6000.5)       | 2026-08-11 | 180d       |
-| S-022 | `Sprite.pixelsPerUnit`—Unity ScriptReference                 | 433            | VENDOR_DOC     | https://docs.unity3d.com/ScriptReference/Sprite-pixelsPerUnit.html                                                      | Unity 6.5 (6000.5)       | 2026-08-11 | 180d       |
-| S-023 | `SpriteBase3D.pixel_size`—Godot 4 documentation              | 436            | VENDOR_DOC     | https://docs.godotengine.org/en/stable/classes/class_spritebase3d.html                                                  | `/en/stable/` serves 4.7 | 2026-08-11 | 180d       |
-| S-031 | Unity Manual, _Import a texture_ (texture dimension ceiling) | 680            | VENDOR_DOC     | https://docs.unity3d.com/Manual/ImportingTextures.html                                                                  | Unity 6.5 (6000.5)       | 2026-08-11 | 180d       |
-| S-032 | Unreal Engine, _Texture Format Support and Settings_         | 681            | VENDOR_DOC     | https://dev.epicgames.com/documentation/en-us/unreal-engine/texture-format-support-and-settings-in-unreal-engine        | UE 5.8 documentation     | 2026-08-11 | 180d       |
-| S-033 | Unity Manual, _Sprite texture type reference_                | 682            | VENDOR_DOC     | https://docs.unity3d.com/Manual/texture-type-sprite.html                                                                | Unity 6.5 (6000.5)       | 2026-08-11 | 180d       |
-| S-034 | Unity 2D Pixel Perfect 5.0                                   | **UNRESOLVED** | VENDOR_DOC     | https://docs.unity3d.com/Packages/com.unity.2d.pixel-perfect@5.0/manual/index.html                                      | package 5.0.3            | 2026-08-11 | 180d       |
-| S-035 | Unity, corroborated by Godot and Unreal                      | 699            | RECOMMENDATION | https://docs.unity3d.com/Manual/ImportingTextures.html                                                                  | Unity 6.5 (6000.5)       | 2026-08-11 | 180d       |
-| S-036 | Godot 4, _Multiple resolutions_                              | 700            | RECOMMENDATION | https://docs.godotengine.org/en/stable/tutorials/rendering/multiple_resolutions.html                                    | `/en/stable/` serves 4.7 | 2026-08-11 | 180d       |
+| id    | cited as                                                     | line | class          | url                                                                                                                     | version                  | accessed   | revalidate |
+| ----- | ------------------------------------------------------------ | ---- | -------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------ | ---------- | ---------- |
+| S-006 | Unity 2D Pixel Perfect package 5.0, _Pixel Perfect Camera_   | 203  | VENDOR_DOC     | https://docs.unity3d.com/Packages/com.unity.2d.pixel-perfect@5.0/manual/index.html                                      | package 5.0.3            | 2026-08-11 | 180d       |
+| S-007 | Unity Manual, _Import a texture_                             | 215  | RECOMMENDATION | https://docs.unity3d.com/Manual/ImportingTextures.html                                                                  | Unity 6.5 (6000.5)       | 2026-08-11 | 180d       |
+| S-008 | Unity Manual, _Import a texture_                             | 225  | VENDOR_DOC     | https://docs.unity3d.com/Manual/ImportingTextures.html                                                                  | Unity 6.5 (6000.5)       | 2026-08-11 | 180d       |
+| S-010 | "MDN tutorial prose"                                         | 231  | VENDOR_DOC     | https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Tutorial/Using_textures_in_WebGL                             | unversioned              | 2026-08-11 | 180d       |
+| S-012 | BCn on **Direct3D 11 and earlier**                           | 249  | VENDOR_DOC     | https://learn.microsoft.com/en-us/windows/win32/direct3d10/d3d10-graphics-programming-guide-resources-block-compression | page updated 2025-04-15  | 2026-08-11 | never      |
+| S-013 | Godot 4 documentation, _Multiple resolutions_                | 297  | RECOMMENDATION | https://docs.godotengine.org/en/stable/tutorials/rendering/multiple_resolutions.html                                    | `/en/stable/` serves 4.7 | 2026-08-11 | 180d       |
+| S-014 | Aseprite (`sourceSize` / `spriteSourceSize`)                 | 339  | VENDOR_DOC     | https://gist.github.com/dacap/db18e5747a4b6e208d3c                                                                      | unversioned              | 2026-08-11 | 1y         |
+| S-015 | libGDX (`offsetX` / `originalWidth`)                         | 339  | VENDOR_DOC     | https://github.com/libgdx/libgdx/blob/master/gdx/src/com/badlogic/gdx/graphics/g2d/TextureAtlas.java                    | `master`                 | 2026-08-11 | 1y         |
+| S-016 | Unity (`Sprite.pivot` in import metadata)                    | 339  | VENDOR_DOC     | https://docs.unity3d.com/ScriptReference/Sprite-pivot.html                                                              | Unity 6.5 (6000.5)       | 2026-08-11 | 180d       |
+| S-019 | `SpriteAlignment.BottomCenter`—Unity ScriptReference         | 397  | VENDOR_DOC     | https://docs.unity3d.com/ScriptReference/SpriteAlignment.BottomCenter.html                                              | Unity 6.5 (6000.5)       | 2026-08-11 | 180d       |
+| S-022 | `Sprite.pixelsPerUnit`—Unity ScriptReference                 | 434  | VENDOR_DOC     | https://docs.unity3d.com/ScriptReference/Sprite-pixelsPerUnit.html                                                      | Unity 6.5 (6000.5)       | 2026-08-11 | 180d       |
+| S-023 | `SpriteBase3D.pixel_size`—Godot 4 documentation              | 437  | VENDOR_DOC     | https://docs.godotengine.org/en/stable/classes/class_spritebase3d.html                                                  | `/en/stable/` serves 4.7 | 2026-08-11 | 180d       |
+| S-031 | Unity Manual, _Import a texture_ (texture dimension ceiling) | 681  | VENDOR_DOC     | https://docs.unity3d.com/Manual/ImportingTextures.html                                                                  | Unity 6.5 (6000.5)       | 2026-08-11 | 180d       |
+| S-032 | Unreal Engine, _Texture Format Support and Settings_         | 682  | VENDOR_DOC     | https://dev.epicgames.com/documentation/en-us/unreal-engine/texture-format-support-and-settings-in-unreal-engine        | UE 5.8 documentation     | 2026-08-11 | 180d       |
+| S-033 | Unity Manual, _Sprite texture type reference_                | 683  | VENDOR_DOC     | https://docs.unity3d.com/Manual/texture-type-sprite.html                                                                | Unity 6.5 (6000.5)       | 2026-08-11 | 180d       |
+| S-034 | Unity 2D Pixel Perfect 5.0                                   | 702  | VENDOR_DOC     | https://docs.unity3d.com/Packages/com.unity.2d.pixel-perfect@5.0/manual/index.html                                      | package 5.0.3            | 2026-08-11 | 180d       |
+| S-035 | Unity, corroborated by Godot and Unreal                      | 700  | RECOMMENDATION | https://docs.unity3d.com/Manual/ImportingTextures.html                                                                  | Unity 6.5 (6000.5)       | 2026-08-11 | 180d       |
+| S-036 | Godot 4, _Multiple resolutions_                              | 701  | RECOMMENDATION | https://docs.godotengine.org/en/stable/tutorials/rendering/multiple_resolutions.html                                    | `/en/stable/` serves 4.7 | 2026-08-11 | 180d       |
 
 **Godot's `/en/stable/` is a moving pointer, not a version.** On the access date it serves **Godot
 4.7**. A reader following these URLs a year from now will be reading a different engine release
@@ -140,13 +143,12 @@ repeating the word.
 content but eventually 404s as old versions age out, so the versionless form is recorded and the
 resolved version noted beside it.
 
-**S-034 is UNRESOLVED.** Its old citation text, "Unity 2D Pixel Perfect 5.0," is no longer findable
-as a distinct second occurrence in the standard—only S-006's citation of the same package (line 203,
-`_Pixel Perfect Camera_`) remains. Either the standard's own reorganization since 08-11 merged this
-second citation away, or it was consolidated into the dimension/atlas tables under different wording
-this pass could not identify by substring search. Recorded unresolved rather than pointed at a
-guessed line; the url is left as-is since the SOURCE itself is not in question, only where the
-standard cites it a second time.
+**S-034 was resolved in 2.0.5.** Version 1.1.0 moved the Pixel-exact rendering row from the hard
+limits to the Recommendation table, into the place of a row it removed, "Store listing aspect
+targets", and the moved row kept that row's source cell, "Google Play Console Help". The standard
+then cited this package a second time under the wrong name, and a search for "Unity 2D Pixel Perfect
+5.0" found only S-006. 2.0.5 restores the source (`ERRATA.md`, E-006), and S-034 points at the row
+again.
 
 Two title mismatches, neither of them a defect in substance. S-033's page is titled _"Sprite (2D and
 UI) texture Import Settings window reference"_, not _"Sprite texture type reference"_. S-035's
@@ -155,15 +157,19 @@ Unreal page; only the Unity locator can be supplied without guessing.
 
 ## Store and platform policy
 
-| id    | cited as                                                              | line | class          | url                                                                                                    | version     | accessed   | revalidate |
-| ----- | --------------------------------------------------------------------- | ---- | -------------- | ------------------------------------------------------------------------------------------------------ | ----------- | ---------- | ---------- |
-| S-017 | "An Android App Bundle that targets texture compression formats…"     | 369  | VENDOR_DOC     | https://developer.android.com/guide/playcore/asset-delivery/texture-compression                        | unversioned | 2026-08-11 | 90d        |
-| S-026 | Google Play Console Help, _Add preview assets_ (screenshot, per side) | 675  | VENDOR_DOC     | https://support.google.com/googleplay/android-developer/answer/9866151                                 | unversioned | 2026-08-11 | 90d        |
-| S-027 | Google Play Console Help (screenshot, aspect)                         | 676  | VENDOR_DOC     | https://support.google.com/googleplay/android-developer/answer/9866151                                 | unversioned | 2026-08-11 | 90d        |
-| S-028 | Google Play Console Help (listing icon)                               | 677  | VENDOR_DOC     | https://support.google.com/googleplay/android-developer/answer/9866151                                 | unversioned | 2026-08-11 | 90d        |
-| S-029 | Google Play Console Help (feature graphic)                            | 678  | VENDOR_DOC     | https://support.google.com/googleplay/android-developer/answer/9866151                                 | unversioned | 2026-08-11 | 90d        |
-| S-030 | Apple, App Store Connect Help (screenshot sizes)                      | 679  | VENDOR_DOC     | https://developer.apple.com/help/app-store-connect/reference/app-information/screenshot-specifications | unversioned | 2026-08-11 | 90d        |
-| S-037 | Google Play Console Help (listing aspect targets)                     | 701  | RECOMMENDATION | https://support.google.com/googleplay/android-developer/answer/9866151                                 | unversioned | 2026-08-11 | 90d        |
+| id    | cited as                                                              | line                 | class          | url                                                                                                    | version     | accessed   | revalidate |
+| ----- | --------------------------------------------------------------------- | -------------------- | -------------- | ------------------------------------------------------------------------------------------------------ | ----------- | ---------- | ---------- |
+| S-017 | "An Android App Bundle that targets texture compression formats…"     | 370                  | VENDOR_DOC     | https://developer.android.com/guide/playcore/asset-delivery/texture-compression                        | unversioned | 2026-08-11 | 90d        |
+| S-026 | Google Play Console Help, _Add preview assets_ (screenshot, per side) | 676                  | VENDOR_DOC     | https://support.google.com/googleplay/android-developer/answer/9866151                                 | unversioned | 2026-08-11 | 90d        |
+| S-027 | Google Play Console Help (screenshot, aspect)                         | 677                  | VENDOR_DOC     | https://support.google.com/googleplay/android-developer/answer/9866151                                 | unversioned | 2026-08-11 | 90d        |
+| S-028 | Google Play Console Help (listing icon)                               | 678                  | VENDOR_DOC     | https://support.google.com/googleplay/android-developer/answer/9866151                                 | unversioned | 2026-08-11 | 90d        |
+| S-029 | Google Play Console Help (feature graphic)                            | 679                  | VENDOR_DOC     | https://support.google.com/googleplay/android-developer/answer/9866151                                 | unversioned | 2026-08-11 | 90d        |
+| S-030 | Apple, App Store Connect Help (screenshot sizes)                      | 680                  | VENDOR_DOC     | https://developer.apple.com/help/app-store-connect/reference/app-information/screenshot-specifications | unversioned | 2026-08-11 | 90d        |
+| S-037 | Google Play Console Help (listing aspect targets)                     | **REMOVED in 1.1.0** | RECOMMENDATION | https://support.google.com/googleplay/android-developer/answer/9866151                                 | unversioned | 2026-08-11 | never      |
+
+**S-037 is no longer cited.** Its row, "Store listing aspect targets", left the standard in 1.1.0
+(see S-034 above). The id is kept and never renumbered, and its revalidate is `never` because
+nothing cites it now.
 
 All four Google Play rows resolve to one page. Neither store versions or dates its help pages, so
 `accessed` is the only handle a reader has on when the policy was read—which is why this class
@@ -173,16 +179,20 @@ carries the shortest interval in the register.
 
 | id    | cited as                     | line | class        | url                                                                                           | version                | accessed   | revalidate |
 | ----- | ---------------------------- | ---- | ------------ | --------------------------------------------------------------------------------------------- | ---------------------- | ---------- | ---------- |
-| S-020 | cocos2d-x                    | 407  | TOOL_DEFAULT | https://docs.cocos2d-x.org/api-ref/cplusplus/v4x/d3/d5c/classcocos2d_1_1_sprite.html          | v4.x                   | 2026-08-11 | 1y         |
-| S-021 | Tiled                        | 411  | TOOL_DEFAULT | https://doc.mapeditor.org/en/stable/manual/objects/                                           | `/en/stable/` → 1.12   | 2026-08-11 | 1y         |
-| S-038 | Unity Sprite Atlas           | 709  | TOOL_DEFAULT | https://docs.unity3d.com/6000.3/Documentation/Manual/sprite/atlas/sprite-atlas-reference.html | Unity 6.3 LTS (6000.3) | 2026-08-11 | 180d       |
-| S-039 | libGDX TexturePacker         | 710  | TOOL_DEFAULT | https://libgdx.com/wiki/tools/texture-packer                                                  | unversioned (wiki)     | 2026-08-11 | 1y         |
-| S-040 | TexturePacker                | 711  | TOOL_DEFAULT | https://www.codeandweb.com/texturepacker/documentation/texture-settings                       | unversioned            | 2026-08-11 | 1y         |
-| S-041 | Godot 4.x TileSetAtlasSource | 712  | TOOL_DEFAULT | https://docs.godotengine.org/en/stable/classes/class_tilesetatlassource.html                  | Godot 4.7 (`stable`)   | 2026-09-25 | 180d       |
+| S-020 | cocos2d-x                    | 408  | TOOL_DEFAULT | https://docs.cocos2d-x.org/api-ref/cplusplus/v4x/d3/d5c/classcocos2d_1_1_sprite.html          | v4.x                   | 2026-08-11 | 1y         |
+| S-021 | Tiled                        | 412  | TOOL_DEFAULT | https://doc.mapeditor.org/en/stable/manual/objects/                                           | `/en/stable/` → 1.12   | 2026-08-11 | 1y         |
+| S-038 | Unity Sprite Atlas           | 710  | TOOL_DEFAULT | https://docs.unity3d.com/6000.3/Documentation/Manual/sprite/atlas/sprite-atlas-reference.html | Unity 6.3 LTS (6000.3) | 2026-08-11 | 180d       |
+| S-039 | libGDX TexturePacker         | 711  | TOOL_DEFAULT | https://libgdx.com/wiki/tools/texture-packer                                                  | unversioned (wiki)     | 2026-08-11 | 1y         |
+| S-040 | TexturePacker                | 712  | TOOL_DEFAULT | https://www.codeandweb.com/texturepacker/documentation/texture-settings                       | unversioned            | 2026-08-11 | 1y         |
+| S-041 | Godot 4.x TileSetAtlasSource | 713  | TOOL_DEFAULT | https://docs.godotengine.org/en/stable/classes/class_tilesetatlassource.html                  | Godot 4.7 (`stable`)   | 2026-09-25 | 180d       |
 
 S-038 is the one row that had to be version-pinned: the versionless
 `docs.unity3d.com/Manual/sprite-atlas-reference.html` returns 404, and the page lives under a
 version-and-section path. Expect this locator to need repair sooner than its siblings.
+
+S-038 open residual: this row cites Unity's Sprite Atlas reference page, last read 2026-08-11 (the
+row, and the sweeps in `REVALIDATION.md`). Whether a Sprite Atlas V2 asset shares the 4 px default
+is not on that page and is not verified anywhere in this repository.
 
 **S-041 RESOLVED (2026-09-25, ARK-045 c).** The locator is Godot's `TileSetAtlasSource` class
 reference, property `use_texture_padding`: `bool use_texture_padding = true` (Godot 4.7, the
@@ -217,8 +227,8 @@ is arguably the truer one. Owner's call—the register does not reclassify a cit
 
 | id    | cited as                                        | line | class             | url                                                                                | version               | accessed   | revalidate |
 | ----- | ----------------------------------------------- | ---- | ----------------- | ---------------------------------------------------------------------------------- | --------------------- | ---------- | ---------- |
-| S-024 | Universal LPC Spritesheet (Liberated Pixel Cup) | 629  | EXTERNAL-MEASURED | https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator | unversioned (rolling) | 2026-08-11 | 1y         |
-| S-025 | Battle for Wesnoth                              | 635  | EXTERNAL-MEASURED | https://github.com/wesnoth/wesnoth                                                 | unversioned (rolling) | 2026-08-11 | 1y         |
+| S-024 | Universal LPC Spritesheet (Liberated Pixel Cup) | 630  | EXTERNAL-MEASURED | https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator | unversioned (rolling) | 2026-08-11 | 1y         |
+| S-025 | Battle for Wesnoth                              | 636  | EXTERNAL-MEASURED | https://github.com/wesnoth/wesnoth                                                 | unversioned (rolling) | 2026-08-11 | 1y         |
 
 Both repositories exist, both ship the per-file credit files the standard names (`CREDITS.csv`,
 `copyrights.csv`), and both describe the per-file licence structure the standard describes. The
@@ -234,8 +244,8 @@ so the owner has the right URL in hand when deciding what, if anything, to do ab
 | id    | cited as                                                                  | line           | class         | url                                                                                                               | version                 | accessed   | revalidate |
 | ----- | ------------------------------------------------------------------------- | -------------- | ------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------- | ---------- | ---------- |
 | S-042 | Microsoft Learn, _Bilinear Texture Filtering_                             | **UNRESOLVED** | VENDOR_DOC    | https://learn.microsoft.com/en-us/windows/win32/direct3d9/bilinear-texture-filtering                              | page updated 2025-03-11 | 2026-08-11 | never      |
-| S-044 | _(not attributed)_—Coordinate Systems (Direct3D 10)                       | 735            | VENDOR_DOC    | https://learn.microsoft.com/en-us/windows/win32/direct3d10/d3d10-graphics-programming-guide-resources-coordinates | page updated 2025-03-11 | 2026-08-11 | never      |
-| S-045 | _(not attributed)_—Vulkan sampling coordinate systems                     | 735            | SPECIFICATION | https://docs.vulkan.org/spec/latest/chapters/textures.html                                                        | spec `latest` (rolling) | 2026-08-11 | 1y         |
+| S-044 | _(not attributed)_—Coordinate Systems (Direct3D 10)                       | 736            | VENDOR_DOC    | https://learn.microsoft.com/en-us/windows/win32/direct3d10/d3d10-graphics-programming-guide-resources-coordinates | page updated 2025-03-11 | 2026-08-11 | never      |
+| S-045 | _(not attributed)_—Vulkan sampling coordinate systems                     | 736            | SPECIFICATION | https://docs.vulkan.org/spec/latest/chapters/textures.html                                                        | spec `latest` (rolling) | 2026-08-11 | 1y         |
 | S-046 | _(not attributed)_—"block-compression documentation from tooling vendors" | 253            | VENDOR_DOC    | https://github.com/ARM-software/astc-encoder/blob/main/Docs/FileFormat.md                                         | `main`                  | 2026-08-11 | 1y         |
 
 **S-042's `line` is UNRESOLVED as of 2026-09-03**—no distinct citation of "Bilinear Texture
