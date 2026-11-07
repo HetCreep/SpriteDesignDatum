@@ -55,12 +55,13 @@ export function extractChangelogEntry(changelogText, tagVersion, { previousStabl
   const headingIdx = lines.findIndex((l) => /^##\s*\[/.test(l));
   if (headingIdx === -1) throw new ChangelogShapeError('CHANGELOG.md has no version heading ("## [X.Y.Z] - YYYY-MM-DD")');
 
+  // the unfinished entry is named before the date is read: the standard `## [Unreleased]` carries no date, so reaching the date check first reported it as a malformed heading (14h, CoalLedger #8)
+  if (/^##\s*\[\s*unreleased\s*\]/i.test(lines[headingIdx])) {
+    throw new ChangelogShapeError('top entry is still [Unreleased] -- the CHANGELOG entry is written and finalized BEFORE the tag (RELEASE-PATTERN.md "The chain around the press", step 1)');
+  }
   const m = lines[headingIdx].match(/^##\s*\[([^\]]+)\]\s*-\s*(\d{4}-\d{2}-\d{2})\s*$/);
   if (!m) throw new ChangelogShapeError(`top heading "${lines[headingIdx].trim()}" is not "## [X.Y.Z] - YYYY-MM-DD"`);
   const [, version, date] = m;
-  if (version.toLowerCase() === 'unreleased') {
-    throw new ChangelogShapeError('top entry is still [Unreleased] -- the CHANGELOG entry is written and finalized BEFORE the tag (RELEASE-PATTERN.md "The chain around the press", step 1)');
-  }
   if (version !== tagVersion) {
     throw new ChangelogShapeError(`top entry is [${version}] but the pushed tag is v${tagVersion} -- the CHANGELOG entry must match the tag it is cut for`);
   }
@@ -81,6 +82,12 @@ export function extractChangelogEntry(changelogText, tagVersion, { previousStabl
     throw new ChangelogShapeError(`the [${version}] entry has no one-line summary before its first "### " section -- add one sentence stating what changed and why it matters (this becomes the Release's title and Lead)`);
   }
   const summary = body[firstContentIdx].trim();
+  // The summary becomes the Release title, the announcement and every log line that prints them, so a control character in it (C0, DEL or C1:
+  // an escape sequence, a lone carriage return) refuses the entry by name, and only its code point is echoed, never the character (CWE-117).
+  for (const ch of summary) {
+    const c = ch.codePointAt(0);
+    if (c < 0x20 || (c >= 0x7f && c <= 0x9f)) throw new ChangelogShapeError(`the [${version}] summary line carries a control character (code point ${c}) -- remove it; the summary becomes the Release title`);
+  }
 
   const afterSummary = body.slice(firstContentIdx + 1);
   const sectionsStart = afterSummary.findIndex((l) => /^###\s/.test(l));
@@ -114,7 +121,9 @@ export const MIRROR_TITLE_CAP = 200;
 
 export function mirroredTitle(repo, tag, releaseName) {
   const name = String(releaseName || '').trim();
-  return name ? (name.startsWith(tag) ? `${repo} ${name}` : `${repo} ${tag} - ${name}`) : `${repo} ${tag}`;
+  // The tag is the name's own prefix only at a boundary: "v2.7.0" is not the prefix of "v2.7.01" or "v2.7.0-rc1" (UMB-456 (1) iv).
+  const named = name.startsWith(tag) && /^(\s|$)/.test(name.slice(tag.length));
+  return name ? (named ? `${repo} ${name}` : `${repo} ${tag} - ${name}`) : `${repo} ${tag}`;
 }
 
 // null when the mirrored title fits; else the named message the pre-tag check prints (and the announcer's run summary repeats).
