@@ -3,15 +3,16 @@
 //
 // WHY: GitHub scans a public repository for PROVIDER tokens. This gate is the repository's own check: it runs the
 // portable scanner (scripts/lib/secret-scan.mjs, kept byte-identical in every repository that carries it) before a
-// commit and before a push. The scanner catches a provider-shaped token, a private-key header and a high-entropy value
-// assigned to a name like secret, token, password or key. It does NOT catch a credential inside a URL or connection
-// string (scheme://user:pass@host), an HTTP authentication header whose value is not on such a named assignment, or a
-// key split across lines.
+// commit and before a push. The scanner catches a provider-shaped token anywhere on a line (a URL or an HTTP header included), a
+// private-key header and a high-entropy value assigned to a name like secret, token, password or key. It does NOT catch a credential
+// inside a URL or connection string (scheme://user:pass@host) unless the credential is provider-shaped, an HTTP authentication header
+// whose value is a scheme and a token (Authorization: Bearer <key>, X-Api-Token: Bearer <key>) unless that token is provider-shaped,
+// or a key split across lines.
 //
 // TWO SCANS. (1) The STAGED tree, always: every blob in the index, which is what a commit records and what a CI checkout
 // holds (a staged edit is scanned even when the working file was changed back; an unstaged edit cannot be committed or
 // pushed and is not reported). A commit made with "git commit -a" or a partial commit reads the index that commit uses
-// (GIT_INDEX_FILE), the one GIT_* variable the gate keeps. (2) With --pre-push (the hook passes it,
+// (GIT_INDEX_FILE), one of the two GIT_* variables the gate keeps. (2) With --pre-push (the hook passes it,
 // with git's ref lines on stdin): the ADDED lines of every commit being pushed, so a key added and then deleted inside the
 // range is still found, plus every pushed commit message and annotated-tag message. --remote=<name> narrows a new branch
 // to the commits that remote does not already have.
@@ -49,23 +50,32 @@ const unit4 = (c) => `${BACKSLASH}u${c.charCodeAt(0).toString(16).padStart(4, '0
 const esc = (s) => JSON.stringify(String(s)).replace(/[\p{Cc}\p{Cf}\p{Zl}\p{Zp}]/gu, (c) => c.split('').map(unit4).join(''));
 // A hook runs with GIT_DIR, GIT_WORK_TREE, GIT_PREFIX and others that aim git at the repository the hook was started for.
 // Every git call here drops them (the gate runs from the repository root and finds its repository from there), except
-// GIT_INDEX_FILE, which names the index a commit is made from and is the thing commit mode must read.
-const gitEnv = () => ({ ...Object.fromEntries(Object.entries(process.env).filter(([k]) => !/^GIT_/i.test(k) || k.toUpperCase() === 'GIT_INDEX_FILE')), LC_ALL: 'C', LANGUAGE: 'C' });
+// GIT_INDEX_FILE, which names the index a commit is made from and is the thing commit mode must read, and GIT_CEILING_DIRECTORIES, which only NARROWS where git
+// searches for the repository (a folder under a ceiling is not part of a repository above it; the worst a wrong value does is make the gate fail closed, UMB-456 (1) vi).
+const KEPT = new Set(['GIT_INDEX_FILE', 'GIT_CEILING_DIRECTORIES']);
+const gitEnv = () => ({ ...Object.fromEntries(Object.entries(process.env).filter(([k]) => !/^GIT_/i.test(k) || KEPT.has(k.toUpperCase()))), LC_ALL: 'C', LANGUAGE: 'C' });
+// Windows looks for a program in the CURRENT folder before PATH, and the current folder is the checkout being scanned, so a git.exe planted in
+// it ran in git's place with the committer's rights (measured 2026-11-03; CWE-426). Windows' own switch turns that lookup off, and Node reads it
+// from THIS process's environment, never from a child's env option (measured), so the gate sets it for itself before its first spawn. Elsewhere
+// the current folder is searched only when PATH names it, the user's own setting.
+if (process.platform === 'win32') process.env.NoDefaultCurrentDirectoryInExePath = '1';
 const gitIn = (a) => execFileSync('git', a, { encoding: 'utf8', maxBuffer: 256 << 20, timeout: 60000, stdio: ['ignore', 'pipe', 'pipe'], env: gitEnv() });
-// Reads blobs in one process: "<sha> <type> <size>\n<bytes>\n" per object, "<sha> missing\n" for one git does not have.
+// Reads blobs in one process: "<sha> <type> <size>\n<bytes>\n" per object, "<sha> missing\n" for one git does not have. Each distinct id is asked
+// for once, however many paths stage it: a Map from id to its bytes (a view into git's output, never a copy), or null for a missing object.
 function readBlobs(shas) {
-  const buf = execFileSync('git', ['cat-file', '--batch'], { input: shas.join('\n') + '\n', maxBuffer: 1 << 30, timeout: 120000, stdio: ['pipe', 'pipe', 'pipe'], env: gitEnv() });
-  const out = [];
+  const ids = [...new Set(shas)];
+  const buf = execFileSync('git', ['cat-file', '--batch'], { input: ids.join('\n') + '\n', maxBuffer: 1 << 30, timeout: 120000, stdio: ['pipe', 'pipe', 'pipe'], env: gitEnv() });
+  const out = new Map();
   let pos = 0;
-  for (let i = 0; i < shas.length; i++) {
+  for (const id of ids) {
     const nl = buf.indexOf(10, pos);
     if (nl < 0) throw new Error('cat-file output ended early');
     const head = buf.toString('latin1', pos, nl).split(' ');
     pos = nl + 1;
-    if (head[1] === 'missing') { out.push(null); continue; }
+    if (head[1] === 'missing') { out.set(id, null); continue; }
     const size = Number(head[2]);
     if (!Number.isSafeInteger(size) || pos + size > buf.length) throw new Error('cat-file output was malformed');
-    out.push(buf.toString('utf8', pos, pos + size));
+    out.set(id, buf.subarray(pos, pos + size));
     pos += size + 1;
   }
   return out;
@@ -83,8 +93,15 @@ async function main() {
       return { mode: m[1], sha: m[2], name: m[4] };
     });
   } catch (e) {
-    const noRepo = /not a git repository/i.test(String((e && e.stderr) || ''));
-    console.log(`FAIL SECRETS: ${noRepo ? 'this directory is not inside a git repository' : 'git could not list the tracked files (is git on PATH?)'}; the scan did NOT run`);
+    const err = String((e && e.stderr) || '');
+    // git words "no repository above here" two ways, each with a parenthetical (the upward walk reached the root, or stopped
+    // at a mount boundary); "not a git repository: '<path>'" with none is a BROKEN repository, not an absent one: older git
+    // prints it for a .git link to a missing directory (the ubuntu runner, 2026-10-23), and the bare phrase misread it
+    const noRepo = /not a git repository \(or any (?:of the parent directories\)|parent up to mount point )/.test(err);
+    // a git that ran and refused (a broken .git link, a dubious-ownership refusal) names its own cause; PATH is only the guess
+    // when git printed nothing at all
+    const first = (err.split('\n').find((l) => l.trim()) || '').trim();
+    console.log(`FAIL SECRETS: ${noRepo ? 'this directory is not inside a git repository' : `git could not list the tracked files (${first || 'is git on PATH?'})`}; the scan did NOT run`);
     process.exitCode = 1;
     return;
   }
@@ -118,19 +135,23 @@ async function main() {
 
   let scanned = 0;
   const unreadable = [];
-  const wanted = tracked.filter((e) => e.mode !== '160000' && !BINARY.test(e.name)); // a gitlink is a submodule commit, not a file
-  let bodies = [];
+  const wanted = tracked.filter((e) => e.mode !== '160000'); // a gitlink is a submodule commit, not a file
+  let blobs = null;
   if (wanted.length) {
-    try { bodies = readBlobs(wanted.map((e) => e.sha)); } catch (e) {
+    try { blobs = readBlobs(wanted.map((e) => e.sha)); } catch (e) {
       fails.push(`git could not read the staged files (${e && e.code ? e.code : 'cat-file error'}); the tree was NOT scanned`);
-      bodies = wanted.map(() => undefined);
     }
   }
-  wanted.forEach((e, i) => {
-    if (bodies[i] === undefined) return;
-    if (bodies[i] === null) { unreadable.push(esc(e.name)); return; }
+  // A binary-looking NAME only marks a blob for the content probe: it is skipped when its bytes are binary too (a NUL in its first bytes,
+  // git's rule, the scanner's looksBinary), so a text file named .png is scanned like any other. Each distinct blob is decoded once.
+  const texts = new Map();
+  if (blobs) wanted.forEach((e) => {
+    const bytes = blobs.get(e.sha);
+    if (bytes === null) { unreadable.push(esc(e.name)); return; }
+    if (BINARY.test(e.name) && scan.looksBinary(bytes)) return;
+    if (!texts.has(e.sha)) texts.set(e.sha, bytes.toString('utf8'));
     scanned++;
-    for (const h of scan.scanText(bodies[i], e.name)) keep(h, `tree ${esc(e.name)}:${h.line}`, headAcks);
+    for (const h of scan.scanText(texts.get(e.sha), e.name)) keep(h, `tree ${esc(e.name)}:${h.line}`, headAcks);
   });
   if (unreadable.length) fails.push(`${unreadable.length} tracked file(s) could not be read, so were NOT scanned: ${unreadable.slice(0, 3).join('; ')}`);
 
