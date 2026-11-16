@@ -56,6 +56,14 @@ test('an UNREACHABLE row with a finite interval is still skipped, and the run pa
   assert.equal(r.status, 0, r.out)
 })
 
+test('a backslash in a cell is escaped in the register table, so the markdown keeps the value as written', () => {
+  const r = run([
+    '| S-905 | Example spec | 1 | SPECIFICATION | UNREACHABLE: C:\\share\\ | v1 | 2026-09-01 | 90d |',
+  ])
+  assert.equal(r.status, 0, r.out)
+  assert.ok(r.out.includes('| UNREACHABLE: C:\\\\share\\\\ |'), r.out)
+})
+
 test('a revalidate-never row with no URL is still skipped, and the run passes', () => {
   const r = run(['| S-904 | Example corpus | 10 | SPECIFICATION |  | 1.0 | 2026-09-01 | never |'])
   assert.equal(r.status, 0, r.out)

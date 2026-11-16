@@ -268,7 +268,9 @@ for (const row of rows) {
 
 const fetched = verdicts.filter((v) => v.verdict !== 'skipped' && v.verdict !== 'no-url')
 const count = (v) => fetched.filter((x) => x.verdict === v).length
-const esc = (s) => String(s).replace(/\|/g, '\\|')
+// Escape the backslash as well as the pipe: escaping only the pipe turns a value's own `\|` into `\\|`,
+// which a table parser that pairs backslashes reads as a literal backslash and then a column separator.
+const esc = (s) => String(s).replace(/[\\|]/g, '\\$&')
 
 let out = `\n## Sweep ${TODAY}\n\n`
 out += `Run by \`tools/watch-sources.mjs\`. ${rows.length} rows in \`SOURCES.md\`, ${fetched.length} fetched, `
