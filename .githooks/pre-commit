@@ -10,11 +10,11 @@
 
 # The secret scan (scripts/secret-gate.mjs). A public repository gets GitHub's provider-token scan for free. This scan
 # catches three things: a provider-shaped token (refused before the push reaches GitHub), a private-key header, and a
-# high-entropy value assigned to a name like secret, token, password or key. It does NOT catch a credential inside a
-# URL or connection string (scheme://user:pass@host), an HTTP authentication header whose value is not on such a named
-# assignment, or a key split across lines. git hands
+# high-entropy value assigned to a name like secret, token, password or key. It does NOT catch a credential inside a URL
+# or connection string (scheme://user:pass@host), or an HTTP authentication header's token, unless the credential is
+# provider-shaped, or a key split across lines. git hands
 # only pre-push the ref lines on stdin, so only pre-push passes --pre-push (every pushed commit, message and tag);
-# pre-commit scans the tracked tree. One file, two hook names, identical bytes: the branch is on the name git invoked.
+# pre-commit scans the staged tree (every staged blob except a binary one: binary-looking name AND binary first bytes). One file, two hook names, identical bytes: the branch is on the name git invoked.
 if [ "$(basename "$0")" = "pre-push" ]; then
   node scripts/secret-gate.mjs --pre-push "--remote=$1" || exit 1
 else

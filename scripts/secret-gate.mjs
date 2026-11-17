@@ -9,7 +9,7 @@
 // whose value is a scheme and a token (Authorization: Bearer <key>, X-Api-Token: Bearer <key>) unless that token is provider-shaped,
 // or a key split across lines.
 //
-// TWO SCANS. (1) The STAGED tree, always: every blob in the index, which is what a commit records and what a CI checkout
+// TWO SCANS. (1) The STAGED tree, always: every blob in the index except a binary one (a blob whose every staged path has a binary-looking name AND whose first bytes are binary is skipped, below), which is what a commit records and what a CI checkout
 // holds (a staged edit is scanned even when the working file was changed back; an unstaged edit cannot be committed or
 // pushed and is not reported). A commit made with "git commit -a" or a partial commit reads the index that commit uses
 // (GIT_INDEX_FILE), one of the two GIT_* variables the gate keeps. (2) With --pre-push (the hook passes it,
@@ -30,11 +30,11 @@
 // Exit:    0 clean · 1 a hit, or a scan that could not run · 64 usage error
 // Report a problem: TheColliery/.github issues. Zero dependencies: node builtins only.
 
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawn } from 'node:child_process';
 import fs from 'node:fs';
 
 const USAGE = 'usage: node scripts/secret-gate.mjs [--pre-push [--remote=<name>]] | -h\n'
-  + '  scans the tracked files; with --pre-push also every commit being pushed (git\'s ref lines on stdin)\n'
+  + '  scans the staged files (the index); with --pre-push also every commit being pushed (git\'s ref lines on stdin)\n'
   + '  example: node scripts/secret-gate.mjs\n'
   + '  exit 0 clean · 1 a hit or a scan that could not run · 64 usage error';
 const ACKS = 'secret-scan.acks';
@@ -51,7 +51,7 @@ const esc = (s) => JSON.stringify(String(s)).replace(/[\p{Cc}\p{Cf}\p{Zl}\p{Zp}]
 // A hook runs with GIT_DIR, GIT_WORK_TREE, GIT_PREFIX and others that aim git at the repository the hook was started for.
 // Every git call here drops them (the gate runs from the repository root and finds its repository from there), except
 // GIT_INDEX_FILE, which names the index a commit is made from and is the thing commit mode must read, and GIT_CEILING_DIRECTORIES, which only NARROWS where git
-// searches for the repository (a folder under a ceiling is not part of a repository above it; the worst a wrong value does is make the gate fail closed, UMB-456 (1) vi).
+// searches for the repository (a folder under a ceiling is not part of a repository above it; the worst a wrong value does is make the gate fail closed).
 const KEPT = new Set(['GIT_INDEX_FILE', 'GIT_CEILING_DIRECTORIES']);
 const gitEnv = () => ({ ...Object.fromEntries(Object.entries(process.env).filter(([k]) => !/^GIT_/i.test(k) || KEPT.has(k.toUpperCase()))), LC_ALL: 'C', LANGUAGE: 'C' });
 // Windows looks for a program in the CURRENT folder before PATH, and the current folder is the checkout being scanned, so a git.exe planted in
@@ -59,26 +59,89 @@ const gitEnv = () => ({ ...Object.fromEntries(Object.entries(process.env).filter
 // from THIS process's environment, never from a child's env option (measured), so the gate sets it for itself before its first spawn. Elsewhere
 // the current folder is searched only when PATH names it, the user's own setting.
 if (process.platform === 'win32') process.env.NoDefaultCurrentDirectoryInExePath = '1';
-const gitIn = (a) => execFileSync('git', a, { encoding: 'utf8', maxBuffer: 256 << 20, timeout: 60000, stdio: ['ignore', 'pipe', 'pipe'], env: gitEnv() });
-// Reads blobs in one process: "<sha> <type> <size>\n<bytes>\n" per object, "<sha> missing\n" for one git does not have. Each distinct id is asked
-// for once, however many paths stage it: a Map from id to its bytes (a view into git's output, never a copy), or null for a missing object.
-function readBlobs(shas) {
+// git honours a replace ref when it reads an object, so a local `git replace` could show the scan other bytes than the commit records and the push
+// sends. Every git call here reads objects as they are stored.
+const NO_REPLACE = '--no-replace-objects';
+// The scanner asks for one answer as bytes ({ buffer: true }: a commit's patch, to decode wide text in it); every other answer is a string.
+const gitIn = (a, o) => execFileSync('git', [NO_REPLACE, ...a], { encoding: o && o.buffer ? 'buffer' : 'utf8', maxBuffer: 256 << 20, timeout: 60000, stdio: ['ignore', 'pipe', 'pipe'], env: gitEnv() });
+// Reads blobs in one STREAMED process: "<sha> <type> <size>\n<bytes>\n" per object, "<sha> missing\n" for one git does not have. Each distinct id
+// is asked for once, however many paths stage it. An id in `probe` (every path that stages it has a binary-looking name) is judged on its first
+// bytes as they arrive and, when they are binary, dropped as it streams past, never held: a binary blob of any size costs no memory. Every other
+// id is held whole, because it is scanned. Resolves a Map from id to its bytes, BINARY_BLOB for a dropped one, or null for a missing object.
+const BINARY_BLOB = Symbol('binary');
+// What the stream may hold at once (t342 F9, 2026-11-17): every blob that is scanned is held whole, so a very large staged text file (a dump, a data export) would fill the process's memory, and the
+// concat of its pieces would throw outside any try. The count includes a blob still being probed and is released when a probed blob is dropped as binary. Past the ceiling the gate stops with a
+// FAIL line that names the file, and the tree is NOT scanned (fail closed). The ceiling equals gitIn's own maxBuffer; SECRET_GATE_MAX_HELD_BYTES can only LOWER it (a test hook: a value that
+// is not a positive integer, or that is higher, is ignored), so no environment can weaken the gate.
+const HELD_CEILING = 256 << 20;
+const heldCeiling = () => { const n = Number(process.env.SECRET_GATE_MAX_HELD_BYTES); return Number.isSafeInteger(n) && n > 0 && n < HELD_CEILING ? n : HELD_CEILING; };
+const PROBE_BYTES = 8000; // the scanner's looksBinary reads this many first bytes
+function readBlobs(shas, probe, looksBinary, nameOf = new Map()) {
   const ids = [...new Set(shas)];
-  const buf = execFileSync('git', ['cat-file', '--batch'], { input: ids.join('\n') + '\n', maxBuffer: 1 << 30, timeout: 120000, stdio: ['pipe', 'pipe', 'pipe'], env: gitEnv() });
-  const out = new Map();
-  let pos = 0;
-  for (const id of ids) {
-    const nl = buf.indexOf(10, pos);
-    if (nl < 0) throw new Error('cat-file output ended early');
-    const head = buf.toString('latin1', pos, nl).split(' ');
-    pos = nl + 1;
-    if (head[1] === 'missing') { out.set(id, null); continue; }
-    const size = Number(head[2]);
-    if (!Number.isSafeInteger(size) || pos + size > buf.length) throw new Error('cat-file output was malformed');
-    out.set(id, buf.subarray(pos, pos + size));
-    pos += size + 1;
-  }
-  return out;
+  const ceiling = heldCeiling();
+  let held = 0;
+  return new Promise((resolve, reject) => {
+    const out = new Map();
+    let next = 0;
+    let head = Buffer.alloc(0); // a header line not yet ended
+    let cur = null; // { id, left, keep: true | false | null (not yet probed), parts, have }
+    let bad = null;
+    const child = spawn('git', [NO_REPLACE, 'cat-file', '--batch'], { timeout: 120000, stdio: ['pipe', 'pipe', 'pipe'], env: gitEnv() });
+    const stop = (msg, code = 'ECATFILE') => { if (!bad) bad = Object.assign(new Error(msg), { code }); child.kill(); };
+    const tooBig = (id, what) => stop(`${esc(nameOf.get(id) || id)} ${what}: more than ${ceiling} bytes of staged text would be held in memory at once`, 'EHELD');
+    child.stdout.on('data', (chunk) => {
+      if (bad) return;
+      let data = head.length ? Buffer.concat([head, chunk]) : chunk;
+      head = Buffer.alloc(0);
+      let pos = 0;
+      while (pos < data.length) {
+        if (cur && cur.left > 0) {
+          const take = Math.min(cur.left, data.length - pos);
+          const piece = data.subarray(pos, pos + take);
+          pos += take;
+          cur.left -= take;
+          if (cur.keep === false) continue;
+          cur.parts.push(piece);
+          cur.have += take;
+          held += take;
+          if (held > ceiling) return tooBig(cur.id, 'is too large to hold');
+          if (cur.keep === null && (cur.have >= PROBE_BYTES || cur.left === 0)) {
+            cur.keep = !looksBinary(Buffer.concat(cur.parts));
+            if (!cur.keep) { held -= cur.have; cur.parts = []; }
+          }
+        } else if (cur) {
+          if (data[pos] !== 10) return stop('cat-file output was malformed');
+          pos++;
+          let whole = BINARY_BLOB;
+          if (cur.keep !== false) { try { whole = Buffer.concat(cur.parts); } catch { return tooBig(cur.id, 'could not be joined'); } }
+          out.set(cur.id, whole);
+          cur = null;
+        } else {
+          const nl = data.indexOf(10, pos);
+          if (nl < 0) { head = Buffer.from(data.subarray(pos)); return; }
+          const parts = data.toString('latin1', pos, nl).split(' ');
+          pos = nl + 1;
+          if (next >= ids.length) return stop('cat-file answered more objects than it was asked for');
+          const id = ids[next++];
+          if (parts[1] === 'missing') { out.set(id, null); continue; }
+          const size = Number(parts[2]);
+          if (!Number.isSafeInteger(size) || size < 0) return stop('cat-file output was malformed');
+          if (!probe.has(id) && held + size > ceiling) return tooBig(id, 'is too large to hold'); // a header already says it: refused before one byte is held
+          cur = { id, left: size, keep: probe.has(id) ? null : true, parts: [], have: 0 };
+        }
+      }
+    });
+    child.stderr.resume();
+    child.stdin.on('error', () => {}); // a git that exits early closes the pipe; 'close' below reports why
+    child.on('error', (e) => { if (!bad) bad = e; reject(bad); });
+    child.on('close', (code, signal) => {
+      if (bad) return reject(bad);
+      if (code !== 0 || signal) return reject(Object.assign(new Error('cat-file failed'), { code: signal || `exit ${code}` }));
+      if (cur || head.length || next < ids.length) return reject(Object.assign(new Error('cat-file output ended early'), { code: 'ECATFILE' }));
+      resolve(out);
+    });
+    child.stdin.end(ids.join('\n') + '\n');
+  });
 }
 
 async function main() {
@@ -101,7 +164,7 @@ async function main() {
     // a git that ran and refused (a broken .git link, a dubious-ownership refusal) names its own cause; PATH is only the guess
     // when git printed nothing at all
     const first = (err.split('\n').find((l) => l.trim()) || '').trim();
-    console.log(`FAIL SECRETS: ${noRepo ? 'this directory is not inside a git repository' : `git could not list the tracked files (${first || 'is git on PATH?'})`}; the scan did NOT run`);
+    console.log(`FAIL SECRETS: ${noRepo ? 'this directory is not inside a git repository' : `git could not list the tracked files (${first ? esc(first) : 'is git on PATH?'})`}; the scan did NOT run`);
     process.exitCode = 1;
     return;
   }
@@ -130,7 +193,8 @@ async function main() {
   };
   const hits = new Set();
   let acked = 0;
-  const keep = (h, where, acks) => { if (acks.has(h.fp)) acked++; else hits.add(`${where} ${h.pattern} (fp ${h.fp})`); };
+  const tooLargeHits = new Set(); // classified by the hit's own pattern where it is kept (t342 F5): the line's text carries a file name, which a stranger chooses
+  const keep = (h, where, acks) => { if (acks.has(h.fp)) acked++; else (h.pattern === scan.WIDE_TOO_LARGE ? tooLargeHits : hits).add(`${where} ${h.pattern} (fp ${h.fp})`); };
   const headAcks = acksAt('HEAD');
 
   let scanned = 0;
@@ -138,20 +202,25 @@ async function main() {
   const wanted = tracked.filter((e) => e.mode !== '160000'); // a gitlink is a submodule commit, not a file
   let blobs = null;
   if (wanted.length) {
-    try { blobs = readBlobs(wanted.map((e) => e.sha)); } catch (e) {
-      fails.push(`git could not read the staged files (${e && e.code ? e.code : 'cat-file error'}); the tree was NOT scanned`);
+    const allBinaryNamed = new Map(); // id -> true when every path that stages it has a binary-looking name
+    for (const e of wanted) allBinaryNamed.set(e.sha, allBinaryNamed.get(e.sha) !== false && BINARY.test(e.name));
+    const probe = new Set([...allBinaryNamed].filter(([, b]) => b).map(([id]) => id));
+    const nameOf = new Map(wanted.map((e) => [e.sha, e.name]));
+    try { blobs = await readBlobs(wanted.map((e) => e.sha), probe, (b) => scan.looksBinary(b) && !scan.wideKinds(b).length, nameOf); } catch (e) {
+      fails.push(e && e.code === 'EHELD' ? `${e.message}; the tree was NOT scanned` : `git could not read the staged files (${e && e.code ? e.code : 'cat-file error'}); the tree was NOT scanned`);
     }
   }
   // A binary-looking NAME only marks a blob for the content probe: it is skipped when its bytes are binary too (a NUL in its first bytes,
-  // git's rule, the scanner's looksBinary), so a text file named .png is scanned like any other. Each distinct blob is decoded once.
-  const texts = new Map();
+  // git's rule, the scanner's looksBinary), so a text file named .png is scanned like any other. The scanner reads each blob from its bytes (scanBytes):
+  // wide text (UTF-16 or UTF-32, by the scanner's wideKinds rule) is decoded and scanned, and every blob is read as UTF-8 too.
   if (blobs) wanted.forEach((e) => {
     const bytes = blobs.get(e.sha);
     if (bytes === null) { unreadable.push(esc(e.name)); return; }
-    if (BINARY.test(e.name) && scan.looksBinary(bytes)) return;
-    if (!texts.has(e.sha)) texts.set(e.sha, bytes.toString('utf8'));
+    if (bytes === BINARY_BLOB) return; // binary-named at every path and binary by its first bytes, dropped while it streamed
+    // a binary-looking name with NUL-bearing bytes is still text when the scanner's wide-text rule reads its first bytes as UTF-16 or UTF-32 (the bytes the stream probe judged)
+    if (BINARY.test(e.name) && scan.looksBinary(bytes) && !scan.wideKinds(bytes.subarray(0, PROBE_BYTES)).length) return;
     scanned++;
-    for (const h of scan.scanText(texts.get(e.sha), e.name)) keep(h, `tree ${esc(e.name)}:${h.line}`, headAcks);
+    for (const h of scan.scanBytes(bytes, e.name)) keep(h, `tree ${esc(e.name)}:${h.line}`, headAcks);
   });
   if (unreadable.length) fails.push(`${unreadable.length} tracked file(s) could not be read, so were NOT scanned: ${unreadable.slice(0, 3).join('; ')}`);
 
@@ -176,7 +245,11 @@ async function main() {
     }
   }
   if (badAck.length) fails.push(`${ACKS} line(s) ${badAck.join(', ')} (revision:line) are not a 16-hex fingerprint; refusing to guess what they acknowledge`);
-  if (hits.size) fails.push(`${hits.size} secret-shaped match(es), values never printed. Remove each and rotate it if it was real, or acknowledge a known public value by fingerprint in ${ACKS}, committed on the branch you push: ${[...hits].slice(0, 5).join('; ')}${hits.size > 5 ? ' ...' : ''}`);
+  // a file too large to decode holds no match and no value: its own line says what an acknowledgement of it does
+  const tooLarge = [...tooLargeHits];
+  const matches = [...hits];
+  if (tooLarge.length) fails.push(`${tooLarge.length} file(s) the scanner reads as UTF-16 or UTF-32 text are larger than ${scan.WIDE_DECODE_MAX_BYTES >> 20} MiB, so their wide text was NOT decoded or scanned. Check each for keys first: acknowledging its fingerprint in ${ACKS} lets those exact bytes pass without the wide-text scan: ${tooLarge.slice(0, 5).join('; ')}${tooLarge.length > 5 ? ' ...' : ''}`);
+  if (matches.length) fails.push(`${matches.length} secret-shaped match(es), values never printed. Remove each and rotate it if it was real, or acknowledge a known public value by fingerprint in ${ACKS}, committed on the branch you push: ${matches.slice(0, 5).join('; ')}${matches.length > 5 ? ' ...' : ''}`);
   if (fails.length) {
     for (const f of fails) console.log(`FAIL SECRETS: ${f}`);
     process.exitCode = 1;
